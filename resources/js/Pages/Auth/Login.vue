@@ -1,100 +1,99 @@
 <script setup>
-import Checkbox from '@/Components/Checkbox.vue';
-import GuestLayout from '@/Layouts/GuestLayout.vue';
-import InputError from '@/Components/InputError.vue';
-import InputLabel from '@/Components/InputLabel.vue';
-import PrimaryButton from '@/Components/PrimaryButton.vue';
-import TextInput from '@/Components/TextInput.vue';
-import { Head, Link, useForm } from '@inertiajs/vue3';
+import { Head, Link, useForm } from '@inertiajs/vue3'
 
 defineProps({
-    canResetPassword: {
-        type: Boolean,
-    },
-    status: {
-        type: String,
-    },
-});
+    canResetPassword: Boolean,
+    status: String,
+})
 
 const form = useForm({
     email: '',
     password: '',
     remember: false,
-});
+})
 
-const submit = () => {
+function submit() {
     form.post(route('login'), {
         onFinish: () => form.reset('password'),
-    });
-};
+    })
+}
 </script>
 
 <template>
-    <GuestLayout>
-        <Head title="Log in" />
+    <Head title="Acceder" />
 
-        <div v-if="status" class="mb-4 text-sm font-medium text-green-600">
-            {{ status }}
+    <div class="login-page">
+
+        <!-- LADO IZQUIERDO -->
+        <div class="login-left">
+            <div class="login-left__overlay"></div>
+            <div class="login-left__content">
+                <Link href="/" class="login-brand">SA</Link>
+                <h2 class="login-left__title">
+                    Tu asesoría fiscal<br>
+                    <em>siempre disponible</em>
+                </h2>
+                <p class="login-left__text">Accede a tu área privada para gestionar tus citas, documentos y consultas con tu asesor.</p>
+            </div>
         </div>
 
-        <form @submit.prevent="submit">
-            <div>
-                <InputLabel for="email" value="Email" />
+        <!-- LADO DERECHO -->
+        <div class="login-right">
+            <div class="login-box">
+                <div class="login-box__header">
+                    <h1 class="login-box__title">Bienvenido</h1>
+                    <p class="login-box__sub">Introduce tus credenciales para acceder</p>
+                </div>
 
-                <TextInput
-                    id="email"
-                    type="email"
-                    class="mt-1 block w-full"
-                    v-model="form.email"
-                    required
-                    autofocus
-                    autocomplete="username"
-                />
+                <div v-if="status" class="login-status">{{ status }}</div>
 
-                <InputError class="mt-2" :message="form.errors.email" />
+                <form @submit.prevent="submit" class="login-form">
+                    <div class="form-group">
+                        <label class="form-label">Email</label>
+                        <input
+                            v-model="form.email"
+                            type="email"
+                            class="form-input"
+                            :class="{ 'form-input--error': form.errors.email }"
+                            placeholder="tu@email.com"
+                            autofocus
+                            autocomplete="username"
+                        />
+                        <span v-if="form.errors.email" class="form-error">{{ form.errors.email }}</span>
+                    </div>
+
+                    <div class="form-group">
+                        <div class="login-label-row">
+                            <label class="form-label">Contraseña</label>
+                            <Link v-if="canResetPassword" href="/forgot-password" class="login-forgot">¿Olvidaste tu contraseña?</Link>
+                        </div>
+                        <input
+                            v-model="form.password"
+                            type="password"
+                            class="form-input"
+                            :class="{ 'form-input--error': form.errors.password }"
+                            placeholder="••••••••"
+                            autocomplete="current-password"
+                        />
+                        <span v-if="form.errors.password" class="form-error">{{ form.errors.password }}</span>
+                    </div>
+
+                    <div class="login-remember">
+                        <input type="checkbox" v-model="form.remember" id="remember" class="login-checkbox" />
+                        <label for="remember" class="login-remember-label">Recordarme</label>
+                    </div>
+
+                    <button type="submit" class="form-submit" :disabled="form.processing">
+                        {{ form.processing ? 'Accediendo...' : 'Acceder' }}
+                    </button>
+                </form>
+
+                <div class="login-box__footer">
+                    <p>¿No tienes cuenta? <Link href="/reserva" class="login-link">Solicita una cita</Link></p>
+                    <Link href="/" class="login-back">← Volver a la web</Link>
+                </div>
             </div>
+        </div>
 
-            <div class="mt-4">
-                <InputLabel for="password" value="Password" />
-
-                <TextInput
-                    id="password"
-                    type="password"
-                    class="mt-1 block w-full"
-                    v-model="form.password"
-                    required
-                    autocomplete="current-password"
-                />
-
-                <InputError class="mt-2" :message="form.errors.password" />
-            </div>
-
-            <div class="mt-4 block">
-                <label class="flex items-center">
-                    <Checkbox name="remember" v-model:checked="form.remember" />
-                    <span class="ms-2 text-sm text-gray-600"
-                        >Remember me</span
-                    >
-                </label>
-            </div>
-
-            <div class="mt-4 flex items-center justify-end">
-                <Link
-                    v-if="canResetPassword"
-                    :href="route('password.request')"
-                    class="rounded-md text-sm text-gray-600 underline hover:text-gray-900 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
-                >
-                    Forgot your password?
-                </Link>
-
-                <PrimaryButton
-                    class="ms-4"
-                    :class="{ 'opacity-25': form.processing }"
-                    :disabled="form.processing"
-                >
-                    Log in
-                </PrimaryButton>
-            </div>
-        </form>
-    </GuestLayout>
+    </div>
 </template>

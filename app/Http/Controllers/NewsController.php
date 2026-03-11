@@ -2,69 +2,36 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
+use Inertia\Inertia;
+use App\Models\News;
 
 class NewsController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
     public function index()
     {
-        $noticias = \App\Models\News::where('is_published', true)
+        $noticias = News::where('is_published', true)
             ->orderBy('published_at', 'desc')
             ->get();
 
-        return \Inertia\Inertia::render('Public/Noticias', [
+        return Inertia::render('Public/News', [
             'noticias' => $noticias
         ]);
     }
 
-    /**
-     * Show the form for creating a new resource.
-     */
-    public function create()
+    public function show($slug)
     {
-        //
+        $noticia = News::where('slug', $slug)
+            ->where('is_published', true)
+            ->firstOrFail();
+
+        return Inertia::render('Public/NewsShow', [
+            'noticia' => $noticia
+        ]);
     }
 
-    /**
-     * Store a newly created resource in storage.
-     */
-    public function store(Request $request)
-    {
-        //
-    }
-
-    /**
-     * Display the specified resource.
-     */
-    public function show(string $id)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(string $id)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(Request $request, string $id)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy(string $id)
-    {
-        //
-    }
+    public function create() {}
+    public function store() {}
+    public function edit() {}
+    public function update() {}
+    public function destroy() {}
 }

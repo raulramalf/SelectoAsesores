@@ -3,7 +3,6 @@
 namespace App\Http\Controllers;
 
 use Inertia\Inertia;
-use App\Models\News;
 
 class PublicController extends Controller
 {
@@ -14,16 +13,16 @@ class PublicController extends Controller
 
     public function servicios()
     {
-        return Inertia::render('Public/Servicios');
+        return Inertia::render('Public/Services');
     }
 
     public function nosotros()
     {
-        return Inertia::render('Public/Nosotros');
+        return Inertia::render('Public/About');
     }
 
     public function contacto()
     {
-        return Inertia::render('Public/Contacto');
+        return Inertia::render('Public/Contact');
     }
 }

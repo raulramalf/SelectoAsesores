@@ -10,9 +10,11 @@ class UserController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+   public function index()
     {
-        //
+        return Inertia::render('Admin/Clientes', [
+            'users' => User::where('role', 'cliente')->get(),
+        ]);
     }
 
     /**
