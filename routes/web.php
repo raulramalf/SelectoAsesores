@@ -41,6 +41,9 @@ Route::middleware(['auth', 'role:asesor,admin'])->prefix('admin')->name('admin.'
     Route::get('/documentos',            [AdminDashboard::class, 'documentos'])->name('documentos');
     Route::get('/analisis',              [AdminDashboard::class, 'analisis'])->name('analisis');
     Route::get('/perfil',                [AdminDashboard::class, 'perfil'])->name('perfil');
-    Route::resource('users',             UserController::class);
+    
+    // Ruta específica para los clientes
+    Route::get('/clientes',              [UserController::class, 'index'])->name('clientes');
+    
     Route::resource('noticias',          NewsController::class)->except(['show']);
 });

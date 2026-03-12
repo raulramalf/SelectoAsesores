@@ -84,12 +84,12 @@ const servicios = [
 const testimonios = [
     {
         nombre: 'Marco Ramírez',
-        foto: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=120&q=80',
+        foto: '',
         texto: 'Lo que más valoro es la agilidad. Tener un asesor personal asignado que conoce mi histórico y responde en menos de 24 horas marca la diferencia entre un gestor común y un servicio de élite.',
     },
     {
         nombre: 'Marta Ramírez',
-        foto: 'https://images.unsplash.com/photo-1494790108755-2616b612b786?w=120&q=80',
+        foto: '',
         texto: 'La planificación fiscal estratégica que ofrecen no es un gasto, es una inversión. Gracias a su análisis con IA, hemos optimizado costes que ni siquiera habíamos detectado. Son el socio que toda gran empresa necesita.',
     },
 ]

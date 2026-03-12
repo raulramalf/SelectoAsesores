@@ -4,13 +4,15 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use Inertia\Inertia;         // <--- Importación obligatoria
+use App\Models\User;         // <--- Importación obligatoria
 
 class UserController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
-   public function index()
+    public function index()
     {
         return Inertia::render('Admin/Clientes', [
             'users' => User::where('role', 'cliente')->get(),
