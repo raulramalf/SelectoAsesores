@@ -7,7 +7,9 @@ use App\Models\User;
 use App\Models\Appointment;
 use App\Models\Document;
 use App\Models\ContactMessage;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 use Inertia\Inertia;
 
 class DashboardController extends Controller
@@ -21,66 +23,168 @@ class DashboardController extends Controller
                 'documentos' => Document::whereDate('created_at', '>=', now()->subDays(7))->count(),
                 'mensajes'   => ContactMessage::whereNull('read_at')->count(),
             ],
-            'solicitudes' => Appointment::with('user')
+            'solicitudes' => Appointment::with('client')
                 ->latest()
                 ->take(5)
                 ->get()
                 ->map(fn($c) => [
                     'id'     => $c->id,
                     'texto'  => $c->reason,
-                    'nombre' => $c->user?->name ?? $c->name,
+                    'nombre' => $c->client?->name ?? '—',
                     'estado' => $c->status ?? 'pendiente',
-                    'fecha'  => $c->date,
+                    'fecha'  => $c->date?->format('d/m/Y'),
                 ]),
+            'proximas_citas' => Appointment::with('client')
+                ->where('date', '>=', now())
+                ->where('status', '!=', 'cancelada')
+                ->orderBy('date')
+                ->take(5)
+                ->get()
+                ->map(fn($c) => [
+                    'id'     => $c->id,
+                    'nombre' => $c->client?->name ?? '—',
+                    'razon'  => $c->reason,
+                    'fecha'  => $c->date?->format('d/m/Y'),
+                    'time'   => $c->time,
+                    'estado' => $c->status ?? 'pendiente',
+                ]),
+            'actividad' => collect()
+                ->merge(
+                    Appointment::with('client')->latest()->take(3)->get()->map(fn($c) => [
+                        'texto' => 'Nueva cita: ' . ($c->client?->name ?? '—'),
+                        'fecha' => $c->created_at->diffForHumans(),
+                        'tipo'  => 'cita',
+                    ])
+                )
+                ->merge(
+                    Document::with('user')->latest()->take(3)->get()->map(fn($d) => [
+                        'texto' => 'Documento subido: ' . $d->name,
+                        'fecha' => $d->created_at->diffForHumans(),
+                        'tipo'  => 'documento',
+                    ])
+                )
+                ->merge(
+                    User::where('role', 'cliente')->latest()->take(2)->get()->map(fn($u) => [
+                        'texto' => 'Nuevo cliente: ' . $u->name,
+                        'fecha' => $u->created_at->diffForHumans(),
+                        'tipo'  => 'cliente',
+                    ])
+                )
+                ->sortByDesc('fecha')
+                ->take(6)
+                ->values(),
         ]);
     }
 
     public function citas()
     {
         return Inertia::render('Admin/Citas', [
-            'citas' => Appointment::with('user')
+            'citas' => Appointment::with('client')
                 ->orderBy('date')
                 ->get()
                 ->map(fn($c) => [
                     'id'          => $c->id,
-                    'nombre'      => $c->user?->name ?? $c->name,
-                    'email'       => $c->user?->email ?? $c->email,
+                    'nombre'      => $c->client?->name,
+                    'email'       => $c->client?->email,
                     'razon'       => $c->reason,
                     'fecha'       => $c->date,
+                    'time'        => $c->time,
                     'descripcion' => $c->description,
                     'estado'      => $c->status ?? 'pendiente',
                 ]),
+            'clientes' => User::where('role', 'cliente')->get(['id', 'name']),
         ]);
     }
 
     public function documentos()
     {
         return Inertia::render('Admin/Documentos', [
-            'documentos' => Document::with('user')
-                ->latest()
-                ->get()
-                ->map(fn($d) => [
-                    'id'      => $d->id,
-                    'nombre'  => $d->name,
-                    'tipo'    => $d->type,
-                    'cliente' => $d->user?->name,
-                    'fecha'   => $d->created_at->format('d/m/Y'),
-                    'size'    => $d->size,
-                    'url'     => $d->path,
-                ]),
+            'documentos' => Document::with('user')->latest()->get()->map(fn($d) => [
+                'id'          => $d->id,
+                'nombre'      => $d->name,
+                'description' => $d->description,
+                'tipo'        => $d->type,
+                'cliente'     => $d->user?->name,
+                'fecha'       => $d->created_at->format('d/m/Y'),
+                'size'        => $d->size,
+                'url'         => $d->url,
+            ]),
+            'clientes' => User::where('role', 'cliente')->get(['id', 'name']),
         ]);
     }
 
-    public function analisis()
+    public function analisis(Request $request)
     {
+        $anio = $request->get('anio', now()->year);
+        $meses = ['Ene','Feb','Mar','Abr','May','Jun','Jul','Ago','Sep','Oct','Nov','Dic'];
+
+        // Clientes ganados por mes
+        $clientesPorMes = User::where('role', 'cliente')
+            ->whereYear('created_at', $anio)
+            ->selectRaw('EXTRACT(MONTH FROM created_at) as mes, COUNT(*) as total')
+            ->groupBy('mes')
+            ->orderBy('mes')
+            ->get()
+            ->keyBy('mes');
+
+        $clientesData = collect(range(1, 12))->map(fn($m) => $clientesPorMes->get($m)?->total ?? 0);
+
+        // Citas completadas vs canceladas por mes
+        $citasCompletadas = Appointment::whereYear('date', $anio)
+            ->where('status', 'completada')
+            ->selectRaw('EXTRACT(MONTH FROM date) as mes, COUNT(*) as total')
+            ->groupBy('mes')
+            ->get()
+            ->keyBy('mes');
+
+        $citasCanceladas = Appointment::whereYear('date', $anio)
+            ->where('status', 'cancelada')
+            ->selectRaw('EXTRACT(MONTH FROM date) as mes, COUNT(*) as total')
+            ->groupBy('mes')
+            ->get()
+            ->keyBy('mes');
+
+        $completadasData = collect(range(1, 12))->map(fn($m) => $citasCompletadas->get($m)?->total ?? 0);
+        $canceladasData  = collect(range(1, 12))->map(fn($m) => $citasCanceladas->get($m)?->total ?? 0);
+
+        // Servicios más demandados
+        $servicios = Appointment::whereYear('date', $anio)
+            ->selectRaw('reason, COUNT(*) as total')
+            ->groupBy('reason')
+            ->orderByDesc('total')
+            ->get();
+
+        // Tasa de retención (clientes con más de 1 cita)
+        $totalClientes      = User::where('role', 'cliente')->count();
+        $clientesRecurrentes = Appointment::select('client_id')
+            ->groupBy('client_id')
+            ->havingRaw('COUNT(*) > 1')
+            ->get()
+            ->count();
+        $tasaRetencion = $totalClientes > 0
+            ? round(($clientesRecurrentes / $totalClientes) * 100, 1)
+            : 0;
+
+        // KPIs del año
+        $kpis = [
+            'clientes_anio'  => User::where('role', 'cliente')->whereYear('created_at', $anio)->count(),
+            'citas_anio'     => Appointment::whereYear('date', $anio)->count(),
+            'completadas'    => Appointment::whereYear('date', $anio)->where('status', 'completada')->count(),
+            'tasa_retencion' => $tasaRetencion,
+        ];
+
         return Inertia::render('Admin/Analisis', [
-            'stats' => [
-                'clientes_mes'   => User::where('role', 'cliente')
-                    ->whereMonth('created_at', now()->month)->count(),
-                'citas_mes'      => Appointment::whereMonth('date', now()->month)->count(),
-                'docs_mes'       => Document::whereMonth('created_at', now()->month)->count(),
-                'mensajes_mes'   => ContactMessage::whereMonth('created_at', now()->month)->count(),
-            ],
+            'anio'            => (int) $anio,
+            'anios'           => range(now()->year, now()->year - 3),
+            'meses'           => $meses,
+            'kpis'            => $kpis,
+            'clientes_data'   => $clientesData->values(),
+            'completadas_data'=> $completadasData->values(),
+            'canceladas_data' => $canceladasData->values(),
+            'servicios'       => $servicios->map(fn($s) => [
+                'label' => $s->reason,
+                'total' => $s->total,
+            ]),
         ]);
     }
 

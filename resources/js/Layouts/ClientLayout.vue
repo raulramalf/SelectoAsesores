@@ -1,112 +1,158 @@
 <script setup>
-import { Link, usePage, router } from '@inertiajs/vue3'
-import { computed, ref } from 'vue'
+import AdminLayout from '@/Layouts/AdminLayout.vue'
+import { useForm, usePage } from '@inertiajs/vue3'
+import { ref, computed } from 'vue'
+
+defineProps({
+    users: { type: Array, default: () => [] }
+})
 
 const page = usePage()
-const user = computed(() => page.props.auth?.user)
-const dropdownOpen = ref(false)
+const buscador = ref('')
+const modalAbierto = ref(false)
 
-function logout() {
-    router.post('/logout')
+const form = useForm({
+    name:                  '',
+    email:                 '',
+    phone:                 '',
+    password:              '',
+    password_confirmation: '',
+})
+
+function abrirModal() {
+    form.reset()
+    modalAbierto.value = true
 }
 
-const navItems = [
-    {
-        label: 'Dashboard',
-        href: '/dashboard',
-        icon: 'M2.25 12l8.954-8.955c.44-.439 1.152-.439 1.591 0L21.75 12M4.5 9.75v10.125c0 .621.504 1.125 1.125 1.125H9.75v-4.875c0-.621.504-1.125 1.125-1.125h2.25c.621 0 1.125.504 1.125 1.125V21h4.125c.621 0 1.125-.504 1.125-1.125V9.75M8.25 21h8.25'
-    },
-    {
-        label: 'Calendario',
-        href: '/dashboard/citas',
-        icon: 'M6.75 3v2.25M17.25 3v2.25M3 18.75V7.5a2.25 2.25 0 012.25-2.25h13.5A2.25 2.25 0 0121 7.5v11.25m-18 0A2.25 2.25 0 005.25 21h13.5A2.25 2.25 0 0021 18.75m-18 0v-7.5A2.25 2.25 0 015.25 9h13.5A2.25 2.25 0 0121 11.25v7.5'
-    },
-    {
-        label: 'Archivos',
-        href: '/dashboard/documentos',
-        icon: 'M19.5 14.25v-2.625a3.375 3.375 0 00-3.375-3.375h-1.5A1.125 1.125 0 0113.5 7.125v-1.5a3.375 3.375 0 00-3.375-3.375H8.25m0 12.75h7.5m-7.5 3H12M10.5 2.25H5.625c-.621 0-1.125.504-1.125 1.125v17.25c0 .621.504 1.125 1.125 1.125h12.75c.621 0 1.125-.504 1.125-1.125V11.25a9 9 0 00-9-9z'
-    },
-    {
-        label: 'Perfil',
-        href: '/dashboard/perfil',
-        icon: 'M15.75 6a3.75 3.75 0 11-7.5 0 3.75 3.75 0 017.5 0zM4.501 20.118a7.5 7.5 0 0114.998 0A17.933 17.933 0 0112 21.75c-2.676 0-5.216-.584-7.499-1.632z'
-    },
-]
+function cerrarModal() {
+    modalAbierto.value = false
+    form.reset()
+}
+
+function guardarCliente() {
+    form.post(route('admin.users.store'), {
+        onSuccess: () => cerrarModal(),
+    })
+}
+
+const flashOk = computed(() => page.props.flash?.status === 'cliente-creado')
 </script>
 
 <template>
-    <div class="dashboard-layout">
+    <AdminLayout>
+        <template #header>Clientes</template>
 
-        <!-- SIDEBAR -->
-        <aside class="sidebar">
-            <div class="sidebar__header">
-                <Link href="/" class="sidebar__logo">SA</Link>
-            </div>
-
-            <nav class="sidebar__nav">
-                <Link
-                    v-for="item in navItems"
-                    :key="item.href"
-                    :href="item.href"
-                    class="sidebar__item"
-                >
-                    <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" :d="item.icon"/>
-                    </svg>
-                    {{ item.label }}
-                </Link>
-            </nav>
-
-            <div class="sidebar__footer">
-                <button @click="logout" class="sidebar__logout-btn">
-                    <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" d="M15.75 9V5.25A2.25 2.25 0 0013.5 3h-6a2.25 2.25 0 00-2.25 2.25v13.5A2.25 2.25 0 007.5 21h6a2.25 2.25 0 002.25-2.25V15M12 9l-3 3m0 0l3 3m-3-3h12.75"/>
-                    </svg>
-                    Log out
-                </button>
-            </div>
-        </aside>
-
-        <!-- CONTENIDO -->
-        <div class="dashboard-content">
-
-            <!-- TOPBAR -->
-            <header class="dashboard-header">
-                <div class="dashboard-header__title">
-                    <slot name="header">Dashboard</slot>
-                </div>
-
-                <div class="dashboard-header__right">
-                    <button class="topbar-icon-btn">
-                        <svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" d="M14.857 17.082a23.848 23.848 0 005.454-1.31A8.967 8.967 0 0118 9.75v-.7V9A6 6 0 006 9v.75a8.967 8.967 0 01-2.312 6.022c1.733.64 3.56 1.085 5.455 1.31m5.714 0a24.255 24.255 0 01-5.714 0m5.714 0a3 3 0 11-5.714 0"/>
-                        </svg>
-                    </button>
-
-                    <div class="topbar-user" @click="dropdownOpen = !dropdownOpen">
-                        <div class="topbar-avatar">{{ user?.name?.charAt(0) }}</div>
-                        <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" :style="dropdownOpen ? 'transform:rotate(180deg)' : ''">
-                            <path stroke-linecap="round" stroke-linejoin="round" d="M19.5 8.25l-7.5 7.5-7.5-7.5"/>
-                        </svg>
-
-                        <div v-if="dropdownOpen" class="topbar-dropdown">
-                            <div class="topbar-dropdown__info">
-                                <p class="topbar-dropdown__name">{{ user?.name }}</p>
-                                <p class="topbar-dropdown__email">{{ user?.email }}</p>
-                                <span class="topbar-dropdown__role">Cliente</span>
-                            </div>
-                            <div class="topbar-dropdown__divider"></div>
-                            <Link href="/dashboard/perfil" class="topbar-dropdown__item">Mi perfil</Link>
-                            <button @click="logout" class="topbar-dropdown__item topbar-dropdown__item--danger">Cerrar sesión</button>
-                        </div>
-                    </div>
-                </div>
-            </header>
-
-            <main class="dashboard-main">
-                <slot />
-            </main>
+        <div class="dash-welcome">
+            <h1 class="dash-welcome__title">Clientes</h1>
+            <button @click="abrirModal" class="dash-btn-primary">+ Añadir cliente</button>
         </div>
 
-    </div>
+        <div v-if="flashOk" class="flash-ok" style="margin-bottom:16px;">
+            Cliente creado correctamente
+        </div>
+
+        <div class="dash-panel">
+            <div class="dash-panel__header" style="display:flex;align-items:center;justify-content:space-between;">
+                <h3 class="dash-panel__title">Listado de clientes ({{ users.length }})</h3>
+                <input v-model="buscador" type="text" placeholder="Buscar..." class="dash-search" style="width:200px;" />
+            </div>
+
+            <div v-if="users.length === 0" style="padding:48px 20px;text-align:center;">
+                <p style="font-size:13px;color:var(--text-muted);">No hay clientes registrados todavía</p>
+                <button @click="abrirModal" class="dash-btn-primary" style="margin-top:16px;font-size:11px;">Añadir primer cliente</button>
+            </div>
+
+            <table v-else class="docs-table">
+                <thead>
+                    <tr>
+                        <th>Nombre</th>
+                        <th>Email</th>
+                        <th>Teléfono</th>
+                        <th>Registro</th>
+                        <th>Estado</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr v-for="user in users.filter(u => u.name.toLowerCase().includes(buscador.toLowerCase()) || u.email.toLowerCase().includes(buscador.toLowerCase()))" :key="user.id">
+                        <td>
+                            <div style="display:flex;align-items:center;gap:10px;">
+                                <div class="topbar-avatar" style="width:28px;height:28px;font-size:11px;flex-shrink:0;">
+                                    <img v-if="user.avatar" :src="`/storage/${user.avatar}`" :alt="user.name" />
+                                    <span v-else>{{ user.name?.charAt(0) }}</span>
+                                </div>
+                                <span style="font-size:13px;color:#fff;">{{ user.name }}</span>
+                            </div>
+                        </td>
+                        <td style="color:var(--text-muted);font-size:12px;">{{ user.email }}</td>
+                        <td style="color:var(--text-muted);font-size:12px;">{{ user.phone || '—' }}</td>
+                        <td style="color:var(--text-muted);font-size:12px;">{{ user.created_at }}</td>
+                        <td>
+                            <span style="font-size:10px;padding:3px 10px;border-radius:100px;background:rgba(129,199,132,.15);color:#81c784;font-weight:500;">
+                                Activo
+                            </span>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <!-- MODAL -->
+        <Teleport to="body">
+            <div v-if="modalAbierto" class="modal-backdrop" @click.self="cerrarModal">
+                <div class="modal">
+                    <div class="modal__header">
+                        <h2 class="modal__title">Nuevo Cliente</h2>
+                        <button @click="cerrarModal" class="modal__close">
+                            <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12"/>
+                            </svg>
+                        </button>
+                    </div>
+
+                    <form @submit.prevent="guardarCliente" class="modal__body appointment-form">
+                        <div class="dash-cols" style="gap:14px;">
+                            <div class="form-group">
+                                <label class="form-label">Nombre completo *</label>
+                                <input v-model="form.name" type="text" class="form-input"
+                                    :class="{ 'form-input--error': form.errors.name }" placeholder="Juan García" />
+                                <span v-if="form.errors.name" class="form-error">{{ form.errors.name }}</span>
+                            </div>
+                            <div class="form-group">
+                                <label class="form-label">Teléfono</label>
+                                <input v-model="form.phone" type="tel" class="form-input" placeholder="600 000 000" />
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="form-label">Email *</label>
+                            <input v-model="form.email" type="email" class="form-input"
+                                :class="{ 'form-input--error': form.errors.email }" placeholder="cliente@email.com" />
+                            <span v-if="form.errors.email" class="form-error">{{ form.errors.email }}</span>
+                        </div>
+
+                        <div class="dash-cols" style="gap:14px;">
+                            <div class="form-group">
+                                <label class="form-label">Contraseña *</label>
+                                <input v-model="form.password" type="password" class="form-input"
+                                    :class="{ 'form-input--error': form.errors.password }" placeholder="Mínimo 8 caracteres" />
+                                <span v-if="form.errors.password" class="form-error">{{ form.errors.password }}</span>
+                            </div>
+                            <div class="form-group">
+                                <label class="form-label">Confirmar contraseña *</label>
+                                <input v-model="form.password_confirmation" type="password" class="form-input" placeholder="Repetir contraseña" />
+                            </div>
+                        </div>
+
+                        <div class="modal__footer">
+                            <button type="button" @click="cerrarModal" class="modal__btn-cancel">Cancelar</button>
+                            <button type="submit" class="form-submit" style="width:auto;padding:10px 28px;" :disabled="form.processing">
+                                {{ form.processing ? 'Guardando...' : 'Crear Cliente' }}
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </Teleport>
+
+    </AdminLayout>
 </template>
