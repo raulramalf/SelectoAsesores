@@ -42,6 +42,8 @@ Route::middleware(['auth', 'role:cliente'])->group(function () {
     Route::get('/dashboard/citas',      [ClientDashboard::class, 'citas'])->name('client.citas');
     Route::get('/dashboard/documentos', [ClientDashboard::class, 'documentos'])->name('client.documentos');
     Route::get('/dashboard/perfil',     [ClientDashboard::class, 'perfil'])->name('client.perfil');
+    Route::get('/dashboard/reserva', [ClientDashboard::class, 'reserva'])->name('client.reserva');
+    Route::post('/dashboard/reserva', [ClientDashboard::class, 'storeReserva'])->name('client.reserva.store');
 });
 
 // ─── DASHBOARD ASESOR / ADMIN ─────────────────────────────────────────────────
