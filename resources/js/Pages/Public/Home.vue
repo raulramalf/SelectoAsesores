@@ -1,5 +1,6 @@
 <script setup>
 import PublicLayout from '@/Layouts/PublicLayout.vue'
+import Promopopup from './Promopopup.vue'; // Importación del componente
 
 const planes = [
     {
@@ -98,7 +99,6 @@ const testimonios = [
 <template>
     <PublicLayout>
 
-        <!-- HERO -->
         <section class="hero">
             <div class="hero__bg"></div>
             <div class="hero__overlay"></div>
@@ -112,7 +112,6 @@ const testimonios = [
             </div>
         </section>
 
-        <!-- SERVICIOS TÍTULO -->
         <section class="section-header">
             <span class="section-tag">Nuestros servicios</span>
             <h2 class="section-title">
@@ -122,7 +121,6 @@ const testimonios = [
             <p class="section-subtitle">"Asesoría fiscal integral para autónomos, pymes y empresas. Gestionamos tu fiscalidad para que tú te centres en crecer."</p>
         </section>
 
-        <!-- PLANES -->
         <section class="planes">
             <div class="planes__grid">
                 <div
@@ -154,7 +152,6 @@ const testimonios = [
             </div>
         </section>
 
-        <!-- SERVICIOS DETALLE -->
         <section class="servicios-detalle">
             <div class="servicios-detalle__grid">
                 <div v-for="srv in servicios" :key="srv.nombre" class="servicio-card">
@@ -169,7 +166,6 @@ const testimonios = [
             </div>
         </section>
 
-        <!-- TESTIMONIOS -->
         <section class="testimonios">
             <div style="text-align:center;margin-bottom:48px;">
                 <span class="section-tag">Nuestros clientes</span>
@@ -185,7 +181,6 @@ const testimonios = [
             </div>
         </section>
 
-        <!-- CTA -->
         <section class="cta">
             <h2 class="cta__titulo">
                 ¿No sabes qué necesitas?<br>
@@ -195,6 +190,8 @@ const testimonios = [
             <a href="/reserva" class="cta__btn">Solicitar consulta gratuita</a>
             <p class="cta__tel">O llámanos al <a href="tel:555555555">555-555-555</a></p>
         </section>
+
+        <Promopopup />
 
     </PublicLayout>
 </template>

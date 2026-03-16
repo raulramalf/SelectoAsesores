@@ -194,7 +194,7 @@ body {
 }
 .whatsapp-btn {
     position: fixed;
-    bottom: 28px;
+    bottom: 80px;
     right: 28px;
     z-index: 999;
     display: flex;

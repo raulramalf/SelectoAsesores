@@ -9,7 +9,6 @@ use App\Models\Document;
 use App\Models\ContactMessage;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\DB;
 use Inertia\Inertia;
 
 class DashboardController extends Controller
@@ -28,11 +27,12 @@ class DashboardController extends Controller
                 ->take(5)
                 ->get()
                 ->map(fn($c) => [
-                    'id'     => $c->id,
-                    'texto'  => $c->reason,
-                    'nombre' => $c->client?->name ?? '—',
-                    'estado' => $c->status ?? 'pendiente',
-                    'fecha'  => $c->date?->format('d/m/Y'),
+                    'id'        => $c->id,
+                    'texto'     => $c->reason,
+                    'nombre'    => $c->client?->name ?? $c->guest_name ?? '—',
+                    'es_invitado' => is_null($c->client_id),
+                    'estado'    => $c->status ?? 'pendiente',
+                    'fecha'     => $c->date?->format('d/m/Y'),
                 ]),
             'proximas_citas' => Appointment::with('client')
                 ->where('date', '>=', now())
@@ -41,17 +41,18 @@ class DashboardController extends Controller
                 ->take(5)
                 ->get()
                 ->map(fn($c) => [
-                    'id'     => $c->id,
-                    'nombre' => $c->client?->name ?? '—',
-                    'razon'  => $c->reason,
-                    'fecha'  => $c->date?->format('d/m/Y'),
-                    'time'   => $c->time,
-                    'estado' => $c->status ?? 'pendiente',
+                    'id'        => $c->id,
+                    'nombre'    => $c->client?->name ?? $c->guest_name ?? '—',
+                    'es_invitado' => is_null($c->client_id),
+                    'razon'     => $c->reason,
+                    'fecha'     => $c->date?->format('d/m/Y'),
+                    'time'      => $c->time,
+                    'estado'    => $c->status ?? 'pendiente',
                 ]),
             'actividad' => collect()
                 ->merge(
                     Appointment::with('client')->latest()->take(3)->get()->map(fn($c) => [
-                        'texto' => 'Nueva cita: ' . ($c->client?->name ?? '—'),
+                        'texto' => 'Nueva cita: ' . ($c->client?->name ?? $c->guest_name ?? '—'),
                         'fecha' => $c->created_at->diffForHumans(),
                         'tipo'  => 'cita',
                     ])
@@ -84,8 +85,11 @@ class DashboardController extends Controller
                 ->get()
                 ->map(fn($c) => [
                     'id'          => $c->id,
-                    'nombre'      => $c->client?->name,
-                    'email'       => $c->client?->email,
+                    'client_id'   => $c->client_id,
+                    'nombre'      => $c->client?->name ?? $c->guest_name ?? '—',
+                    'email'       => $c->client?->email ?? $c->guest_email ?? '—',
+                    'phone'       => $c->client?->phone ?? $c->guest_phone ?? '—',
+                    'es_invitado' => is_null($c->client_id),
                     'razon'       => $c->reason,
                     'fecha'       => $c->date,
                     'time'        => $c->time,
@@ -118,70 +122,49 @@ class DashboardController extends Controller
         $anio = $request->get('anio', now()->year);
         $meses = ['Ene','Feb','Mar','Abr','May','Jun','Jul','Ago','Sep','Oct','Nov','Dic'];
 
-        // Clientes ganados por mes
         $clientesPorMes = User::where('role', 'cliente')
             ->whereYear('created_at', $anio)
             ->selectRaw('EXTRACT(MONTH FROM created_at) as mes, COUNT(*) as total')
-            ->groupBy('mes')
-            ->orderBy('mes')
-            ->get()
-            ->keyBy('mes');
+            ->groupBy('mes')->orderBy('mes')->get()->keyBy('mes');
 
         $clientesData = collect(range(1, 12))->map(fn($m) => $clientesPorMes->get($m)?->total ?? 0);
 
-        // Citas completadas vs canceladas por mes
-        $citasCompletadas = Appointment::whereYear('date', $anio)
-            ->where('status', 'completada')
+        $citasCompletadas = Appointment::whereYear('date', $anio)->where('status', 'completada')
             ->selectRaw('EXTRACT(MONTH FROM date) as mes, COUNT(*) as total')
-            ->groupBy('mes')
-            ->get()
-            ->keyBy('mes');
+            ->groupBy('mes')->get()->keyBy('mes');
 
-        $citasCanceladas = Appointment::whereYear('date', $anio)
-            ->where('status', 'cancelada')
+        $citasCanceladas = Appointment::whereYear('date', $anio)->where('status', 'cancelada')
             ->selectRaw('EXTRACT(MONTH FROM date) as mes, COUNT(*) as total')
-            ->groupBy('mes')
-            ->get()
-            ->keyBy('mes');
+            ->groupBy('mes')->get()->keyBy('mes');
 
         $completadasData = collect(range(1, 12))->map(fn($m) => $citasCompletadas->get($m)?->total ?? 0);
         $canceladasData  = collect(range(1, 12))->map(fn($m) => $citasCanceladas->get($m)?->total ?? 0);
 
-        // Servicios más demandados
         $servicios = Appointment::whereYear('date', $anio)
             ->selectRaw('reason, COUNT(*) as total')
-            ->groupBy('reason')
-            ->orderByDesc('total')
-            ->get();
+            ->groupBy('reason')->orderByDesc('total')->get();
 
-        // Tasa de retención (clientes con más de 1 cita)
-        $totalClientes      = User::where('role', 'cliente')->count();
-        $clientesRecurrentes = Appointment::select('client_id')
-            ->groupBy('client_id')
-            ->havingRaw('COUNT(*) > 1')
-            ->get()
-            ->count();
+        $totalClientes       = User::where('role', 'cliente')->count();
+        $clientesRecurrentes = Appointment::whereNotNull('client_id')
+            ->select('client_id')->groupBy('client_id')
+            ->havingRaw('COUNT(*) > 1')->get()->count();
         $tasaRetencion = $totalClientes > 0
-            ? round(($clientesRecurrentes / $totalClientes) * 100, 1)
-            : 0;
-
-        // KPIs del año
-        $kpis = [
-            'clientes_anio'  => User::where('role', 'cliente')->whereYear('created_at', $anio)->count(),
-            'citas_anio'     => Appointment::whereYear('date', $anio)->count(),
-            'completadas'    => Appointment::whereYear('date', $anio)->where('status', 'completada')->count(),
-            'tasa_retencion' => $tasaRetencion,
-        ];
+            ? round(($clientesRecurrentes / $totalClientes) * 100, 1) : 0;
 
         return Inertia::render('Admin/Analisis', [
-            'anio'            => (int) $anio,
-            'anios'           => range(now()->year, now()->year - 3),
-            'meses'           => $meses,
-            'kpis'            => $kpis,
-            'clientes_data'   => $clientesData->values(),
-            'completadas_data'=> $completadasData->values(),
-            'canceladas_data' => $canceladasData->values(),
-            'servicios'       => $servicios->map(fn($s) => [
+            'anio'             => (int) $anio,
+            'anios'            => range(now()->year, now()->year - 3),
+            'meses'            => $meses,
+            'kpis'             => [
+                'clientes_anio'  => User::where('role', 'cliente')->whereYear('created_at', $anio)->count(),
+                'citas_anio'     => Appointment::whereYear('date', $anio)->count(),
+                'completadas'    => Appointment::whereYear('date', $anio)->where('status', 'completada')->count(),
+                'tasa_retencion' => $tasaRetencion,
+            ],
+            'clientes_data'    => $clientesData->values(),
+            'completadas_data' => $completadasData->values(),
+            'canceladas_data'  => $canceladasData->values(),
+            'servicios'        => $servicios->map(fn($s) => [
                 'label' => $s->reason,
                 'total' => $s->total,
             ]),
