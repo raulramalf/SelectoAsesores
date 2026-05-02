@@ -14,6 +14,7 @@ return new class extends Migration
             $table->string('slug')->unique();
             $table->text('summary')->nullable();
             $table->longText('content')->nullable();
+            $table->string('source')->nullable();
             $table->string('source_url')->nullable();
             $table->string('category')->nullable();
             $table->timestamp('published_at')->nullable();

@@ -209,6 +209,8 @@ const razonesLabel = {
                         <td>
                             <p style="font-size:13px;color:#fff;">{{ cita.nombre }}</p>
                             <p style="font-size:11px;color:var(--text-muted);">{{ cita.email }}</p>
+                            <p v-if="cita.es_invitado && cita.phone" style="font-size:11px;color:var(--text-dim);">{{ cita.phone }}</p>
+                            <p v-if="cita.es_invitado" style="font-size:10px;color:var(--gold);letter-spacing:.06em;text-transform:uppercase;margin-top:3px;">Cliente Externo</p>
                         </td>
                         <td style="font-size:13px;color:var(--text-light);">{{ razonesLabel[cita.razon] ?? cita.razon }}</td>
                         <td>

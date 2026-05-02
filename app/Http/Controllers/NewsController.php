@@ -2,36 +2,65 @@
 
 namespace App\Http\Controllers;
 
-use Inertia\Inertia;
 use App\Models\News;
+use Illuminate\Http\Request;
+use Illuminate\Support\Str;
+use Inertia\Inertia;
+use Carbon\Carbon;
 
 class NewsController extends Controller
 {
     public function index()
     {
-        $noticias = News::where('is_published', true)
-            ->orderBy('published_at', 'desc')
-            ->get();
-
         return Inertia::render('Public/News', [
-            'noticias' => $noticias
+            'noticias' => News::where('status', 'published')
+                ->whereDate('created_at', Carbon::today())
+                ->orderByDesc('created_at')
+                ->get()
         ]);
     }
 
-    public function show($slug)
+    public function adminIndex()
     {
-        $noticia = News::where('slug', $slug)
-            ->where('is_published', true)
-            ->firstOrFail();
-
-        return Inertia::render('Public/NewsShow', [
-            'noticia' => $noticia
+        return Inertia::render('Admin/Noticias', [
+            'noticias' => News::orderByDesc('created_at')->get()
         ]);
     }
 
-    public function create() {}
-    public function store() {}
-    public function edit() {}
-    public function update() {}
-    public function destroy() {}
+    public function storeFromN8n(Request $request)
+    {
+        News::updateOrCreate(
+            ['slug' => Str::slug(Str::limit($request->titulo, 200, ''))],
+            [
+                'title'        => $request->titulo,
+                'summary'      => $request->resumen,
+                'content'      => $request->resumen,
+                'source'       => $request->fuente,
+                'source_url'   => $request->url,
+                'category'     => $request->categoria ?? 'FISCAL',
+                'image'        => $request->imagen,
+                'status'       => 'pending',
+                'published_at' => now(),
+            ]
+        );
+        return response()->json(['status' => 'success'], 200);
+    }
+
+    public function aprobar(News $noticia)
+    {
+        $noticia->update(['status' => 'published']);
+        return back();
+    }
+
+    public function destroy(News $noticia)
+    {
+        $noticia->delete();
+        return back();
+    }
+
+    public function destroyAll()
+    {
+        News::truncate();
+        return back();
+    }
 }

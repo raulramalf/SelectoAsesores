@@ -78,10 +78,15 @@ services:
     environment:
       - GENERIC_TIMEZONE=Europe/Madrid
       - WEBHOOK_URL=http://localhost:5678
+      - N8N_USER_MANAGEMENT_DISABLED=true
+      - N8N_USER_MANAGEMENT_DISABLED=true
+      - N8N_USER_MANAGEMENT_ENABLED=false
     volumes:
       - n8n_data:/home/node/.n8n
     networks:
       - selecto_net
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
 
 volumes:
   postgres_data:

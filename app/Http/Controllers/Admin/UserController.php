@@ -70,6 +70,7 @@ class UserController extends Controller
         $user = User::findOrFail($id);
         $user->delete();
 
+        // Redirigimos a la lista de clientes tras borrar
         return redirect()->route('admin.clientes')->with('flash', ['status' => 'cliente-eliminado']);
     }
 }

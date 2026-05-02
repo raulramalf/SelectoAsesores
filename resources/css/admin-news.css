@@ -1,0 +1,129 @@
+
+
+.news-admin-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    margin-bottom: 30px;
+}
+
+.page-title {
+    font-family: 'Instrument Serif', serif;
+    color: #D4AF37; 
+    font-size: 2.5rem;
+    font-weight: 400;
+    margin: 0;
+}
+
+.custom-filter-bar {
+    display: flex;
+    gap: 10px;
+    margin-top: 15px;
+}
+
+.custom-filter-bar button {
+    background: #1a2634;
+    border: 1px solid #2d3d4f;
+    color: #6a7a9a;
+    padding: 8px 18px;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 12px;
+    font-weight: 600;
+    transition: all 0.3s ease;
+}
+
+.custom-filter-bar button.active {
+    background: #D4AF37;
+    color: #000;
+    border-color: #D4AF37;
+}
+
+.custom-filter-bar button:hover:not(.active) {
+    border-color: #6a7a9a;
+    color: #fff;
+}
+
+
+.btn-clean-all {
+    background: transparent;
+    border: 1px solid #e57373;
+    color: #e57373;
+    padding: 10px 20px;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 11px;
+    font-weight: 700;
+    text-transform: uppercase;
+    transition: 0.3s;
+}
+
+.btn-clean-all:hover {
+    background: #e57373;
+    color: #fff;
+}
+
+/* Tabla de Gestión */
+.main-title {
+    color: #fff;
+    font-size: 13px;
+    font-weight: 500;
+    display: block;
+}
+
+.source-link {
+    color: #D4AF37;
+    text-decoration: none;
+    font-size: 12px;
+    font-weight: bold;
+    display: flex;
+    align-items: center;
+    gap: 4px;
+}
+
+.source-link:hover {
+    text-decoration: underline;
+}
+
+.status-tag {
+    font-size: 9px;
+    font-weight: 800;
+    padding: 4px 10px;
+    border-radius: 4px;
+    letter-spacing: 0.5px;
+}
+
+.status-tag.pending {
+    background: rgba(255, 213, 79, 0.1);
+    color: #ffd54f;
+}
+
+.status-tag.published {
+    background: rgba(129, 199, 132, 0.1);
+    color: #81c784;
+}
+
+.actions-group {
+    display: flex;
+    gap: 15px;
+    justify-content: flex-end;
+    align-items: center;
+}
+
+.btn-small {
+    padding: 5px 15px;
+    font-size: 11px;
+}
+
+.link-delete {
+    background: none;
+    border: none;
+    color: #e57373;
+    cursor: pointer;
+    font-size: 11px;
+    font-weight: 600;
+}
+
+.text-right {
+    text-align: right;
+}
