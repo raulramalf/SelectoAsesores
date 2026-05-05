@@ -13,7 +13,9 @@ const user = computed(() => page.props.auth?.user)
 
     <div>
         <nav class="nav">
-            <Link href="/" class="nav__logo">SA</Link>
+            <Link :href="route('home')" class="flex items-center">
+                <img src="/favicon.ico" alt="Selecto Asesores" class="h-20 w-auto" />
+            </Link>
             <ul class="nav__links">
                 <li><Link href="/">Inicio</Link></li>
                 <li><Link href="/servicios">Servicios</Link></li>
@@ -49,8 +51,9 @@ const user = computed(() => page.props.auth?.user)
         <footer class="footer">
             <div class="footer__grid">
                 <div>
-                    <Link href="/" class="footer__logo">SA</Link>
-                    <p class="footer__desc">Asesoría fiscal y contable para autónomos, pymes y empresas. Profesionalidad y confianza desde el primer día.</p>
+                    <Link :href="route('home')" class="inline-block w-fit mb-4">
+                        <img src="/favicon.ico" alt="Selecto Asesores" class="h-20 w-auto" />
+                    </Link>
                 </div>
                 <div>
                     <p class="footer__heading">Servicios</p>
@@ -81,7 +84,7 @@ const user = computed(() => page.props.auth?.user)
                 </div>
             </div>
             <div class="footer__bottom">
-                <span class="footer__copy">© 2025 Selecto Asesores S.L. Todos los derechos reservados.</span>
+                <span class="footer__copy">© 2026 Selecto Asesores. Todos los derechos reservados.</span>
                 <div class="footer__legal">
                     <Link href="#">Aviso Legal</Link>
                     <Link href="#">Privacidad</Link>

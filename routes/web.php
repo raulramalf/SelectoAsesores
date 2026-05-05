@@ -12,12 +12,6 @@ use App\Http\Controllers\Admin\UserController;
 use App\Http\Controllers\Admin\DocumentController as AdminDocumentController;
 use App\Http\Controllers\Admin\AppointmentController as AdminAppointmentController;
 
-/*
-|--------------------------------------------------------------------------
-| Web Routes
-|--------------------------------------------------------------------------
-*/
-
 // ─── RUTAS PÚBLICAS ───────────────────────────────────────────────────────────
 Route::get('/',                [PublicController::class, 'home'])->name('home');
 Route::get('/servicios',       [PublicController::class, 'servicios'])->name('servicios');

@@ -28,7 +28,9 @@ const navItems = [
         <!-- SIDEBAR -->
         <aside class="sidebar">
             <div class="sidebar__header">
-                <Link href="/" class="sidebar__logo">SA</Link>
+                <Link href="/" class="inline-block w-fit px-2">
+                    <img src="/favicon.ico" alt="Selecto Asesores" class="h-8 w-auto" />
+                </Link>
             </div>
 
             <nav class="sidebar__nav">

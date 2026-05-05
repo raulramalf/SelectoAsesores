@@ -45,7 +45,7 @@ const tipoColor = {
         <!-- BIENVENIDA -->
         <div class="dash-welcome">
             <div>
-                <h1 class="dash-welcome__title">Hola, {{ user?.name }} 👋</h1>
+                <h1 class="dash-welcome__title">Hola, {{ user?.name }}</h1>
                 <p style="font-size:13px;color:var(--text-muted);margin-top:4px;">Bienvenido a tu área privada de Selecto Asesores</p>
             </div>
             <Link href="/reserva" class="dash-btn-primary">+ Nueva cita</Link>

@@ -9,21 +9,18 @@ export default {
         './resources/views/**/*.blade.php',
         './resources/js/**/*.vue',
     ],
+
     theme: {
         extend: {
-            fontFamily: {
-                sans: ['Inter', ...defaultTheme.fontFamily.sans],
-                serif: ['"Instrument Serif"', ...defaultTheme.fontFamily.serif],
-            },
             colors: {
-                brand: {
-                    dark: '#151F2B',
-                    deep: '#243345',
-                    soft: '#1c2d3f',
-                    gold: '#D4AF37',
-                }
+                primary: '#d1b482', 
+                primaryDark: '#d9cfc2',
+            },
+            fontFamily: {
+                sans: ['Figtree', ...defaultTheme.fontFamily.sans],
             },
         },
     },
+
     plugins: [forms],
 };

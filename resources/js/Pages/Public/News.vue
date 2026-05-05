@@ -30,7 +30,7 @@ const noticiasFiltradas = computed(() => {
             </div>
             <div style="position:absolute;inset:0;background:linear-gradient(180deg,rgba(21,31,43,.5) 0%,rgba(21,31,43,.92) 100%);"></div>
             <div style="position:relative;z-index:2;padding:0 64px 48px;">
-                <span style="font-size:10px;letter-spacing:.22em;text-transform:uppercase;color:#D4AF37;display:block;margin-bottom:10px;">ACTUALIDAD FISCAL</span>
+                <span style="font-size:10px;letter-spacing:.22em;text-transform:uppercase;color:#E2CBAE;display:block;margin-bottom:10px;">ACTUALIDAD FISCAL</span>
                 <h1 style="font-family:'Instrument Serif',serif;font-size:clamp(36px,5vw,60px);font-weight:400;color:#fff;line-height:1.05;margin-bottom:12px;">
                     Noticias y<br>novedades tributarias
                 </h1>
@@ -44,9 +44,10 @@ const noticiasFiltradas = computed(() => {
         <section style="background:#151F2B;border-bottom:1px solid rgba(255,255,255,.06);">
             <div style="padding:0 64px;display:flex;align-items:center;justify-content:space-between;height:56px;gap:16px;">
                 <div style="display:flex;gap:2px;">
+                    <!-- Cambiado el rgba del hover y el color activo -->
                     <button v-for="f in filtros" :key="f"
                         @click="filtroActivo = f"
-                        :style="`padding:6px 16px;border-radius:100px;font-size:11px;font-weight:400;cursor:pointer;font-family:'Inter',sans-serif;letter-spacing:.06em;transition:all .2s;border:${filtroActivo === f ? '1px solid rgba(212,175,55,.4)' : '1px solid transparent'};background:${filtroActivo === f ? 'rgba(212,175,55,.1)' : 'transparent'};color:${filtroActivo === f ? '#D4AF37' : '#6a7a9a'};`">
+                        :style="`padding:6px 16px;border-radius:100px;font-size:11px;font-weight:400;cursor:pointer;font-family:'Inter',sans-serif;letter-spacing:.06em;transition:all .2s;border:${filtroActivo === f ? '1px solid rgba(226,203,174,.4)' : '1px solid transparent'};background:${filtroActivo === f ? 'rgba(226,203,174,.1)' : 'transparent'};color:${filtroActivo === f ? '#E2CBAE' : '#6a7a9a'};`">
                         {{ f }}
                     </button>
                 </div>
@@ -58,16 +59,14 @@ const noticiasFiltradas = computed(() => {
         </section>
 
         <!-- ═══ GRID NOTICIAS ═══ -->
-        <section style="background:#243345;padding:48px 64px 80px;">
+        <section style="background:#243345;padding:48px 64px 80px; min-height: 60vh;">
 
-            <!-- Con noticias -->
             <div v-if="noticiasFiltradas.length > 0"
                 style="display:grid;grid-template-columns:repeat(3,1fr);gap:16px;max-width:1160px;margin:0 auto;">
 
                 <div v-for="noticia in noticiasFiltradas" :key="noticia.id"
                     style="background:#151F2B;border:1px solid rgba(255,255,255,.06);border-radius:6px;overflow:hidden;">
 
-                    <!-- Imagen clicable -->
                     <a :href="noticia.source_url" target="_blank" rel="noopener noreferrer"
                         style="display:block;height:140px;background:#1c2d3f;overflow:hidden;cursor:pointer;">
                         <img v-if="noticia.image" :src="noticia.image" :alt="noticia.title"
@@ -86,22 +85,20 @@ const noticiasFiltradas = computed(() => {
                     </a>
 
                     <div style="padding:18px 16px;">
-                        <!-- Fuente -->
-                        <span style="font-size:9px;font-weight:500;letter-spacing:.16em;text-transform:uppercase;color:#D4AF37;display:block;margin-bottom:7px;">
+                        <span style="font-size:9px;font-weight:500;letter-spacing:.16em;text-transform:uppercase;color:#E2CBAE;display:block;margin-bottom:7px;">
                             {{ noticia.source }}
                         </span>
 
-                        <!-- Título clicable → URL original -->
+                        <!-- Título hover actualizado -->
                         <a :href="noticia.source_url" target="_blank" rel="noopener noreferrer"
                             style="text-decoration:none;cursor:pointer;">
                             <h3 style="font-family:'Instrument Serif',serif;font-size:16px;font-weight:400;color:#fff;line-height:1.35;margin-bottom:8px;transition:color .2s;"
-                                @mouseover="$event.target.style.color='#D4AF37'"
+                                @mouseover="$event.target.style.color='#E2CBAE'"
                                 @mouseleave="$event.target.style.color='#fff'">
                                 {{ noticia.title }}
                             </h3>
                         </a>
 
-                        <!-- Resumen IA -->
                         <p style="font-size:11px;color:#6a7a9a;line-height:1.7;margin-bottom:14px;">
                             {{ noticia.summary }}
                         </p>
@@ -109,8 +106,8 @@ const noticiasFiltradas = computed(() => {
                         <div style="display:flex;justify-content:space-between;align-items:center;">
                             <span style="font-size:10px;color:#4a5a72;">{{ noticia.published_at }}</span>
                             <a :href="noticia.source_url" target="_blank" rel="noopener noreferrer"
-                                style="font-size:10px;color:#D4AF37;text-decoration:none;letter-spacing:.08em;text-transform:uppercase;cursor:pointer;">
-                                Leer original →
+                                style="font-size:10px;color:#E2CBAE;text-decoration:none;letter-spacing:.08em;text-transform:uppercase;cursor:pointer;">
+                                Leer original 
                             </a>
                         </div>
                     </div>

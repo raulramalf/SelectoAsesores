@@ -1,84 +1,192 @@
 <script setup>
 import PublicLayout from '@/Layouts/PublicLayout.vue'
 
+const planes = [
+    {
+        nombre: 'Autónomos',
+        target: 'Para particulares', 
+        desc: 'Gestión fiscal completa y asesoramiento continuo para trabajadores por cuenta propia.',
+        precio: '60',
+        features: [
+            'Alta en Hacienda y Seguridad Social',
+            'Declaraciones trimestrales (IVA, IRPF)',
+            'Asesoramiento contable y fiscal por WhatsApp',
+            'Informes de rendimiento trimestral',
+            'Consultas ilimitadas para resolver tus dudas'
+        ],
+        boton: 'Solicita tu alta'
+    },
+    {
+        nombre: 'Empresas',
+        target: 'Para Pymes',
+        desc: 'Solución integral con contabilidad y gestión laboral adaptada a empresas.',
+        precio: '200',
+        destacado: true,
+        features: [
+            'Contabilidad adaptada al PGC',
+            'Presentación de impuestos (mensual o trimestral)',
+            'Gestión de nóminas y contratos, altas y bajas en la seguridad social',
+            'Asesoramiento financiero, fiscal y estratégico',
+            'Soporte continuo y visión proactiva'
+        ],
+        boton: 'Solicitar propuesta'
+    },
+    {
+        nombre: 'Particulares',
+        target: 'Para individuos',
+        desc: 'Asesoramiento y gestión de trámites puntuales, rentas y herencias.',
+        precio: '30',
+        features: [
+            'Declaración anual de la Renta (IRPF)',
+            'Gestión de herencias y donaciones',
+            'Impuestos de transmisiones patrimoniales (ITP)',
+            'Tramitación de prestaciones sociales (paro, IMV...)',
+            'Asesoramiento en seguros (vida, hogar, vehículos...)'
+        ],
+        boton: 'Quiero asesorarme'
+    }
+]
+
 const servicios = [
     {
-        nombre: 'Declaración de la renta',
-        descripcion: 'Presentamos tu IRPF de forma óptima, aplicando todas las deducciones posibles para reducir al máximo tu carga fiscal de manera legal.',
-        items: ['IRPF anual y declaraciones complementarias', 'Revisión de ejercicios anteriores', 'Deducciones por vivienda, hijos e inversiones', 'Gestión de rentas del capital y ganancias patrimoniales']
+        nombre: 'Asesoría Contable',
+        descripcion: 'Asesoría fiscal, contable y laboral para autónomos, pymes y emprendedores con confianza y profesionalismo.',
+        items: [
+            'Libros contables, conciliaciones, balances y seguimiento.', 
+            'Informes mensuales o trimestrales.', 
+            'Análisis y control financiero.'
+        ]
     },
     {
-        nombre: 'Asesoría fiscal integral',
-        descripcion: 'Gestión completa de todas tus obligaciones fiscales. Planificación estratégica, presentación de impuestos y optimización tributaria para tu empresa.',
-        items: ['IVA trimestral e Impuesto de Sociedades', 'Planificación fiscal anual personalizada', 'Representación ante la Agencia Tributaria', 'Informes fiscales mensuales detallados']
+        nombre: 'Asesoría Laboral',
+        descripcion: 'Asesoría fiscal, contable y laboral para autónomos, pymes y emprendedores con confianza y profesionalismo.',
+        items: [
+            'Altas y bajas en Seguridad Social.', 
+            'Nóminas, contratos y finiquitos.', 
+            'Bonificaciones y bajas médicas.'
+        ]
     },
     {
-        nombre: 'Contabilidad de empresa',
-        descripcion: 'Llevamos la contabilidad de tu negocio al día, garantizando el cumplimiento del Plan General Contable y la fiabilidad de tus cuentas en todo momento.',
-        items: ['Registro de facturas y asientos contables', 'Elaboración de cuentas anuales y balances', 'Informes de resultados mensuales', 'Conciliaciones bancarias y control de tesorería']
+        nombre: 'Asesoría Fiscal',
+        descripcion: 'Asesoría fiscal, contable y laboral para autónomos, pymes y emprendedores con confianza y profesionalismo.',
+        items: [
+            'IVA, IRPF, pagos fraccionados, modelo 130, 303, 390...', 
+            'Impuestos de sociedades (IS)', 
+            'Alta, baja y modificación censal (modelos 036/037)'
+        ]
     },
     {
-        nombre: 'Gestión de Autónomos',
-        descripcion: 'Simplificamos toda la gestión fiscal y administrativa de tu actividad como autónomo para que puedas centrarte en tu negocio.',
-        items: ['Alta en Hacienda y Seguridad Social', 'Declaraciones trimestrales de IVA e IRPF', 'Facturación y gestión de gastos deducibles', 'Asesoramiento en cuota de autónomos']
-    },
-    {
-        nombre: 'Constitución de Sociedades',
-        descripcion: 'Te acompañamos en todo el proceso de creación de tu empresa, desde la elección de la forma jurídica hasta la inscripción registral.',
-        items: ['Asesoramiento en la forma jurídica óptima', 'Redacción de estatutos y escritura de constitución', 'Trámites con el Registro Mercantil', 'Alta censal y obtención del NIF definitivo']
-    },
-    {
-        nombre: 'Consultoría Tributaria',
-        descripcion: 'Análisis exhaustivo de tu situación fiscal para identificar riesgos, optimizar tu tributación y prepararte ante posibles inspecciones de Hacienda.',
-        items: ['Revisión y diagnóstico de riesgos fiscales', 'Respuesta a requerimientos de la AEAT', 'Recursos y reclamaciones económico administrativas', 'Planificación ante inspecciones tributarias']
-    },
+        nombre: 'Servicios particulares',
+        descripcion: 'Asesoría fiscal, contable y laboral para autónomos, pymes y emprendedores con confianza y profesionalismo.',
+        items: [
+            'Declaración de la renta.', 
+            'Herencias, donaciones, ITP.', 
+            'Paro, IMV, prestaciones y seguros.', 
+            'Transferencia de vehículos'
+        ]
+    }
 ]
 </script>
 
 <template>
     <PublicLayout>
 
-        <!-- HEADER -->
-        <section style="background:#243345;padding:64px 64px 48px;text-align:center;">
-            <span style="font-size:10px;letter-spacing:.22em;text-transform:uppercase;color:#8a9ab5;display:block;margin-bottom:14px;">NUESTROS SERVICIOS</span>
-            <h1 style="font-family:'Instrument Serif',serif;font-size:clamp(32px,4vw,52px);font-weight:400;color:#fff;line-height:1.15;margin-bottom:12px;">
-                Todo lo que tu empresa<br>
-                <em style="color:#D4AF37;font-style:italic;">necesita en un solo lugar</em>
+        <!-- ═══ HEADER SERVICIOS ═══ -->
+        <section style="background:#151F2B;padding:80px 64px 40px;text-align:center;border-bottom:1px solid rgba(255,255,255,.05);">
+            <span style="font-size:11px;letter-spacing:.22em;text-transform:uppercase;color:#8a9ab5;display:block;margin-bottom:16px;">CATÁLOGO DE SERVICIOS</span>
+            <h1 style="font-family:'Instrument Serif',serif;font-size:clamp(36px,5vw,56px);font-weight:400;color:#fff;line-height:1.15;margin-bottom:16px;">
+                Especialistas en<br>
+                <em style="color:#E2CBAE;font-style:italic;">gestión fiscal y contable</em>
             </h1>
-            <p style="font-size:13px;color:#6a7a9a;max-width:520px;margin:0 auto;line-height:1.75;font-style:italic;">
-                "Asesoría fiscal integral para autónomos, pymes y empresas. Gestionamos tu fiscalidad para que tú te centres en crecer."
+            <p style="font-size:15px;color:#a0aabf;max-width:560px;margin:0 auto;line-height:1.75;font-weight:300;">
+                Descubre cómo podemos ayudarte. Desde planes integrales hasta servicios específicos diseñados para cubrir todas las necesidades de tu negocio.
             </p>
         </section>
 
-        <!-- GRID SERVICIOS -->
-        <section style="background:#151F2B;padding:56px 64px 72px;">
-            <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:16px;max-width:1160px;margin:0 auto;">
-                <div v-for="srv in servicios" :key="srv.nombre"
-                    style="background:#1c2d3f;border:1px solid rgba(255,255,255,.06);border-radius:6px;padding:28px 24px;">
-                    <h3 style="font-family:'Instrument Serif',serif;font-size:17px;font-weight:400;color:#fff;margin-bottom:10px;">{{ srv.nombre }}</h3>
-                    <p style="font-size:12px;color:#6a7a9a;line-height:1.75;margin-bottom:16px;">{{ srv.descripcion }}</p>
-                    <ul style="list-style:none;padding:0;margin:0;display:flex;flex-direction:column;gap:7px;">
-                        <li v-for="item in srv.items" :key="item" style="font-size:12px;color:#a0aabf;display:flex;align-items:flex-start;gap:8px;line-height:1.5;">
-                            <span style="color:#D4AF37;flex-shrink:0;">✓</span>{{ item }}
-                        </li>
-                    </ul>
+        <!-- ═══ SECCIÓN PLANES ═══ -->
+        <section style="background:#1c2d3f;padding:72px 64px;">
+            <div style="max-width:1160px;margin:0 auto;">
+                <div style="text-align:center;margin-bottom:48px;">
+                    <h2 style="font-family:'Instrument Serif',serif;font-size:36px;font-weight:400;color:#fff;margin-bottom:12px;">Nuestros Servicios</h2>
+                    <p style="font-size:13px;color:#8a9ab5;">Transparencia total. Sin costes ocultos ni sorpresas a final de mes.</p>
+                </div>
+
+                <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:24px;">
+                    <div v-for="plan in planes" :key="plan.nombre"
+                        :style="`background:#151F2B;border:1px solid ${plan.destacado ? 'rgba(226,203,174,.45)' : 'rgba(255,255,255,.06)'};border-radius:8px;padding:36px 32px;display:flex;flex-direction:column;position:relative;`">
+                        
+                        <div v-if="plan.destacado" style="position:absolute;top:-12px;left:50%;transform:translateX(-50%);background:#E2CBAE;color:#151F2B;padding:4px 16px;border-radius:100px;font-size:9px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;">
+                            Más Popular
+                        </div>
+
+                        <h3 style="font-family:'Instrument Serif',serif;font-size:26px;font-weight:400;color:#fff;margin-bottom:8px;text-align:center;">{{ plan.nombre }}</h3>
+                        <p style="font-size:12px;color:#6a7a9a;line-height:1.65;margin-bottom:24px;min-height:40px;text-align:center;">{{ plan.desc }}</p>
+                        
+                        <ul style="list-style:none;padding:0;margin:0 0 32px 0;display:flex;flex-direction:column;gap:10px;flex:1;">
+                            <li v-for="feat in plan.features" :key="feat" style="font-size:12px;color:#a0aabf;display:flex;align-items:flex-start;gap:8px;line-height:1.5;">
+                                <span style="color:#E2CBAE;flex-shrink:0;font-size:10px;margin-top:2px;">◆</span>
+                                {{ feat }}
+                            </li>
+                        </ul>
+
+                        <div style="border-top:1px solid rgba(255,255,255,.06);padding-top:20px;margin-bottom:20px;text-align:center;">
+                            <span style="font-size:11px;color:#6a7a9a;display:block;margin-bottom:4px;" v-if="plan.nombre !== 'Particulares'">Desde</span>
+                            <div style="display:flex;align-items:baseline;justify-content:center;gap:6px;">
+                                <span style="font-family:'Instrument Serif',serif;font-size:36px;font-weight:400;color:#fff;">{{ plan.precio }}€</span>
+                                <span style="font-size:11px;color:#6a7a9a;" v-if="plan.nombre !== 'Particulares'">/ mes</span>
+                            </div>
+                        </div>
+
+                        <a href="/reserva" :style="`display:block;text-align:center;padding:12px;border-radius:4px;font-size:11px;font-weight:500;letter-spacing:.12em;text-transform:uppercase;text-decoration:none;transition:all .2s;${plan.destacado ? 'background:#E2CBAE;color:#151F2B;' : 'background:transparent;border:1px solid rgba(226,203,174,.4);color:#E2CBAE;'}`"
+                            @mouseover="!plan.destacado ? ($event.target.style.background='#E2CBAE', $event.target.style.color='#151F2B') : ($event.target.style.opacity='.85')"
+                            @mouseout="!plan.destacado ? ($event.target.style.background='transparent', $event.target.style.color='#E2CBAE') : ($event.target.style.opacity='1')">
+                            {{ plan.boton }}
+                        </a>
+                    </div>
                 </div>
             </div>
         </section>
 
-        <!-- CTA -->
-        <section style="background:#243345;padding:72px 64px;text-align:center;">
-            <h2 style="font-family:'Instrument Serif',serif;font-size:clamp(26px,3vw,40px);font-weight:400;color:#fff;line-height:1.25;margin-bottom:10px;">
-                ¿No sabes qué necesitas?<br>
-                <em style="color:#D4AF37;">Cuéntanos tu situación y te asesoramos sin compromiso</em>
+        <!-- ═══ SERVICIOS DETALLADOS (ESTÁTICOS) ═══ -->
+        <section style="background:#151F2B;padding:80px 64px;">
+            <div style="max-width:1160px;margin:0 auto;">
+                <div style="margin-bottom:56px;border-bottom:1px solid rgba(255,255,255,.05);padding-bottom:24px;text-align:center;">
+                    <h2 style="font-family:'Instrument Serif',serif;font-size:32px;font-weight:400;color:#fff;margin-bottom:16px;">
+                        Nuestros Servicios
+                    </h2>
+                    <p style="font-size:15px;color:#a0aabf;line-height:1.75;">
+                        Asesoría fiscal, contable y laboral para autónomos, pymes y emprendedores<br>con confianza y profesionalismo.
+                    </p>
+                </div>
+
+                <div style="display:grid;grid-template-columns:repeat(2,1fr);gap:32px;">
+                    <div v-for="srv in servicios" :key="srv.nombre"
+                        style="background:#1c2d3f;border-left:3px solid #E2CBAE;border-radius:0 8px 8px 0;padding:32px 36px;">
+                        
+                        <h3 style="font-family:'Instrument Serif',serif;font-size:24px;font-weight:400;color:#fff;margin-bottom:20px;text-align:center;">{{ srv.nombre }}</h3>
+                        
+                        <!-- Lista cambiada para que sea en una sola columna hacia abajo, igual que en la imagen -->
+                        <div style="display:flex;flex-direction:column;gap:12px;">
+                            <div v-for="item in srv.items" :key="item" style="font-size:12px;color:#a0aabf;display:flex;align-items:flex-start;gap:8px;line-height:1.4;">
+                                <span style="color:#E2CBAE;flex-shrink:0;">•</span>
+                                {{ item }}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ═══ CTA FINAL ═══ -->
+        <section style="background:#243345;padding:72px 64px;text-align:center;border-top:1px solid rgba(255,255,255,.05);">
+            <h2 style="font-family:'Instrument Serif',serif;font-size:clamp(28px,3vw,42px);font-weight:400;color:#fff;line-height:1.2;margin-bottom:16px;">
+                ¿Hablamos sobre<br>
+                <em style="color:#E2CBAE;">el futuro de tu negocio?</em>
             </h2>
-            <p style="font-size:13px;color:#6a7a9a;margin:16px auto 32px;max-width:460px;line-height:1.75;">
-                Primera consulta gratuita. En menos de 24 horas te explicamos qué servicio se adapta mejor a tu caso.
-            </p>
-            <a href="/reserva" style="display:inline-block;background:#D4AF37;color:#151F2B;padding:14px 48px;border-radius:100px;font-size:12px;font-weight:500;letter-spacing:.1em;text-transform:uppercase;text-decoration:none;">
-                SOLICITAR CONSULTA GRATUITA
+            <a href="/reserva" style="display:inline-block;background:#E2CBAE;color:#151F2B;padding:14px 42px;border-radius:100px;font-size:12px;font-weight:600;letter-spacing:.12em;text-transform:uppercase;text-decoration:none;transition:opacity .2s;margin-top:16px;"
+                onmouseover="this.style.opacity='.85'" onmouseout="this.style.opacity='1'">
+                Solicitar Cita
             </a>
-            <p style="font-size:13px;color:#6a7a9a;margin-top:14px;">O llámanos al <a href="tel:555555555" style="color:#8a9ab5;text-decoration:none;">555-555-555</a></p>
         </section>
 
     </PublicLayout>

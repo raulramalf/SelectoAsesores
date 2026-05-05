@@ -19,8 +19,8 @@ function submit() {
 }
 
 const contactItems = [
-    { label: 'Teléfono', value: '555 555 555', href: 'tel:555555555' },
-    { label: 'Email', value: 'selectoasesores@contacto.com', href: 'mailto:selectoasesores@contacto.com' },
+    { label: 'Teléfono', value: '684743250', href: 'tel:555555555' },
+    { label: 'Email', value: 'info@selectoasesores.com', href: 'mailto:info@selectoasesores.es' },
     { label: 'Instagram', value: '@selectoasesores', href: '#' },
     { label: 'LinkedIn', value: 'linkedin/selectoasesores', href: '#' },
 ]
@@ -96,7 +96,7 @@ const contactItems = [
                                     v-model="form.phone"
                                     type="tel"
                                     class="form-input"
-                                    placeholder="600 000 000"
+                                    placeholder="684743250"
                                 />
                             </div>
                         </div>

@@ -28,7 +28,9 @@ function submit() {
         <div class="login-left">
             <div class="login-left__overlay"></div>
             <div class="login-left__content">
-                <Link href="/" class="login-brand">SA</Link>
+                <Link href="/">
+                    <img src="/favicon.ico" class="absolute -bottom-20 -left-20 w-[600px] opacity-[0.03] pointer-events-none" />
+                </Link>
                 <h2 class="login-left__title">
                     Tu asesoría fiscal<br>
                     <em>siempre disponible</em>

@@ -37,7 +37,7 @@
 
 .nosotros-hero__logo-box {
     background: var(--navy-card);
-    border: 1px solid rgba(212, 175, 55, 0.25);
+    border: 1px solid rgba(226, 203, 174, 0.25);
     border-radius: 12px;
     padding: 48px;
     display: flex;
@@ -268,8 +268,8 @@
 }
 
 .filtro-btn--active {
-    border: 1px solid rgba(212, 175, 55, 0.3);
-    background: rgba(212, 175, 55, 0.1);
+    border: 1px solid rgba(226, 203, 174, 0.3);
+    background: rgba(226, 203, 174, 0.1);
     color: var(--gold);
 }
 
@@ -287,7 +287,7 @@
 }
 
 .noticias-busqueda:focus {
-    border-color: rgba(212, 175, 55, 0.3);
+    border-color: rgba(226, 203, 174, 0.3);
 }
 
 .noticias-grid {
@@ -313,7 +313,7 @@
 }
 
 .noticia-card:hover {
-    border-color: rgba(212, 175, 55, 0.25);
+    border-color: rgba(226, 203, 174, 0.25);
 }
 
 .noticia-card__img {
@@ -542,8 +542,8 @@
     display: flex;
     align-items: flex-start;
     gap: 14px;
-    background: rgba(212,175,55,.1);
-    border: 1px solid rgba(212,175,55,.3);
+    background: rgba(226, 203, 174, 0.1);
+    border: 1px solid rgba(226, 203, 174, 0.3);
     border-radius: 8px;
     padding: 18px 20px;
     margin-bottom: 28px;
@@ -608,7 +608,7 @@
 }
 
 .form-input:focus {
-    border-color: rgba(212,175,55,.4);
+    border-color: rgba(226, 203, 174, 0.4);
 }
 
 .form-input--error {
@@ -771,7 +771,7 @@
 .promo-premium-close:hover {
     color: #fff;
     background: var(--navy-mid);
-    border-color: rgba(212, 175, 55, 0.4);
+    border-color: rgba(226, 203, 174, 0.4);
 }
 
 .promo-premium-grid {
@@ -803,9 +803,9 @@
 .promo-premium-badge {
     align-self: flex-start;
     display: inline-block;
-    background-color: rgba(212, 175, 55, 0.1);
+    background-color: rgba(226, 203, 174, 0.1);
     color: var(--gold);
-    border: 1px solid rgba(212, 175, 55, 0.3);
+    border: 1px solid rgba(226, 203, 174, 0.3);
     padding: 6px 14px;
     border-radius: 9999px;
     font-size: 11px;
