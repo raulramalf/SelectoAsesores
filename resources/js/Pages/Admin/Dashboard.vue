@@ -40,7 +40,6 @@ const tipoIcon = {
     <AdminLayout>
         <template #header>Dashboard</template>
 
-        <!-- BIENVENIDA -->
         <div class="dash-welcome">
             <div>
                 <h1 class="dash-welcome__title">Panel Administrador</h1>
@@ -48,7 +47,6 @@ const tipoIcon = {
             </div>
         </div>
 
-        <!-- STATS -->
         <div class="dash-grid" style="margin-bottom:24px;">
             <div class="dash-card">
                 <p class="dash-card__label">Clientes activos</p>
@@ -72,10 +70,8 @@ const tipoIcon = {
             </div>
         </div>
 
-        <!-- DOS COLUMNAS -->
         <div class="dash-cols" style="margin-bottom:20px;">
 
-            <!-- SOLICITUDES RECIENTES -->
             <div class="dash-panel">
                 <div class="dash-panel__header" style="display:flex;justify-content:space-between;align-items:center;">
                     <h3 class="dash-panel__title">Solicitudes recientes</h3>
@@ -105,7 +101,6 @@ const tipoIcon = {
                 </div>
             </div>
 
-            <!-- PRÓXIMAS CITAS -->
             <div class="dash-panel">
                 <div class="dash-panel__header" style="display:flex;justify-content:space-between;align-items:center;">
                     <h3 class="dash-panel__title">Próximas citas</h3>
@@ -136,7 +131,6 @@ const tipoIcon = {
 
         </div>
 
-        <!-- ACTIVIDAD RECIENTE -->
         <div class="dash-panel">
             <div class="dash-panel__header" style="display:flex;justify-content:space-between;align-items:center;">
                 <h3 class="dash-panel__title">Actividad reciente</h3>

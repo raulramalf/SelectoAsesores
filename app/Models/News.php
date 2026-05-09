@@ -3,7 +3,6 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Support\Str;
 
 class News extends Model
 {
@@ -12,8 +11,6 @@ class News extends Model
         'image', 'source', 'source_url', 'slug', 'status'
     ];
 
-    // Accessor: Esto hace que si pides $news->image y es nulo, 
-    // te devuelva una imagen aleatoria de finanzas automáticamente.
     protected function image(): \Illuminate\Database\Eloquent\Casts\Attribute
     {
         return \Illuminate\Database\Eloquent\Casts\Attribute::make(
@@ -23,7 +20,6 @@ class News extends Model
 
     private function getFallbackImage()
     {
-        // Imágenes profesionales de stock según la categoría
         $defaults = [
             'FISCAL'    => 'https://images.unsplash.com/photo-1554224155-6726b3ff858f?w=800',
             'LABORAL'   => 'https://images.unsplash.com/photo-1521791136364-758a39f3ef0c?w=800',

@@ -9,7 +9,6 @@ use App\Models\User;
 
 class AppointmentController extends Controller
 {
-    // Mapeo de razones del formulario público → valores del ENUM de la BD
     private array $reasonMap = [
         'Declaración de la Renta (IRPF)' => 'declaracion_renta',
         'Asesoría Fiscal Integral'        => 'asesoria_fiscal',
@@ -36,10 +35,8 @@ class AppointmentController extends Controller
             'description' => 'nullable|string|max:500',
         ]);
 
-        // Convertir la razón legible al valor del ENUM
         $reasonEnum = $this->reasonMap[$validated['reason']] ?? 'consultoria';
 
-        // Asignar el primer asesor disponible
         $asesor = User::where('role', 'asesor')
             ->orWhere('role', 'admin')
             ->first();

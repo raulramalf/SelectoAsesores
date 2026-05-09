@@ -10,7 +10,6 @@
     padding: 0 25px;
 }
 
-/* Encabezado Principal */
 .public-header {
     text-align: center;
     margin-bottom: 80px;
@@ -71,7 +70,6 @@
     transition: opacity 0.3s ease;
 }
 
-/* Contenido de la Tarjeta */
 .article-info {
     padding: 25px;
 }
@@ -127,4 +125,57 @@
 .article-btn:hover {
     color: #fff;
     gap: 8px;
+}
+
+@media (max-width: 1024px) {
+    .news-masonry {
+        grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+        gap: 20px;
+    }
+
+    .main-heading {
+        font-size: 3.5rem;
+    }
+}
+
+@media (max-width: 768px) {
+    .news-page-wrapper {
+        padding: 60px 0;
+    }
+
+    .news-container {
+        padding: 0 16px;
+    }
+
+    .public-header {
+        margin-bottom: 48px;
+    }
+
+    .main-heading {
+        font-size: 2.5rem;
+        margin: 10px 0;
+    }
+
+    .sub-heading {
+        font-size: 15px;
+    }
+
+    .news-masonry {
+        grid-template-columns: 1fr;
+        gap: 16px;
+    }
+}
+
+@media (max-width: 480px) {
+    .main-heading {
+        font-size: 2rem;
+    }
+
+    .article-info {
+        padding: 18px;
+    }
+
+    .article-name {
+        font-size: 20px;
+    }
 }

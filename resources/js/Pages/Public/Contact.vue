@@ -29,7 +29,6 @@ const contactItems = [
 <template>
     <PublicLayout>
 
-        <!-- HERO -->
         <section class="appointment-hero">
             <div class="appointment-hero__overlay"></div>
             <div class="appointment-hero__content">
@@ -44,11 +43,9 @@ const contactItems = [
             </div>
         </section>
 
-        <!-- FORMULARIO -->
         <section class="contact-section">
             <div class="contact-wrapper">
 
-                <!-- Info -->
                 <div class="contact-info">
                     <h2 class="contact-info__title">Datos de contacto</h2>
 
@@ -66,7 +63,6 @@ const contactItems = [
                     </div>
                 </div>
 
-                <!-- Formulario -->
                 <div class="contact-form-wrapper">
 
                     <div v-if="success" class="appointment-success">

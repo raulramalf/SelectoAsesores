@@ -83,7 +83,6 @@ const razonesLabel = {
 
         <div class="dash-cols" style="margin-bottom:20px;">
 
-            <!-- CALENDARIO -->
             <div class="dash-panel">
                 <div class="dash-panel__header" style="display:flex;align-items:center;justify-content:space-between;">
                     <button @click="prevMes" class="cal-nav-btn">‹</button>
@@ -108,7 +107,6 @@ const razonesLabel = {
                 </div>
             </div>
 
-            <!-- STATS -->
             <div style="display:flex;flex-direction:column;gap:14px;">
                 <div class="dash-card">
                     <p class="dash-card__label">Total citas</p>
@@ -129,7 +127,6 @@ const razonesLabel = {
 
         </div>
 
-        <!-- LISTA -->
         <div class="dash-panel">
             <div class="dash-panel__header" style="display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:10px;">
                 <h3 class="dash-panel__title">Historial de citas</h3>

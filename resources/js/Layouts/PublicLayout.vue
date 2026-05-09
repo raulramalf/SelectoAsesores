@@ -1,8 +1,22 @@
 <script setup>
 import { Link, Head, usePage } from '@inertiajs/vue3'
-import { computed } from 'vue'
+import { computed, ref, onMounted, onUnmounted } from 'vue'
 const page = usePage()
 const user = computed(() => page.props.auth?.user)
+
+// ── Menú móvil ──
+const menuOpen = ref(false)
+function toggleMenu() {
+    menuOpen.value = !menuOpen.value
+    document.body.style.overflow = menuOpen.value ? 'hidden' : ''
+}
+function closeMenu() {
+    menuOpen.value = false
+    document.body.style.overflow = ''
+}
+function onResize() { if (window.innerWidth > 768) closeMenu() }
+onMounted(() => window.addEventListener('resize', onResize))
+onUnmounted(() => { window.removeEventListener('resize', onResize); document.body.style.overflow = '' })
 </script>
 
 <template>
@@ -42,7 +56,32 @@ const user = computed(() => page.props.auth?.user)
                     <Link href="/reserva" class="nav__cta">Reservar cita</Link>
                 </template>
             </div>
+
+            <button
+                class="nav__hamburger"
+                :class="{ 'nav__hamburger--open': menuOpen }"
+                @click="toggleMenu"
+                aria-label="Menú"
+            >
+                <span></span><span></span><span></span>
+            </button>
         </nav>
+
+        <div class="nav__mobile-menu" :class="{ 'nav__mobile-menu--open': menuOpen }">
+            <Link href="/" class="nav__mobile-link" @click="closeMenu">Inicio</Link>
+            <Link href="/servicios" class="nav__mobile-link" @click="closeMenu">Servicios</Link>
+            <Link href="/nosotros" class="nav__mobile-link" @click="closeMenu">Nosotros</Link>
+            <Link href="/noticias" class="nav__mobile-link" @click="closeMenu">Noticias</Link>
+            <Link href="/contacto" class="nav__mobile-link" @click="closeMenu">Contacto</Link>
+            <div class="nav__mobile-divider"></div>
+            <template v-if="user">
+                <Link :href="user.role === 'cliente' ? '/dashboard' : '/admin'" class="nav__mobile-cta" @click="closeMenu">Mi panel</Link>
+            </template>
+            <template v-else>
+                <Link href="/login" class="nav__mobile-link" @click="closeMenu" style="font-size:18px;">Acceder</Link>
+                <Link href="/reserva" class="nav__mobile-cta" @click="closeMenu">Reservar cita</Link>
+            </template>
+        </div>
 
         <main>
             <slot />
@@ -76,7 +115,7 @@ const user = computed(() => page.props.auth?.user)
                 <div>
                     <p class="footer__heading">Contacto</p>
                     <ul class="footer__list">
-                        <li><span>555-555-555</span></li>
+                        <li><span>684743250</span></li>
                         <li><span>selectoasesores@contacto.com</span></li>
                         <li><span>@selectoasesores</span></li>
                         <li><span>linkedin/selectoasesores</span></li>
@@ -93,9 +132,8 @@ const user = computed(() => page.props.auth?.user)
             </div>
         </footer>
 
-        <!-- WHATSAPP FLOTANTE -->
         <a
-            href="https://wa.me/34555555555?text=Hola,%20me%20gustaría%20obtener%20información%20sobre%20sus%20servicios%20de%20asesoría."
+            href="https://wa.me/34684743250?text=Hola,%20me%20gustaría%20obtener%20información%20sobre%20sus%20servicios%20de%20asesoría."
             target="_blank"
             rel="noopener noreferrer"
             class="whatsapp-btn"
@@ -106,6 +144,5 @@ const user = computed(() => page.props.auth?.user)
             </svg>
             <span class="whatsapp-btn__text">¿Hablamos?</span>
         </a>
-
     </div>
 </template>

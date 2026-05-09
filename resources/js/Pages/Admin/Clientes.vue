@@ -45,7 +45,6 @@ function cancelarEliminar() {
 }
 
 function eliminar() {
-    // Generamos la URL de borrado con el ID dinámico del cliente
     router.delete(route('admin.clientes.destroy', clienteAEliminar.value.id), {
         onSuccess: () => { 
             clienteAEliminar.value = null 
@@ -116,7 +115,7 @@ const flashDeleted = computed(() => page.props.flash?.status === 'cliente-elimin
                         <td style="color:var(--text-muted);font-size:12px;">{{ user.created_at }}</td>
                         <td>
                             <div style="display:flex;align-items:center;gap:14px;">
-                                <Link :href="route('admin.clientes.show', user.id)" class="doc-btn-download">Ver perfil →</Link>
+                                <Link :href="route('admin.clientes.show', user.id)" class="doc-btn-download">Ver perfil</Link>
                                 <button @click="confirmarEliminar(user)" class="btn-eliminar">Eliminar</button>
                             </div>
                         </td>
@@ -126,7 +125,6 @@ const flashDeleted = computed(() => page.props.flash?.status === 'cliente-elimin
         </div>
 
         <Teleport to="body">
-            <!-- MODAL CREAR CLIENTE -->
             <div v-if="modalAbierto" class="modal-backdrop" @click.self="cerrarModal">
                 <div class="modal">
                     <div class="modal__header">
@@ -135,31 +133,25 @@ const flashDeleted = computed(() => page.props.flash?.status === 'cliente-elimin
                     </div>
                     <form @submit.prevent="guardarCliente" class="modal__body">
                         
-                        <!-- AQUI ESTÁN LOS CAMPOS QUE FALTABAN -->
                         <div style="display:flex; flex-direction:column; gap:16px; margin-bottom: 24px;">
                             
-                            <!-- Nombre -->
                             <div>
                                 <label style="font-size:11px; color:#8a9ab5; text-transform:uppercase; letter-spacing:1px; margin-bottom:6px; display:block;">Nombre completo *</label>
                                 <input v-model="form.name" type="text" required style="width:100%; padding:10px 14px; background:#1c2d3f; border:1px solid rgba(255,255,255,0.1); border-radius:4px; color:#fff; font-size:13px; outline:none;" placeholder="Ej. Juan Pérez" />
                                 <div v-if="form.errors.name" style="color:#e57373; font-size:11px; margin-top:4px;">{{ form.errors.name }}</div>
                             </div>
 
-                            <!-- Email -->
                             <div>
                                 <label style="font-size:11px; color:#8a9ab5; text-transform:uppercase; letter-spacing:1px; margin-bottom:6px; display:block;">Email *</label>
                                 <input v-model="form.email" type="email" required style="width:100%; padding:10px 14px; background:#1c2d3f; border:1px solid rgba(255,255,255,0.1); border-radius:4px; color:#fff; font-size:13px; outline:none;" placeholder="correo@ejemplo.com" />
                                 <div v-if="form.errors.email" style="color:#e57373; font-size:11px; margin-top:4px;">{{ form.errors.email }}</div>
                             </div>
 
-                            <!-- Teléfono -->
                             <div>
                                 <label style="font-size:11px; color:#8a9ab5; text-transform:uppercase; letter-spacing:1px; margin-bottom:6px; display:block;">Teléfono</label>
                                 <input v-model="form.phone" type="tel" style="width:100%; padding:10px 14px; background:#1c2d3f; border:1px solid rgba(255,255,255,0.1); border-radius:4px; color:#fff; font-size:13px; outline:none;" placeholder="600 000 000" />
                                 <div v-if="form.errors.phone" style="color:#e57373; font-size:11px; margin-top:4px;">{{ form.errors.phone }}</div>
                             </div>
-
-                            <!-- Contraseñas (En dos columnas) -->
                             <div style="display:grid; grid-template-columns: 1fr 1fr; gap:16px;">
                                 <div>
                                     <label style="font-size:11px; color:#8a9ab5; text-transform:uppercase; letter-spacing:1px; margin-bottom:6px; display:block;">Contraseña *</label>
@@ -182,7 +174,6 @@ const flashDeleted = computed(() => page.props.flash?.status === 'cliente-elimin
                 </div>
             </div>
 
-            <!-- MODAL ELIMINAR CLIENTE -->
             <div v-if="clienteAEliminar" class="modal-backdrop" @click.self="cancelarEliminar">
                 <div class="modal modal--confirm">
                     <h3 class="modal__title">¿Eliminar cliente?</h3>

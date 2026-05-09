@@ -19,7 +19,6 @@ const meses = ['Ene','Feb','Mar','Abr','May','Jun','Jul','Ago','Sep','Oct','Nov'
     <AdminLayout>
         <template #header>Detalle de cliente</template>
 
-        <!-- VOLVER -->
         <div style="margin-bottom:24px;">
             <Link href="/admin/clientes"
                 style="display:inline-flex;align-items:center;gap:6px;font-size:11px;color:var(--text-muted);text-decoration:none;letter-spacing:.1em;text-transform:uppercase;transition:color .2s;"
@@ -31,10 +30,8 @@ const meses = ['Ene','Feb','Mar','Abr','May','Jun','Jul','Ago','Sep','Oct','Nov'
             </Link>
         </div>
 
-        <!-- TARJETA PRINCIPAL -->
         <div class="cliente-hero">
 
-            <!-- IZQUIERDA: avatar + nombre -->
             <div class="cliente-hero__identity">
                 <div class="cliente-hero__avatar">
                     <img v-if="cliente.avatar" :src="`/storage/${cliente.avatar}`" :alt="cliente.name" />
@@ -47,7 +44,6 @@ const meses = ['Ene','Feb','Mar','Abr','May','Jun','Jul','Ago','Sep','Oct','Nov'
                 </div>
             </div>
 
-            <!-- DERECHA: datos de contacto -->
             <div class="cliente-hero__contact">
                 <div class="cliente-hero__contact-item">
                     <div class="cliente-hero__contact-icon">
@@ -100,10 +96,8 @@ const meses = ['Ene','Feb','Mar','Abr','May','Jun','Jul','Ago','Sep','Oct','Nov'
 
         </div>
 
-        <!-- DOS COLUMNAS -->
         <div class="dash-cols" style="margin-top:20px;">
 
-            <!-- CITAS -->
             <div class="dash-panel">
                 <div class="dash-panel__header" style="display:flex;justify-content:space-between;align-items:center;">
                     <h3 class="dash-panel__title">Historial de citas</h3>
@@ -132,7 +126,6 @@ const meses = ['Ene','Feb','Mar','Abr','May','Jun','Jul','Ago','Sep','Oct','Nov'
                 </div>
             </div>
 
-            <!-- DOCUMENTOS -->
             <div class="dash-panel">
                 <div class="dash-panel__header" style="display:flex;justify-content:space-between;align-items:center;">
                     <h3 class="dash-panel__title">Documentos</h3>

@@ -23,16 +23,25 @@ class AuthenticatedSessionController extends Controller
 
     public function store(LoginRequest $request): RedirectResponse
     {
-        $request->authenticate();
-        $request->session()->regenerate();
+        $request->authenticate(); 
 
         $user = $request->user();
 
-        if ($user->role === 'asesor' || $user->role === 'admin') {
-            return redirect(route('admin.index'));
+        if ($user->two_factor_confirmed_at) {
+            Auth::logout(); 
+            $request->session()->put('2fa:user:id', $user->id);
+            $request->session()->put('2fa:auth:remember', $request->boolean('remember'));
+            
+            return redirect()->route('2fa.challenge');
         }
 
-        return redirect(route('client.index'));
+        $request->session()->regenerate();
+
+        if ($user->role === 'admin') {
+            return redirect()->route('admin.index');
+        }
+        
+        return redirect()->route('client.index');
     }
 
     public function destroy(Request $request): RedirectResponse

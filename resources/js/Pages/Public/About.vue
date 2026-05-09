@@ -12,12 +12,10 @@ const proceso = [
 <template>
     <PublicLayout>
 
-        <!-- ═══ BLOQUE PRINCIPAL CONTINUO (Hero + Misión/Visión) ═══ -->
         <div style="background:#151F2B;">
             
             <!-- HERO -->
             <section style="position:relative; padding:160px 64px 80px; text-align:center; display:flex; align-items:center; justify-content:center;">
-                <!-- Fondo fotográfico muy sutil fundido con el color base -->
                 <div style="position:absolute; inset:0;">
                     <img src="https://images.unsplash.com/photo-1497366216548-37526070297c?auto=format&fit=crop&w=1920&q=80" alt="Fondo oficina" style="width:100%; height:100%; object-fit:cover; filter:grayscale(50%); opacity:0.15;">
                 </div>
@@ -35,19 +33,15 @@ const proceso = [
                 </div>
             </section>
 
-            <!-- IMAGEN ANCLA Y TEXTOS (Misión/Visión) -->
             <section style="padding:0 64px 140px; position:relative; z-index:2;">
                 <div style="max-width:1160px; margin:0 auto;">
 
-                    <!-- Imagen Editorial Centrada -->
                     <div style="width:100%; height:500px; border-radius:16px; overflow:hidden; margin-bottom:80px; border:1px solid rgba(255,255,255,0.05);">
                         <img src="https://images.unsplash.com/photo-1522071820081-009f0129c71c?auto=format&fit=crop&w=1200&q=80" alt="Equipo trabajando" style="width:100%; height:100%; object-fit:cover; object-position:center 40%;">
                     </div>
 
-                    <!-- Cuadrícula limpia para Misión y Visión -->
                     <div style="display:grid; grid-template-columns:repeat(2, 1fr); gap:80px;">
                         
-                        <!-- Columna Misión -->
                         <div>
                             <div style="display:flex; align-items:center; gap:16px; margin-bottom:24px;">
                                 <div style="width:40px; height:1px; background:#E2CBAE;"></div>
@@ -59,7 +53,6 @@ const proceso = [
                             </p>
                         </div>
 
-                        <!-- Columna Visión -->
                         <div>
                             <div style="display:flex; align-items:center; gap:16px; margin-bottom:24px;">
                                 <div style="width:40px; height:1px; background:#E2CBAE;"></div>
@@ -75,9 +68,8 @@ const proceso = [
                 </div>
             </section>
             
-        </div> <!-- Fin del bloque continuo -->
+        </div> 
 
-        <!-- ═══ PROCESO ═══ -->
         <section style="background:#1c2d3f; padding:120px 64px; border-top:1px solid rgba(255,255,255,0.03); border-bottom:1px solid rgba(255,255,255,0.03);">
             <div style="max-width:1160px; margin:0 auto; text-align:center;">
                 
@@ -86,10 +78,8 @@ const proceso = [
                     Cómo trabajamos<br><em style="color:#E2CBAE;">contigo</em>
                 </h2>
 
-                <!-- Timeline Grid -->
                 <div style="display:grid; grid-template-columns:repeat(4, 1fr); gap:40px; position:relative;">
                     
-                    <!-- Línea conectora -->
                     <div style="position:absolute; top:28px; left:10%; right:10%; height:1px; background:rgba(226,203,174,0.2); z-index:1;"></div>
 
                     <div v-for="paso in proceso" :key="paso.num" style="position:relative; z-index:2; display:flex; flex-direction:column; align-items:center;">
@@ -105,7 +95,6 @@ const proceso = [
             </div>
         </section>
 
-        <!-- ═══ CTA FINAL ═══ -->
         <section style="background:#243345; padding:100px 64px; text-align:center;">
             <h2 style="font-family:'Instrument Serif',serif; font-size:clamp(32px,4vw,48px); font-weight:400; color:#fff; line-height:1.2; margin-bottom:12px;">
                 ¿Listo para dar el<br>

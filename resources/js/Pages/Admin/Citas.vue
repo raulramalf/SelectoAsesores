@@ -10,7 +10,6 @@ const props = defineProps({
 
 const page = usePage()
 
-// ─── CALENDARIO ──────────────────────────────────────
 const meses      = ['Enero','Febrero','Marzo','Abril','Mayo','Junio','Julio','Agosto','Septiembre','Octubre','Noviembre','Diciembre']
 const mesesCortos= ['Ene','Feb','Mar','Abr','May','Jun','Jul','Ago','Sep','Oct','Nov','Dic']
 const diasNombre = ['Lun','Mar','Mié','Jue','Vie','Sáb','Dom']
@@ -43,7 +42,6 @@ function tieneCita(dia) {
     })
 }
 
-// ─── FILTROS ─────────────────────────────────────────
 const filtro   = ref('todas')
 const buscador = ref('')
 
@@ -56,7 +54,6 @@ const citasFiltradas = computed(() =>
     })
 )
 
-// ─── ESTADO COLORES ───────────────────────────────────
 const estadoColor = {
     pendiente:  { bg: 'rgba(212,175,55,.15)',  color: '#D4AF37' },
     confirmada: { bg: 'rgba(129,199,132,.15)', color: '#81c784' },
@@ -64,7 +61,6 @@ const estadoColor = {
     completada: { bg: 'rgba(100,181,246,.15)', color: '#64b5f6' },
 }
 
-// ─── MODAL NUEVA CITA ─────────────────────────────────
 const modalOpen = ref(false)
 const form = useForm({
     client_id:   '',
@@ -83,12 +79,10 @@ function guardarCita() {
     })
 }
 
-// ─── CAMBIAR ESTADO ───────────────────────────────────
 function cambiarEstado(cita, estado) {
     router.patch(`/admin/citas/${cita.id}/estado`, { estado }, { preserveScroll: true })
 }
 
-// ─── ELIMINAR ─────────────────────────────────────────
 const citaAEliminar = ref(null)
 function confirmarEliminar(cita) { citaAEliminar.value = cita }
 function cancelarEliminar()      { citaAEliminar.value = null }
@@ -123,7 +117,6 @@ const razonesLabel = {
 
         <div class="dash-cols" style="margin-bottom:20px;">
 
-            <!-- CALENDARIO -->
             <div class="dash-panel">
                 <div class="dash-panel__header" style="display:flex;align-items:center;justify-content:space-between;">
                     <button @click="prevMes" class="cal-nav-btn">‹</button>
@@ -148,7 +141,6 @@ const razonesLabel = {
                 </div>
             </div>
 
-            <!-- STATS -->
             <div style="display:flex;flex-direction:column;gap:14px;">
                 <div class="dash-card">
                     <p class="dash-card__label">Total citas</p>
@@ -169,7 +161,6 @@ const razonesLabel = {
 
         </div>
 
-        <!-- TABLA -->
         <div class="dash-panel">
             <div class="dash-panel__header" style="display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:10px;">
                 <div style="display:flex;gap:6px;flex-wrap:wrap;">
@@ -233,7 +224,6 @@ const razonesLabel = {
             </table>
         </div>
 
-        <!-- MODAL NUEVA CITA -->
         <Teleport to="body">
             <div v-if="modalOpen" class="modal-backdrop" @click.self="cerrarModal">
                 <div class="modal">
@@ -310,7 +300,6 @@ const razonesLabel = {
             </div>
         </Teleport>
 
-        <!-- MODAL ELIMINAR -->
         <Teleport to="body">
             <div v-if="citaAEliminar" class="modal-backdrop" @click.self="cancelarEliminar">
                 <div class="modal modal--confirm">

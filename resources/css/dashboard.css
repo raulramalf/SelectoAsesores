@@ -1,4 +1,3 @@
-/* ─── VARIABLES ──────────────────────────────────────── */
 :root {
     --navy:       #151F2B;
     --navy-mid:   #1d2b3a;
@@ -13,7 +12,6 @@
     --font-sans:  'Inter', sans-serif;
 }
 
-/* ─── DASHBOARD LAYOUT ───────────────────────────────── */
 .dashboard-layout {
     display: flex;
     min-height: 100vh;
@@ -147,7 +145,6 @@
     flex: 1;
 }
 
-/* ─── TOPBAR ─────────────────────────────────────────── */
 .topbar-icon-btn {
     background: transparent;
     border: none;
@@ -256,7 +253,6 @@
 .topbar-dropdown__item--danger { color: #e57373; }
 .topbar-dropdown__item--danger:hover { background: rgba(229,115,115,.08); }
 
-/* ─── WELCOME / STATS ────────────────────────────────── */
 .dash-welcome {
     display: flex;
     align-items: center;
@@ -321,7 +317,6 @@
 .dash-card__gold { border-color: rgba(226, 203, 174, 0.2); }
 .dash-card__gold .dash-card__value { color: var(--gold); }
 
-/* ─── PANELS ─────────────────────────────────────────── */
 .dash-cols { display: grid; grid-template-columns: 1fr 1fr; gap: 18px; }
 
 .dash-panel {
@@ -354,7 +349,6 @@
 
 .dash-chart-placeholder__text { font-size: 12px; color: var(--text-dim); text-align: center; }
 
-/* ─── SOLICITUDES ────────────────────────────────────── */
 .dash-solicitudes { display: flex; flex-direction: column; }
 
 .dash-solicitud {
@@ -378,7 +372,6 @@
     flex-shrink: 0;
 }
 
-/* ─── ACTIVIDADES ────────────────────────────────────── */
 .dash-actividades { display: flex; flex-direction: column; }
 
 .dash-actividad {
@@ -403,7 +396,6 @@
 .dash-actividad__texto { font-size: 13px; color: var(--text-light); margin-bottom: 2px; }
 .dash-actividad__fecha { font-size: 11px; color: var(--text-dim); }
 
-/* ─── CALENDARIO ─────────────────────────────────────── */
 .cal-nav-btn {
     background: transparent;
     border: none;
@@ -445,7 +437,6 @@
 .cal-day--hoy { background: rgba(226, 203, 174, 0.15); color: var(--gold); font-weight: 500; }
 .cal-day--vacio { cursor: default; }
 
-/* ─── CITAS ──────────────────────────────────────────── */
 .citas-lista { display: flex; flex-direction: column; }
 
 .cita-item {
@@ -484,7 +475,6 @@
     text-transform: capitalize;
 }
 
-/* ─── DOCUMENTOS ─────────────────────────────────────── */
 .filtro-tab {
     padding: 5px 12px;
     border-radius: 100px;
@@ -549,7 +539,6 @@
 }
 .doc-btn-download:hover { opacity: .7; }
 
-/* ─── PERFIL ─────────────────────────────────────────── */
 .perfil-avatar {
     width: 56px;
     height: 56px;
@@ -614,7 +603,6 @@ label:hover .avatar-overlay { opacity: 1; }
 .toggle--on { background: rgba(226, 203, 174, 0.2); border-color: rgba(226, 203, 174, 0.4); }
 .toggle--on::after { background: var(--gold); transform: translateX(16px); }
 
-/* ─── BOTÓN PRIMARIO ─────────────────────────────────── */
 .dash-btn-primary {
     display: inline-flex;
     align-items: center;
@@ -637,7 +625,6 @@ label:hover .avatar-overlay { opacity: 1; }
 
 .dash-btn-primary:hover { opacity: .88; }
 
-/* ─── FLASH ──────────────────────────────────────────── */
 .flash-ok {
     background: rgba(129,199,132,.12);
     border: 1px solid rgba(129,199,132,.3);
@@ -658,7 +645,6 @@ label:hover .avatar-overlay { opacity: 1; }
     margin-bottom: 12px;
 }
 
-/* ─── FORMULARIOS ────────────────────────────────────── */
 .appointment-form { display: flex; flex-direction: column; gap: 16px; }
 .form-group { display: flex; flex-direction: column; gap: 6px; }
 
@@ -707,7 +693,6 @@ label:hover .avatar-overlay { opacity: 1; }
 .form-submit:hover { opacity: .88; }
 .form-submit:disabled { opacity: .5; cursor: not-allowed; }
 
-/* ─── CLIENT BANNERS ─────────────────────────────────── */
 .client-banners {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
@@ -722,7 +707,6 @@ label:hover .avatar-overlay { opacity: 1; }
     border-radius: 8px;
 }
 
-/* ─── LOGIN ──────────────────────────────────────────── */
 .login-page { display: grid; grid-template-columns: 1fr 1fr; min-height: 100vh; }
 
 .login-left { position: relative; overflow: hidden; background: #0d1a26; }
@@ -819,7 +803,6 @@ label:hover .avatar-overlay { opacity: 1; }
 .login-back { font-size: 12px; color: var(--text-dim); text-decoration: none; transition: color .2s; }
 .login-back:hover { color: var(--text-light); }
 
-/* ─── NAV PUBLIC ─────────────────────────────────────── */
 .nav__right { display: flex; align-items: center; gap: 14px; }
 
 .nav__login {
@@ -851,7 +834,6 @@ label:hover .avatar-overlay { opacity: 1; }
 }
 .nav__user:hover { background: var(--gold-bg); }
 
-/* ─── MODAL ──────────────────────────────────────────── */
 .modal-backdrop {
     position: fixed;
     inset: 0;
@@ -973,7 +955,6 @@ label:hover .avatar-overlay { opacity: 1; }
     margin: 0 auto 16px;
 }
 
-/* ─── BOTÓN ELIMINAR ─────────────────────────────────── */
 .btn-eliminar {
     font-size: 11px;
     color: #e57373;
@@ -988,7 +969,6 @@ label:hover .avatar-overlay { opacity: 1; }
 }
 .btn-eliminar:hover { opacity: .7; }
 
-/* ─── FORM MODAL ─────────────────────────────────────── */
 .modal-form-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
 
 .modal-input {
@@ -1036,7 +1016,6 @@ label:hover .avatar-overlay { opacity: 1; }
     white-space: nowrap;
 }
 
-/* ─── CLIENTE DETALLE CARD ───────────────────────────── */
 .cliente-card {
     background: var(--navy-mid);
     border: 1px solid var(--border);
@@ -1106,7 +1085,6 @@ label:hover .avatar-overlay { opacity: 1; }
 
 .cliente-card__info-item svg { flex-shrink: 0; color: var(--text-dim); }
 
-/* ─── CLIENTE DATO ───────────────────────────────────── */
 .cliente-dato {
     background: rgba(255,255,255,.02);
     border: 1px solid var(--border);
@@ -1125,7 +1103,6 @@ label:hover .avatar-overlay { opacity: 1; }
 
 .cliente-dato__value { font-size: 13px; color: #fff; }
 
-/* ─── CLIENTE HERO CARD ──────────────────────────────── */
 .cliente-hero {
     background: var(--navy-mid);
     border: 1px solid var(--border);
@@ -1239,7 +1216,6 @@ label:hover .avatar-overlay { opacity: 1; }
     color: var(--text-light);
 }
 
-/* ─── MODAL CONFIRMACION FIX ─────────────────────────── */
 .modal--confirm {
     max-width: 400px;
 }
@@ -1266,7 +1242,6 @@ label:hover .avatar-overlay { opacity: 1; }
     gap: 12px;
 }
 
-/* ─── UPLOAD ZONE ────────────────────────────────────── */
 .upload-zone {
     display: flex;
     flex-direction: column;
@@ -1308,7 +1283,6 @@ select.modal-input option {
     color: #fff;
 }
 
-/* ─── CALENDARIO DOT ─────────────────────────────────── */
 .cal-day--cita {
     position: relative;
 }
@@ -1323,7 +1297,6 @@ select.modal-input option {
     margin-top: 2px;
 }
 
-/* ─── ESTADO SELECT ──────────────────────────────────── */
 .estado-select {
     background: transparent;
     border: 1px solid;
@@ -1344,3 +1317,259 @@ select.modal-input option {
 }
 
 .estado-select:hover { opacity: .8; }
+
+.sidebar-toggle {
+    display: none;
+    background: transparent;
+    border: none;
+    color: var(--text-muted);
+    cursor: pointer;
+    padding: 6px;
+    border-radius: 6px;
+    align-items: center;
+    justify-content: center;
+    transition: color .2s, background .2s;
+    flex-shrink: 0;
+}
+
+.sidebar-toggle:hover {
+    color: #fff;
+    background: rgba(255,255,255,.05);
+}
+
+.sidebar-overlay {
+    display: none;
+    position: fixed;
+    inset: 0;
+    background: rgba(0,0,0,.5);
+    z-index: 49;
+    backdrop-filter: blur(2px);
+}
+
+.sidebar-overlay--visible {
+    display: block;
+}
+
+@media (max-width: 1024px) {
+    .dashboard-main {
+        padding: 20px;
+    }
+
+    .dash-cols {
+        grid-template-columns: 1fr;
+    }
+
+    .client-banners {
+        grid-template-columns: 1fr 1fr;
+    }
+
+    .cliente-hero {
+        padding: 24px;
+        gap: 24px;
+    }
+
+    .cliente-hero__contact {
+        grid-template-columns: 1fr;
+        gap: 12px;
+    }
+
+    .modal-form-grid {
+        grid-template-columns: 1fr;
+    }
+}
+
+@media (max-width: 768px) {
+    .dashboard-content {
+        margin-left: 0;
+    }
+
+    .sidebar {
+        transform: translateX(-100%);
+        transition: transform .3s cubic-bezier(.4,0,.2,1);
+        z-index: 50;
+    }
+
+    .sidebar--open {
+        transform: translateX(0);
+        box-shadow: 4px 0 24px rgba(0,0,0,.4);
+    }
+
+    .sidebar-toggle {
+        display: flex;
+    }
+
+    .dashboard-header {
+        padding: 0 16px;
+    }
+
+    .dashboard-main {
+        padding: 16px;
+    }
+
+    /* Grids */
+    .dash-cols {
+        grid-template-columns: 1fr;
+        gap: 14px;
+    }
+
+    .dash-welcome {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 12px;
+    }
+
+    .dash-search {
+        width: 100%;
+    }
+
+    .dash-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 10px;
+    }
+
+    .dash-card {
+        padding: 16px;
+    }
+
+    .dash-card__value {
+        font-size: 28px;
+    }
+
+    /* Client banners: 1 columna */
+    .client-banners {
+        grid-template-columns: 1fr;
+    }
+
+    /* Login: columna única */
+    .login-page {
+        grid-template-columns: 1fr;
+    }
+
+    .login-left {
+        min-height: 200px;
+    }
+
+    .login-left__content {
+        padding: 32px 24px;
+        justify-content: flex-end;
+    }
+
+    .login-brand {
+        margin-bottom: 24px;
+    }
+
+    .login-left__title {
+        font-size: 24px;
+        margin-bottom: 8px;
+    }
+
+    .login-left__text {
+        font-size: 13px;
+    }
+
+    .login-right {
+        padding: 32px 20px;
+    }
+
+    .login-box {
+        max-width: 100%;
+    }
+
+    /* Modal */
+    .modal {
+        max-width: calc(100vw - 32px);
+        margin: 16px;
+    }
+
+    .modal-form-grid {
+        grid-template-columns: 1fr;
+        gap: 12px;
+    }
+
+    .modal__header {
+        padding: 16px 20px;
+    }
+
+    .modal__body {
+        padding: 16px 20px;
+    }
+
+    .cliente-hero {
+        flex-direction: column;
+        padding: 20px;
+        gap: 20px;
+    }
+
+    .cliente-hero__identity {
+        gap: 16px;
+    }
+
+    .cliente-hero__contact {
+        grid-template-columns: 1fr;
+        width: 100%;
+    }
+
+    .docs-table-wrapper {
+        overflow-x: auto;
+        -webkit-overflow-scrolling: touch;
+    }
+
+    .docs-table {
+        min-width: 520px;
+    }
+
+    /* Topbar dropdown */
+    .topbar-dropdown {
+        right: -8px;
+    }
+
+    .topbar-dropdown__name {
+        font-size: 12px;
+    }
+}
+
+@media (max-width: 480px) {
+    .dashboard-main {
+        padding: 12px;
+    }
+
+    .dashboard-header {
+        padding: 0 12px;
+    }
+
+    .dash-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .dash-card__value {
+        font-size: 32px;
+    }
+
+    .login-right {
+        padding: 24px 16px;
+    }
+
+    .login-box__title {
+        font-size: 28px;
+    }
+
+    .modal-backdrop {
+        padding: 12px;
+    }
+
+    .modal {
+        max-width: 100%;
+        margin: 0;
+        border-radius: 8px;
+    }
+
+    .cita-item {
+        padding: 10px 14px;
+        gap: 10px;
+    }
+
+    .cita-item__fecha {
+        padding: 5px 8px;
+        min-width: 38px;
+    }
+}

@@ -45,7 +45,7 @@ const hoy = new Date().toISOString().split('T')[0]
             </div>
             <Link href="/dashboard/citas" style="font-size:11px;color:var(--text-muted);text-decoration:none;letter-spacing:.08em;text-transform:uppercase;transition:color .2s;"
                 onmouseover="this.style.color='#fff'" onmouseout="this.style.color=''">
-                ← Volver a mis citas
+                Volver a mis citas
             </Link>
         </div>
 
@@ -55,7 +55,6 @@ const hoy = new Date().toISOString().split('T')[0]
 
         <div class="dash-cols">
 
-            <!-- FORMULARIO -->
             <div class="dash-panel" style="grid-column: span 1;">
                 <div class="dash-panel__header">
                     <h3 class="dash-panel__title">Datos de la cita</h3>
@@ -105,7 +104,6 @@ const hoy = new Date().toISOString().split('T')[0]
                 </div>
             </div>
 
-            <!-- INFO -->
             <div style="display:flex;flex-direction:column;gap:16px;">
 
                 <div class="dash-panel">

@@ -24,7 +24,6 @@ function submit() {
 
     <div class="login-page">
 
-        <!-- LADO IZQUIERDO -->
         <div class="login-left">
             <div class="login-left__overlay"></div>
             <div class="login-left__content">
@@ -39,7 +38,6 @@ function submit() {
             </div>
         </div>
 
-        <!-- LADO DERECHO -->
         <div class="login-right">
             <div class="login-box">
                 <div class="login-box__header">

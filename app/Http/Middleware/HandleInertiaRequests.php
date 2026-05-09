@@ -29,7 +29,6 @@ class HandleInertiaRequests extends Middleware
                 'success' => $request->session()->get('flash.success') ?? $request->session()->get('success'),
                 'error'   => $request->session()->get('flash.error')   ?? $request->session()->get('error'),
             ],
-            // Contador de mensajes no leídos — solo si es asesor/admin
             'mensajes_sin_leer' => $request->user()?->role === 'asesor' || $request->user()?->role === 'admin'
                 ? ContactMessage::whereNull('read_at')->count()
                 : 0,

@@ -1,10 +1,11 @@
 <script setup>
 import { Link, usePage, router } from '@inertiajs/vue3'
-import { computed, ref } from 'vue'
+import { computed, ref, onMounted, onUnmounted } from 'vue'
 
 const page = usePage()
 const user = computed(() => page.props.auth?.user)
 const dropdownOpen = ref(false)
+const sidebarOpen = ref(false)
 
 const avatarUrl = computed(() => {
     if (user.value?.avatar) return `/storage/${user.value.avatar}`
@@ -15,18 +16,40 @@ function logout() {
     router.post('/logout')
 }
 
+function toggleSidebar() {
+    sidebarOpen.value = !sidebarOpen.value
+}
+
+function closeSidebar() {
+    sidebarOpen.value = false
+}
+
+function handleResize() {
+    if (window.innerWidth > 768) sidebarOpen.value = false
+}
+
+onMounted(() => window.addEventListener('resize', handleResize))
+onUnmounted(() => window.removeEventListener('resize', handleResize))
+
 const navItems = [
-    { label: 'Dashboard',  href: '/dashboard',             icon: 'M2.25 12l8.954-8.955c.44-.439 1.152-.439 1.591 0L21.75 12M4.5 9.75v10.125c0 .621.504 1.125 1.125 1.125H9.75v-4.875c0-.621.504-1.125 1.125-1.125h2.25c.621 0 1.125.504 1.125 1.125V21h4.125c.621 0 1.125-.504 1.125-1.125V9.75M8.25 21h8.25' },
-    { label: 'Solicitar Cita', href: '/dashboard/reserva', icon: 'M6.75 3v2.25M17.25 3v2.25M3 18.75V7.5a2.25 2.25 0 012.25-2.25h13.5A2.25 2.25 0 0121 7.5v11.25m-18 0A2.25 2.25 0 005.25 21h13.5A2.25 2.25 0 0021 18.75m-18 0v-7.5A2.25 2.25 0 015.25 9h13.5A2.25 2.25 0 0121 11.25v7.5' },    { label: 'Documentos', href: '/dashboard/documentos',  icon: 'M19.5 14.25v-2.625a3.375 3.375 0 00-3.375-3.375h-1.5A1.125 1.125 0 0113.5 7.125v-1.5a3.375 3.375 0 00-3.375-3.375H8.25m0 12.75h7.5m-7.5 3H12M10.5 2.25H5.625c-.621 0-1.125.504-1.125 1.125v17.25c0 .621.504 1.125 1.125 1.125h12.75c.621 0 1.125-.504 1.125-1.125V11.25a9 9 0 00-9-9z' },
-    { label: 'Perfil',     href: '/dashboard/perfil',      icon: 'M15.75 6a3.75 3.75 0 11-7.5 0 3.75 3.75 0 017.5 0zM4.501 20.118a7.5 7.5 0 0114.998 0A17.933 17.933 0 0112 21.75c-2.676 0-5.216-.584-7.499-1.632z' },
+    { label: 'Dashboard',      href: '/dashboard',             icon: 'M2.25 12l8.954-8.955c.44-.439 1.152-.439 1.591 0L21.75 12M4.5 9.75v10.125c0 .621.504 1.125 1.125 1.125H9.75v-4.875c0-.621.504-1.125 1.125-1.125h2.25c.621 0 1.125.504 1.125 1.125V21h4.125c.621 0 1.125-.504 1.125-1.125V9.75M8.25 21h8.25' },
+    { label: 'Solicitar Cita', href: '/dashboard/reserva',    icon: 'M6.75 3v2.25M17.25 3v2.25M3 18.75V7.5a2.25 2.25 0 012.25-2.25h13.5A2.25 2.25 0 0121 7.5v11.25m-18 0A2.25 2.25 0 005.25 21h13.5A2.25 2.25 0 0021 18.75m-18 0v-7.5A2.25 2.25 0 015.25 9h13.5A2.25 2.25 0 0121 11.25v7.5' },
+    { label: 'Documentos',     href: '/dashboard/documentos', icon: 'M19.5 14.25v-2.625a3.375 3.375 0 00-3.375-3.375h-1.5A1.125 1.125 0 0113.5 7.125v-1.5a3.375 3.375 0 00-3.375-3.375H8.25m0 12.75h7.5m-7.5 3H12M10.5 2.25H5.625c-.621 0-1.125.504-1.125 1.125v17.25c0 .621.504 1.125 1.125 1.125h12.75c.621 0 1.125-.504 1.125-1.125V11.25a9 9 0 00-9-9z' },
+    { label: 'Perfil',         href: '/dashboard/perfil',     icon: 'M15.75 6a3.75 3.75 0 11-7.5 0 3.75 3.75 0 017.5 0zM4.501 20.118a7.5 7.5 0 0114.998 0A17.933 17.933 0 0112 21.75c-2.676 0-5.216-.584-7.499-1.632z' },
 ]
 </script>
 
 <template>
     <div class="dashboard-layout">
 
-        <!-- SIDEBAR -->
-        <aside class="sidebar">
+        <div
+            class="sidebar-overlay"
+            :class="{ 'sidebar-overlay--visible': sidebarOpen }"
+            @click="closeSidebar"
+            aria-hidden="true"
+        ></div>
+
+        <aside class="sidebar" :class="{ 'sidebar--open': sidebarOpen }">
             <div class="sidebar__header">
                 <Link href="/" class="inline-block w-fit px-2">
                     <img src="/favicon.ico" alt="Selecto Asesores" class="h-8 w-auto" />
@@ -34,7 +57,13 @@ const navItems = [
             </div>
 
             <nav class="sidebar__nav">
-                <Link v-for="item in navItems" :key="item.href" :href="item.href" class="sidebar__item">
+                <Link
+                    v-for="item in navItems"
+                    :key="item.href"
+                    :href="item.href"
+                    class="sidebar__item"
+                    @click="closeSidebar"
+                >
                     <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24">
                         <path stroke-linecap="round" stroke-linejoin="round" :d="item.icon"/>
                     </svg>
@@ -52,11 +81,14 @@ const navItems = [
             </div>
         </aside>
 
-        <!-- CONTENIDO -->
         <div class="dashboard-content">
-
-            <!-- TOPBAR -->
             <header class="dashboard-header">
+                <button class="sidebar-toggle" @click="toggleSidebar" aria-label="Abrir menú lateral">
+                    <svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5"/>
+                    </svg>
+                </button>
+
                 <div class="dashboard-header__title">
                     <slot name="header">Área Cliente</slot>
                 </div>

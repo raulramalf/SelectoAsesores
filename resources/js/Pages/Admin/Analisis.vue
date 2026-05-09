@@ -32,7 +32,6 @@ const razonesLabel = {
     consultoria:       'Consultoría',
 }
 
-// ─── CHART REFS ───────────────────────────────────────
 const chartClientesRef   = ref(null)
 const chartCitasRef      = ref(null)
 const chartServiciosRef  = ref(null)
@@ -49,12 +48,10 @@ const RED        = '#e57373'
 const RED_BG     = 'rgba(229,115,115,.15)'
 
 function initCharts() {
-    // Destruir anteriores
     chartClientes?.destroy()
     chartCitas?.destroy()
     chartServicios?.destroy()
 
-    // 1. Clientes ganados por mes
     if (chartClientesRef.value) {
         chartClientes = new Chart(chartClientesRef.value, {
             type: 'bar',
@@ -98,7 +95,6 @@ function initCharts() {
         })
     }
 
-    // 2. Citas completadas vs canceladas
     if (chartCitasRef.value) {
         chartCitas = new Chart(chartCitasRef.value, {
             type: 'line',
@@ -161,7 +157,6 @@ function initCharts() {
         })
     }
 
-    // 3. Servicios más demandados (barras horizontales)
     if (chartServiciosRef.value && props.servicios.length) {
         chartServicios = new Chart(chartServiciosRef.value, {
             type: 'bar',
@@ -223,7 +218,6 @@ onMounted(() => initCharts())
     <AdminLayout>
         <template #header>Análisis</template>
 
-        <!-- CABECERA + FILTRO AÑO -->
         <div class="dash-welcome">
             <h1 class="dash-welcome__title">Análisis y Estadísticas</h1>
             <div style="display:flex;gap:6px;">
@@ -235,7 +229,6 @@ onMounted(() => initCharts())
             </div>
         </div>
 
-        <!-- KPI CARDS -->
         <div class="dash-grid" style="margin-bottom:24px;">
             <div class="dash-card dash-card__gold">
                 <p class="dash-card__label">Clientes nuevos</p>
@@ -259,7 +252,6 @@ onMounted(() => initCharts())
             </div>
         </div>
 
-        <!-- GRÁFICA 1 + GRÁFICA 2 -->
         <div class="dash-cols" style="margin-bottom:20px;">
 
             <div class="dash-panel">
@@ -284,7 +276,6 @@ onMounted(() => initCharts())
 
         </div>
 
-        <!-- GRÁFICA 3 + TASA RETENCIÓN -->
         <div class="dash-cols">
 
             <div class="dash-panel">

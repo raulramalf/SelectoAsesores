@@ -10,8 +10,11 @@ use App\Http\Controllers\Auth\PasswordResetLinkController;
 use App\Http\Controllers\Auth\RegisteredUserController;
 use App\Http\Controllers\Auth\VerifyEmailController;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\Auth\TwoFactorController;
 
 Route::middleware('guest')->group(function () {
+    Route::get('2fa-challenge', [TwoFactorController::class, 'challenge'])->name('2fa.challenge');
+    Route::post('2fa-challenge', [TwoFactorController::class, 'verify'])->name('2fa.verify');   
     Route::get('register', [RegisteredUserController::class, 'create'])
         ->name('register');
 
@@ -56,4 +59,14 @@ Route::middleware('auth')->group(function () {
 
     Route::post('logout', [AuthenticatedSessionController::class, 'destroy'])
         ->name('logout');
+
+    Route::post('user/two-factor-authentication', [TwoFactorController::class, 'enable'])
+        ->name('2fa.enable');
+
+    Route::post('user/confirmed-two-factor-authentication', [TwoFactorController::class, 'confirm'])
+        ->name('2fa.confirm');
+
+    Route::delete('user/two-factor-authentication', [TwoFactorController::class, 'disable'])
+        ->name('2fa.disable');
+       
 });

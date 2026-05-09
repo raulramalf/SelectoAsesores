@@ -21,7 +21,6 @@ const testimonios = [
 
         <Promopopup />
 
-        <!-- ═══ HERO PRINCIPAL ═══ -->
         <section style="position:relative;overflow:hidden;min-height:80vh;display:flex;align-items:center;justify-content:center;text-align:center;">
             <div style="position:absolute;inset:0;">
                 <img src="https://images.unsplash.com/photo-1589829545856-d10d557cf95f?w=1600&q=85" alt="Hero" style="width:100%;height:100%;object-fit:cover;object-position:center 20%;filter:grayscale(30%);">
@@ -45,20 +44,15 @@ const testimonios = [
             </div>
         </section>
 
-       <!-- ═══ SECCIÓN OFERTA ESPECIAL (Formato Tarjeta, Texto Izq, Imagen Der) ═══ -->
         <section id="seccion-oferta" style="background:#151F2B;padding:120px 64px;position:relative;overflow:hidden;">
             
-            <!-- Halo trasero para destacar la tarjeta -->
             <div style="position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:1000px;height:500px;background:radial-gradient(circle, rgba(226,203,174,0.04) 0%, transparent 70%);pointer-events:none;"></div>
 
-            <!-- Contenedor central -->
             <div style="max-width:1200px;margin:0 auto;position:relative;z-index:2;">
                 
-                <!-- La caja de la tarjeta -->
                 <div class="promo-premium-modal" style="box-shadow: 0 30px 60px -15px rgba(0,0,0,0.5); border: 1px solid rgba(226,203,174,0.15); border-radius: 16px; max-width: 100%;">
                     <div class="promo-premium-grid" style="min-height: 520px; display: flex;"> 
                         
-                        <!-- 1. CONTENIDO A LA IZQUIERDA -->
                         <div class="promo-premium-content" style="flex: 1.2; padding: 56px 64px; display:flex; flex-direction:column; justify-content:center;">
                             <span class="promo-premium-badge" style="letter-spacing: 0.25em; margin-bottom: 16px;">Tarifa Especial Nuevos Clientes</span>
                             
@@ -101,7 +95,6 @@ const testimonios = [
                             </p>
                         </div>
 
-                        <!-- 2. NUEVA IMAGEN A LA DERECHA -->
                         <div class="promo-premium-image" style="flex: 1; background-image: url('https://images.unsplash.com/photo-1450101499163-c8848c66ca85?w=800&q=80'); background-size: cover; background-position: center; position: relative;">
                             <div class="promo-premium-image-overlay" style="position: absolute; inset: 0; background: linear-gradient(to left, rgba(21, 31, 43, 0.1), rgba(28, 45, 63, 1) 98%);"></div>
                         </div>
@@ -112,7 +105,6 @@ const testimonios = [
             </div>
         </section>
 
-        <!-- ═══ TESTIMONIOS ═══ -->
         <section style="background:#1c2d3f;padding:80px 64px;">
             <div style="max-width:1160px;margin:0 auto;">
                 <div style="text-align:center;margin-bottom:48px;">
@@ -123,10 +115,8 @@ const testimonios = [
                     <div v-for="t in testimonios" :key="t.nombre" style="background:#151F2B;border:1px solid rgba(255,255,255,0.05);border-radius:8px;padding:32px;display:flex;align-items:flex-start;gap:20px;">
                         <img :src="t.imagen" :alt="t.nombre" style="width:64px;height:64px;border-radius:50%;object-fit:cover;border:2px solid #E2CBAE;flex-shrink:0;box-shadow:0 4px 12px rgba(0,0,0,0.2);">
                         <div>
-                            <!-- Subimos el nombre a 16px para mantener jerarquía -->
                             <h4 style="font-size:16px;color:#fff;font-weight:600;margin-bottom:8px;">{{ t.nombre }}</h4>
                             
-                            <!-- FUENTE CORREGIDA: Quitamos 'Instrument Serif', subimos a 14px y mejoramos el interlineado -->
                             <p style="font-size:14px;color:#a0aabf;line-height:1.7;font-style:italic;">{{ t.texto }}</p>
                         </div>
                     </div>
@@ -134,7 +124,6 @@ const testimonios = [
             </div>
         </section>
 
-        <!-- ═══ CTA FINAL ═══ -->
         <section style="background:#243345;padding:80px 64px;text-align:center;">
             <h2 style="font-family:'Instrument Serif',serif;font-size:clamp(32px,4vw,48px);font-weight:400;color:#fff;line-height:1.2;margin-bottom:12px;">
                 ¿No sabes si esto es para ti?<br>

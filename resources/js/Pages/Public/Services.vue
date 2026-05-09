@@ -91,7 +91,6 @@ const servicios = [
 <template>
     <PublicLayout>
 
-        <!-- ═══ HEADER SERVICIOS ═══ -->
         <section style="background:#151F2B;padding:80px 64px 40px;text-align:center;border-bottom:1px solid rgba(255,255,255,.05);">
             <span style="font-size:11px;letter-spacing:.22em;text-transform:uppercase;color:#8a9ab5;display:block;margin-bottom:16px;">CATÁLOGO DE SERVICIOS</span>
             <h1 style="font-family:'Instrument Serif',serif;font-size:clamp(36px,5vw,56px);font-weight:400;color:#fff;line-height:1.15;margin-bottom:16px;">
@@ -103,7 +102,6 @@ const servicios = [
             </p>
         </section>
 
-        <!-- ═══ SECCIÓN PLANES ═══ -->
         <section style="background:#1c2d3f;padding:72px 64px;">
             <div style="max-width:1160px;margin:0 auto;">
                 <div style="text-align:center;margin-bottom:48px;">
@@ -147,7 +145,6 @@ const servicios = [
             </div>
         </section>
 
-        <!-- ═══ SERVICIOS DETALLADOS (ESTÁTICOS) ═══ -->
         <section style="background:#151F2B;padding:80px 64px;">
             <div style="max-width:1160px;margin:0 auto;">
                 <div style="margin-bottom:56px;border-bottom:1px solid rgba(255,255,255,.05);padding-bottom:24px;text-align:center;">
@@ -165,7 +162,6 @@ const servicios = [
                         
                         <h3 style="font-family:'Instrument Serif',serif;font-size:24px;font-weight:400;color:#fff;margin-bottom:20px;text-align:center;">{{ srv.nombre }}</h3>
                         
-                        <!-- Lista cambiada para que sea en una sola columna hacia abajo, igual que en la imagen -->
                         <div style="display:flex;flex-direction:column;gap:12px;">
                             <div v-for="item in srv.items" :key="item" style="font-size:12px;color:#a0aabf;display:flex;align-items:flex-start;gap:8px;line-height:1.4;">
                                 <span style="color:#E2CBAE;flex-shrink:0;">•</span>
@@ -177,7 +173,6 @@ const servicios = [
             </div>
         </section>
 
-        <!-- ═══ CTA FINAL ═══ -->
         <section style="background:#243345;padding:72px 64px;text-align:center;border-top:1px solid rgba(255,255,255,.05);">
             <h2 style="font-family:'Instrument Serif',serif;font-size:clamp(28px,3vw,42px);font-weight:400;color:#fff;line-height:1.2;margin-bottom:16px;">
                 ¿Hablamos sobre<br>

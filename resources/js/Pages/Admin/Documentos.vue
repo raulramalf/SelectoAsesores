@@ -125,7 +125,6 @@ const flashDel = computed(() => page.props.flash?.status === 'documento-eliminad
         <div v-if="flashOk"  class="flash-ok"    style="margin-bottom:16px;">Documento subido correctamente</div>
         <div v-if="flashDel" class="flash-error"  style="margin-bottom:16px;">Documento eliminado correctamente</div>
 
-        <!-- FILTROS -->
         <div class="dash-panel" style="margin-bottom:16px;">
             <div style="padding:12px 18px;display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap;">
                 <div style="display:flex;gap:6px;flex-wrap:wrap;">
@@ -139,7 +138,6 @@ const flashDel = computed(() => page.props.flash?.status === 'documento-eliminad
             </div>
         </div>
 
-        <!-- TABLA -->
         <div class="dash-panel">
             <div class="dash-panel__header">
                 <h3 class="dash-panel__title">Archivos de clientes</h3>
@@ -192,7 +190,6 @@ const flashDel = computed(() => page.props.flash?.status === 'documento-eliminad
             </table>
         </div>
 
-        <!-- MODAL SUBIR DOCUMENTO -->
         <Teleport to="body">
             <div v-if="modalOpen" class="modal-backdrop" @click.self="cerrarModal">
                 <div class="modal">
@@ -210,7 +207,6 @@ const flashDel = computed(() => page.props.flash?.status === 'documento-eliminad
 
                     <div class="modal__body">
 
-                        <!-- ZONA SUBIDA -->
                         <label for="file-upload" class="upload-zone" :class="fileName && 'upload-zone--active'">
                             <svg width="28" height="28" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"
                                 :style="fileName ? 'color:var(--gold)' : 'color:var(--text-dim)'">
@@ -228,7 +224,6 @@ const flashDel = computed(() => page.props.flash?.status === 'documento-eliminad
 
                         <div style="display:flex;flex-direction:column;gap:14px;margin-top:20px;">
 
-                            <!-- CLIENTE -->
                             <div class="form-group">
                                 <label class="form-label">Asignar a cliente *</label>
                                 <select v-model="form.user_id" class="form-input modal-input"
@@ -239,7 +234,6 @@ const flashDel = computed(() => page.props.flash?.status === 'documento-eliminad
                                 <span v-if="form.errors.user_id" class="form-error">{{ form.errors.user_id }}</span>
                             </div>
 
-                            <!-- TÍTULO -->
                             <div class="form-group">
                                 <label class="form-label">Título *</label>
                                 <input v-model="form.name" type="text" class="form-input modal-input"
@@ -248,7 +242,6 @@ const flashDel = computed(() => page.props.flash?.status === 'documento-eliminad
                                 <span v-if="form.errors.name" class="form-error">{{ form.errors.name }}</span>
                             </div>
 
-                            <!-- DESCRIPCIÓN + CATEGORÍA -->
                             <div class="modal-form-grid">
                                 <div class="form-group">
                                     <label class="form-label">Categoría *</label>
@@ -283,7 +276,6 @@ const flashDel = computed(() => page.props.flash?.status === 'documento-eliminad
             </div>
         </Teleport>
 
-        <!-- MODAL CONFIRMAR ELIMINAR -->
         <Teleport to="body">
             <div v-if="docAEliminar" class="modal-backdrop" @click.self="cancelarEliminar">
                 <div class="modal modal--confirm">

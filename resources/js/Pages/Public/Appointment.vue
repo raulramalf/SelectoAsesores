@@ -33,7 +33,6 @@ function submit() {
 <template>
     <PublicLayout>
 
-        <!-- HERO -->
         <section class="appointment-hero">
             <div class="appointment-hero__overlay"></div>
             <div class="appointment-hero__content">
@@ -48,7 +47,6 @@ function submit() {
             </div>
         </section>
 
-        <!-- FORMULARIO -->
         <section class="appointment-section">
             <div class="appointment-wrapper">
 
@@ -66,16 +64,14 @@ function submit() {
 
                     <div class="appointment-info__contacto">
                         <p class="appointment-info__contacto-label">¿Prefieres llamarnos?</p>
-                        <a href="tel:555555555" class="appointment-info__contacto-tel">555 555 555</a>
+                        <a href="tel:684743250" class="appointment-info__contacto-tel">684 743 250</a>
                         <p class="appointment-info__contacto-label" style="margin-top:8px;">O escríbenos a</p>
                         <a href="mailto:selectoasesores@contacto.com" class="appointment-info__contacto-mail">selectoasesores@contacto.com</a>
                     </div>
                 </div>
 
-                <!-- Columna formulario -->
                 <div class="appointment-form-wrapper">
 
-                    <!-- Mensaje éxito -->
                     <div v-if="success" class="appointment-success">
                         <span class="appointment-success__icon">✓</span>
                         <div>

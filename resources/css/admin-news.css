@@ -125,3 +125,36 @@
 .text-right {
     text-align: right;
 }
+
+@media (max-width: 768px) {
+    .news-admin-header {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 16px;
+        margin-bottom: 20px;
+    }
+
+    .page-title {
+        font-size: 1.8rem;
+    }
+
+    .custom-filter-bar {
+        flex-wrap: wrap;
+        gap: 8px;
+    }
+
+    .custom-filter-bar button {
+        padding: 7px 14px;
+        font-size: 11px;
+    }
+}
+
+@media (max-width: 480px) {
+    .page-title {
+        font-size: 1.5rem;
+    }
+
+    .actions-group {
+        gap: 10px;
+    }
+}

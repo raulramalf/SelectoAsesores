@@ -42,7 +42,6 @@ const tipoColor = {
     <ClientLayout>
         <template #header>Dashboard</template>
 
-        <!-- BIENVENIDA -->
         <div class="dash-welcome">
             <div>
                 <h1 class="dash-welcome__title">Hola, {{ user?.name }}</h1>
@@ -51,7 +50,6 @@ const tipoColor = {
             <Link href="/reserva" class="dash-btn-primary">+ Nueva cita</Link>
         </div>
 
-        <!-- STATS -->
         <div class="dash-grid" style="margin-bottom:24px;">
             <div class="dash-card">
                 <p class="dash-card__label">Próxima cita</p>
@@ -72,10 +70,7 @@ const tipoColor = {
             </div>
         </div>
 
-        <!-- DOS COLUMNAS -->
         <div class="dash-cols">
-
-            <!-- PRÓXIMA CITA -->
             <div class="dash-panel">
                 <div class="dash-panel__header" style="display:flex;justify-content:space-between;align-items:center;">
                     <h3 class="dash-panel__title">Próxima Cita</h3>
@@ -104,12 +99,11 @@ const tipoColor = {
                     </div>
                     <Link href="/dashboard/citas" style="display:block;text-align:center;margin-top:14px;font-size:11px;color:var(--text-muted);text-decoration:none;letter-spacing:.08em;text-transform:uppercase;transition:color .2s;"
                         onmouseover="this.style.color='#fff'" onmouseout="this.style.color=''">
-                        Ver todas mis citas →
+                        Ver todas mis citas 
                     </Link>
                 </div>
             </div>
 
-            <!-- ACTIVIDAD RECIENTE -->
             <div class="dash-panel">
                 <div class="dash-panel__header">
                     <h3 class="dash-panel__title">Actividad Reciente</h3>
@@ -132,7 +126,6 @@ const tipoColor = {
 
         </div>
 
-        <!-- DOCUMENTOS RECIENTES -->
         <div class="dash-panel" style="margin-top:20px;">
             <div class="dash-panel__header" style="display:flex;justify-content:space-between;align-items:center;">
                 <h3 class="dash-panel__title">Documentos Recientes</h3>

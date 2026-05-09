@@ -1,5 +1,3 @@
-/* ─── SERVICIOS ──────────────────────────────────────── */
-
 .servicios-hero {
     background: var(--navy);
     padding: 80px 64px 56px;
@@ -18,8 +16,6 @@
     max-width: 1160px;
     margin: 0 auto;
 }
-
-/* ─── NOSOTROS ───────────────────────────────────────── */
 
 .nosotros-hero {
     background: var(--navy);
@@ -189,8 +185,6 @@
     color: var(--text-muted);
     line-height: 1.7;
 }
-
-/* ─── NOTICIAS ───────────────────────────────────────── */
 
 .noticias-hero {
     position: relative;
@@ -403,7 +397,6 @@
     line-height: 1.75;
 }
 
-/* ─── APPOINTMENT ────────────────────────────────────── */
 
 .appointment-hero {
     position: relative;
@@ -661,7 +654,6 @@
     text-decoration: underline;
 }
 
-/* ─── CONTACT ────────────────────────────────────────── */
 
 .contact-section {
     background: var(--navy-mid);
@@ -722,7 +714,6 @@
     border-radius: 10px;
     padding: 40px 36px;
 }
-/* ─── PROMO POPUP PREMIUM ──────────────────────────────────────── */
 
 .promo-premium-overlay {
     position: fixed;
@@ -782,7 +773,6 @@
 
 .promo-premium-image {
     position: relative;
-    /* Imagen de stock profesional (puedes cambiar la URL por una propia) */
     background: url('https://images.unsplash.com/photo-1556761175-5973dc0f32e7?w=800&q=80') center / cover no-repeat;
 }
 
@@ -962,4 +952,96 @@
         opacity: 1;
         transform: scale(1) translateY(0);
     }
+}
+
+@media (max-width: 1024px) {
+    /* Servicios */
+    .servicios-hero           { padding: 60px 40px 40px; }
+    .servicios-grid           { padding: 40px 40px 60px; }
+    .servicios-grid__inner    { grid-template-columns: repeat(2, 1fr); }
+
+    .nosotros-hero            { padding: 60px 40px 48px; }
+    .nosotros-mision          { padding: 48px 40px; }
+    .nosotros-equipo          { padding: 48px 40px 64px; }
+    .equipo-grid              { grid-template-columns: repeat(2, 1fr); }
+
+    .noticias-hero__content   { padding: 48px 40px; }
+    .noticias-filtros         { padding: 0 40px; }
+    .noticias-grid            { padding: 40px 40px 60px; }
+    .noticias-grid__inner     { grid-template-columns: repeat(2, 1fr); }
+
+    .appointment-hero__content { padding: 48px 40px; }
+    .appointment-section      { padding: 48px 40px 64px; }
+    .appointment-wrapper      { grid-template-columns: 1fr; gap: 24px; }
+    .contact-section          { padding: 48px 40px 64px; }
+    .contact-wrapper          { grid-template-columns: 1fr; gap: 24px; }
+}
+
+@media (max-width: 768px) {
+    .servicios-hero           { padding: 48px 20px 32px; }
+    .servicios-grid           { padding: 32px 20px 48px; }
+    .servicios-grid__inner    { grid-template-columns: 1fr; }
+
+    .nosotros-hero            { padding: 40px 20px 32px; }
+    .nosotros-hero__inner     { grid-template-columns: 1fr; gap: 28px; }
+    .nosotros-hero__logo-text { font-size: 56px; }
+    .nosotros-mision          { padding: 40px 20px; }
+    .nosotros-mision__grid    { grid-template-columns: 1fr; }
+    .nosotros-equipo          { padding: 40px 20px 56px; }
+    .equipo-grid              { grid-template-columns: repeat(2, 1fr); gap: 16px; }
+    .mision-card              { padding: 28px 20px; }
+
+    .noticias-hero            { min-height: 200px; }
+    .noticias-hero__content   { padding: 32px 20px; }
+    .noticias-hero__title     { font-size: clamp(28px, 8vw, 44px); }
+    .noticias-filtros         {
+        padding: 12px 20px;
+        height: auto;
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 10px;
+    }
+    .noticias-filtros__tabs   { flex-wrap: wrap; gap: 4px; }
+    .noticias-busqueda        { width: 100%; }
+    .noticias-grid            { padding: 28px 20px 48px; }
+    .noticias-grid__inner     { grid-template-columns: 1fr; }
+
+    .appointment-hero         { min-height: 180px; }
+    .appointment-hero__content { padding: 32px 20px; }
+    .appointment-hero__title  { font-size: clamp(26px, 7vw, 44px); }
+    .appointment-section      { padding: 32px 20px 48px; }
+    .appointment-wrapper      { grid-template-columns: 1fr; gap: 20px; }
+    .appointment-info         { padding: 24px 18px; }
+    .appointment-form-wrapper { padding: 28px 20px; }
+    .form-row                 { grid-template-columns: 1fr; }
+    .contact-section          { padding: 32px 20px 48px; }
+    .contact-wrapper          { grid-template-columns: 1fr; gap: 20px; }
+    .contact-form-wrapper     { padding: 28px 20px; }
+
+    .promo-premium-grid       { flex-direction: column !important; }
+    .promo-premium-image      { display: none !important; }
+    .promo-premium-content    { padding: 28px 20px !important; }
+    .promo-premium-modal      { max-width: calc(100vw - 24px) !important; overflow-y: auto; max-height: 88vh; }
+    .promo-premium-title      { font-size: 26px !important; }
+    .promo-premium-price      { font-size: 40px !important; }
+}
+
+@media (max-width: 480px) {
+    .servicios-hero           { padding: 36px 16px 24px; }
+    .servicios-grid           { padding: 24px 16px 40px; }
+
+    .nosotros-hero            { padding: 32px 16px; }
+    .nosotros-hero__logo-text { font-size: 44px; }
+    .equipo-grid              { grid-template-columns: 1fr; max-width: 300px; margin: 0 auto; }
+
+    .noticias-hero__content   { padding: 24px 16px; }
+    .noticias-grid            { padding: 20px 16px 40px; }
+
+    .appointment-hero__content { padding: 24px 16px; }
+    .appointment-section      { padding: 24px 16px 40px; }
+    .appointment-form-wrapper { padding: 20px 14px; }
+    .appointment-info         { padding: 20px 14px; }
+    .contact-section          { padding: 24px 16px 40px; }
+    .contact-form-wrapper     { padding: 20px 14px; }
+    .contact-info             { padding: 20px 14px; }
 }

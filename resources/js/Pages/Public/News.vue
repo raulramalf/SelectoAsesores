@@ -22,7 +22,6 @@ const noticiasFiltradas = computed(() => {
 <template>
     <PublicLayout>
 
-        <!-- ═══ HERO ═══ -->
         <section style="position:relative;overflow:hidden;min-height:280px;display:flex;align-items:flex-end;">
             <div style="position:absolute;inset:0;">
                 <img src="https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?w=1600&q=80"
@@ -40,11 +39,9 @@ const noticiasFiltradas = computed(() => {
             </div>
         </section>
 
-        <!-- ═══ FILTROS ═══ -->
         <section style="background:#151F2B;border-bottom:1px solid rgba(255,255,255,.06);">
             <div style="padding:0 64px;display:flex;align-items:center;justify-content:space-between;height:56px;gap:16px;">
                 <div style="display:flex;gap:2px;">
-                    <!-- Cambiado el rgba del hover y el color activo -->
                     <button v-for="f in filtros" :key="f"
                         @click="filtroActivo = f"
                         :style="`padding:6px 16px;border-radius:100px;font-size:11px;font-weight:400;cursor:pointer;font-family:'Inter',sans-serif;letter-spacing:.06em;transition:all .2s;border:${filtroActivo === f ? '1px solid rgba(226,203,174,.4)' : '1px solid transparent'};background:${filtroActivo === f ? 'rgba(226,203,174,.1)' : 'transparent'};color:${filtroActivo === f ? '#E2CBAE' : '#6a7a9a'};`">
@@ -58,7 +55,6 @@ const noticiasFiltradas = computed(() => {
             </div>
         </section>
 
-        <!-- ═══ GRID NOTICIAS ═══ -->
         <section style="background:#243345;padding:48px 64px 80px; min-height: 60vh;">
 
             <div v-if="noticiasFiltradas.length > 0"
@@ -89,7 +85,6 @@ const noticiasFiltradas = computed(() => {
                             {{ noticia.source }}
                         </span>
 
-                        <!-- Título hover actualizado -->
                         <a :href="noticia.source_url" target="_blank" rel="noopener noreferrer"
                             style="text-decoration:none;cursor:pointer;">
                             <h3 style="font-family:'Instrument Serif',serif;font-size:16px;font-weight:400;color:#fff;line-height:1.35;margin-bottom:8px;transition:color .2s;"
@@ -114,7 +109,6 @@ const noticiasFiltradas = computed(() => {
                 </div>
             </div>
 
-            <!-- Sin noticias -->
             <div v-else style="text-align:center;padding:80px 20px;max-width:400px;margin:0 auto;">
                 <div style="width:56px;height:56px;border:1px solid rgba(255,255,255,.08);border-radius:6px;display:flex;align-items:center;justify-content:center;margin:0 auto 20px;">
                     <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#4a5a72" stroke-width="1.2">

@@ -48,7 +48,6 @@ const documentosFiltrados = computed(() =>
             <h1 class="dash-welcome__title">Mis Documentos</h1>
         </div>
 
-        <!-- STATS -->
         <div class="dash-grid" style="margin-bottom:20px;">
             <div class="dash-card">
                 <p class="dash-card__label">Total documentos</p>
@@ -64,7 +63,6 @@ const documentosFiltrados = computed(() =>
             </div>
         </div>
 
-        <!-- FILTROS -->
         <div class="dash-panel" style="margin-bottom:16px;">
             <div style="padding:12px 18px;display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap;">
                 <div style="display:flex;gap:6px;flex-wrap:wrap;">
@@ -78,7 +76,6 @@ const documentosFiltrados = computed(() =>
             </div>
         </div>
 
-        <!-- TABLA -->
         <div class="dash-panel">
             <div class="dash-panel__header">
                 <h3 class="dash-panel__title">{{ documentosFiltrados.length }} documento{{ documentosFiltrados.length !== 1 ? 's' : '' }}</h3>

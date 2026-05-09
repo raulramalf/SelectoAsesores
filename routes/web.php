@@ -12,7 +12,7 @@ use App\Http\Controllers\Admin\UserController;
 use App\Http\Controllers\Admin\DocumentController as AdminDocumentController;
 use App\Http\Controllers\Admin\AppointmentController as AdminAppointmentController;
 
-// ─── RUTAS PÚBLICAS ───────────────────────────────────────────────────────────
+//RUTAS PÚBLICAS 
 Route::get('/',                [PublicController::class, 'home'])->name('home');
 Route::get('/servicios',       [PublicController::class, 'servicios'])->name('servicios');
 Route::get('/nosotros',        [PublicController::class, 'nosotros'])->name('nosotros');
@@ -21,7 +21,7 @@ Route::post('/contacto',       [ContactController::class, 'store'])->name('conta
 Route::get('/reserva',         [AppointmentController::class, 'create'])->name('reserva');
 Route::post('/reserva',        [AppointmentController::class, 'store'])->name('reserva.store');
 
-// Actualidad Fiscal (Público)
+// Actualidad Fiscal 
 Route::get('/noticias',        [NewsController::class, 'index'])->name('noticias');
 Route::get('/noticias/{slug}', [NewsController::class, 'show'])->name('noticias.show');
 
@@ -30,7 +30,7 @@ Route::post('/noticias/n8n',   [NewsController::class, 'storeFromN8n']);
 
 require __DIR__.'/auth.php';
 
-// ─── PERFIL GLOBAL (Compartido) ───────────────────────────────────────────────
+// PERFIL GLOBAL 
 Route::middleware('auth')->group(function () {
     Route::patch('/profile',       [ProfileController::class, 'update'])->name('profile.update');
     Route::post('/profile/avatar', [ProfileController::class, 'updateAvatar'])->name('profile.avatar');
@@ -38,7 +38,7 @@ Route::middleware('auth')->group(function () {
     Route::delete('/profile',      [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
 
-// ─── DASHBOARD CLIENTE ────────────────────────────────────────────────────────
+// DASHBOARD CLIENTE 
 Route::middleware(['auth', 'role:cliente'])->group(function () {
     Route::get('/dashboard',            [ClientDashboard::class, 'index'])->name('client.index');
     Route::get('/dashboard/citas',      [ClientDashboard::class, 'citas'])->name('client.citas');
@@ -48,7 +48,7 @@ Route::middleware(['auth', 'role:cliente'])->group(function () {
     Route::post('/dashboard/reserva',   [ClientDashboard::class, 'storeReserva'])->name('client.reserva.store');
 });
 
-// ─── DASHBOARD ASESOR / ADMIN ─────────────────────────────────────────────────
+// DASHBOARD ASESOR 
 Route::middleware(['auth', 'role:asesor,admin'])->prefix('admin')->name('admin.')->group(function () {
     Route::get('/',           [AdminDashboard::class, 'index'])->name('index');
     Route::get('/analisis',   [AdminDashboard::class, 'analisis'])->name('analisis');
@@ -60,7 +60,7 @@ Route::middleware(['auth', 'role:asesor,admin'])->prefix('admin')->name('admin.'
     Route::patch('/perfil',   [ProfileController::class, 'update'])->name('perfil.update');
     Route::put('/perfil',     [ProfileController::class, 'updatePassword'])->name('perfil.password');
 
-    // Gestión de Noticias (Aprobación de n8n) - ORDEN CORREGIDO
+    // Gestión de Noticias 
     Route::delete('/noticias/limpiar',          [NewsController::class, 'destroyAll'])->name('noticias.destroyAll');
     Route::get('/noticias',                     [NewsController::class, 'adminIndex'])->name('noticias.index');
     Route::patch('/noticias/{noticia}/aprobar', [NewsController::class, 'aprobar'])->name('noticias.aprobar');

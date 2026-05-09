@@ -2,6 +2,7 @@
 import ClientLayout from '@/Layouts/ClientLayout.vue'
 import { useForm, usePage } from '@inertiajs/vue3'
 import { computed, ref } from 'vue'
+import axios from 'axios'; 
 
 const page = usePage()
 const user = computed(() => page.props.auth?.user)
@@ -17,12 +18,49 @@ const formPerfil = useForm({
 })
 
 const formAvatar = useForm({ avatar: null })
+const errorAvatarLocal = ref('') 
 
 const formPassword = useForm({
     current_password:      '',
     password:              '',
     password_confirmation: '',
 })
+
+const qrData = ref(null);
+const form2FA = useForm({ code: '' });
+
+async function enable2FA() {
+    try {
+        const response = await axios.post(route('2fa.enable'));
+        qrData.value = response.data;
+    } catch (error) {
+        console.error("Error al generar QR", error);
+    }
+}
+
+function confirm2FA() {
+    form2FA.post(route('2fa.confirm'), {
+        onSuccess: () => {
+            qrData.value = null;
+            form2FA.reset();
+            if (user.value) {
+                user.value.two_factor_confirmed_at = new Date().toISOString();
+            }
+        }
+    });
+}
+
+function disable2FA() {
+    if(confirm('¿Seguro que deseas deshabilitar la autenticación en dos pasos? Tu cuenta será menos segura.')) {
+        useForm().delete(route('2fa.disable'), {
+            onSuccess: () => {
+                if (user.value) {
+                    user.value.two_factor_confirmed_at = null;
+                }
+            }
+        });
+    }
+}
 
 const notificaciones = ref([
     { id: 'citas',        label: 'Recordatorio de citas',  desc: '24h antes de cada cita',                activo: true  },
@@ -42,9 +80,24 @@ function guardarPerfil() {
 function onAvatarChange(e) {
     const file = e.target.files[0]
     if (!file) return
+
+    errorAvatarLocal.value = ''
+    formAvatar.clearErrors()
+
+    if (file.size > 2 * 1024 * 1024) {
+        errorAvatarLocal.value = 'La imagen es demasiado pesada. El tamaño máximo es 2MB.'
+        e.target.value = '' 
+        return 
+    }
+
     avatarPreview.value = URL.createObjectURL(file)
     formAvatar.avatar = file
-    formAvatar.post(route('profile.avatar'), { forceFormData: true })
+    formAvatar.post(route('profile.avatar'), { 
+        forceFormData: true,
+        onError: () => {
+            avatarPreview.value = user.value?.avatar ? `/storage/${user.value.avatar}` : null;
+        }
+    })
 }
 
 function cambiarPassword() {
@@ -68,16 +121,15 @@ const avatarOk   = computed(() => page.props.flash?.status === 'avatar-updated')
 
         <div class="dash-cols">
 
-            <!-- DATOS PERSONALES -->
             <div class="dash-panel">
                 <div class="dash-panel__header">
                     <h3 class="dash-panel__title">Datos Personales</h3>
                 </div>
                 <div style="padding:28px 24px;">
 
-                    <div style="display:flex;align-items:center;gap:20px;margin-bottom:28px;">
+                    <div style="display:flex;align-items:center;gap:20px;margin-bottom:12px;">
                         <label for="avatar-input-client" style="cursor:pointer;position:relative;flex-shrink:0;">
-                            <div class="perfil-avatar" style="width:64px;height:64px;font-size:26px;overflow:hidden;">
+                            <div class="perfil-avatar" style="width:64px;height:64px;font-size:26px;overflow:hidden;background:#1c2d3f;display:flex;align-items:center;justify-content:center;border-radius:50%;color:#fff;">
                                 <img v-if="avatarPreview" :src="avatarPreview"
                                     style="width:100%;height:100%;object-fit:cover;border-radius:50%;" />
                                 <span v-else>{{ user?.name?.charAt(0) }}</span>
@@ -96,8 +148,15 @@ const avatarOk   = computed(() => page.props.flash?.status === 'avatar-updated')
                             <p style="font-size:11px;color:var(--text-dim);margin-top:3px;">Haz click en la foto para cambiarla</p>
                         </div>
                     </div>
+                    
+                    <p v-if="errorAvatarLocal" style="color:#ff4d4d; font-size:12px; margin-bottom:16px; margin-left:84px;">
+                        {{ errorAvatarLocal }}
+                    </p>
+                    <p v-if="formAvatar.errors.avatar" style="color:#ff4d4d; font-size:12px; margin-bottom:16px; margin-left:84px;">
+                        {{ formAvatar.errors.avatar }}
+                    </p>
 
-                    <div v-if="avatarOk" class="flash-ok">Foto actualizada correctamente</div>
+                    <div v-if="avatarOk" class="flash-ok" style="margin-bottom:16px;">Foto actualizada correctamente</div>
 
                     <form @submit.prevent="guardarPerfil" class="appointment-form">
                         <div class="form-group">
@@ -122,10 +181,8 @@ const avatarOk   = computed(() => page.props.flash?.status === 'avatar-updated')
                 </div>
             </div>
 
-            <!-- DERECHA -->
             <div style="display:flex;flex-direction:column;gap:20px;">
 
-                <!-- SEGURIDAD -->
                 <div class="dash-panel">
                     <div class="dash-panel__header">
                         <h3 class="dash-panel__title">Seguridad</h3>
@@ -154,7 +211,45 @@ const avatarOk   = computed(() => page.props.flash?.status === 'avatar-updated')
                     </div>
                 </div>
 
-                <!-- NOTIFICACIONES -->
+                <div class="dash-panel">
+                    <div class="dash-panel__header">
+                        <h3 class="dash-panel__title">Autenticación en Dos Pasos (2FA)</h3>
+                    </div>
+                    <div style="padding:28px 24px;">
+                        <p style="font-size:13px;color:var(--text-muted);margin-bottom:20px;">
+                            Añade una capa extra de seguridad a tu cuenta usando Google Authenticator o Microsoft Authenticator.
+                        </p>
+
+                        <div v-if="user?.two_factor_confirmed_at">
+                            <div class="flash-ok" style="margin-bottom:16px;">2FA está activado y protegiendo tu cuenta.</div>
+                            <button @click="disable2FA" class="form-submit" style="background:transparent; border:1px solid #ff4d4d; color:#ff4d4d;">
+                                Deshabilitar 2FA
+                            </button>
+                        </div>
+                        
+                        <div v-else>
+                            <button v-if="!qrData" @click="enable2FA" class="form-submit" style="background:#fff; color:#151F2B;">
+                                Configurar 2FA
+                            </button>
+                            
+                            <div v-if="qrData" style="background:rgba(255,255,255,0.05); padding:20px; border-radius:8px;">
+                                <p style="font-size:13px; color:#fff; margin-bottom:12px;">1. Escanea este código con tu aplicación autenticadora:</p>
+                                
+                                <div v-html="qrData.qrCode" style="background:white; padding:16px; border-radius:8px; display:inline-block; margin-bottom:16px;"></div>
+                                
+                                <p style="font-size:13px; color:#fff; margin-bottom:12px;">2. Introduce el código de 6 dígitos que genera tu app:</p>
+                                <form @submit.prevent="confirm2FA" style="display:flex; gap:12px; align-items:center;">
+                                    <input v-model="form2FA.code" type="text" class="form-input" placeholder="Ej: 123456" style="max-width:150px;" required />
+                                    <button type="submit" class="form-submit" :disabled="form2FA.processing" style="width:auto; padding:0 24px;">
+                                        Verificar
+                                    </button>
+                                </form>
+                                <span v-if="form2FA.errors.code" class="form-error" style="display:block; margin-top:8px;">{{ form2FA.errors.code }}</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
                 <div class="dash-panel">
                     <div class="dash-panel__header">
                         <h3 class="dash-panel__title">Preferencias de Notificaciones</h3>
@@ -169,7 +264,6 @@ const avatarOk   = computed(() => page.props.flash?.status === 'avatar-updated')
                         </div>
                     </div>
                 </div>
-
             </div>
         </div>
     </ClientLayout>

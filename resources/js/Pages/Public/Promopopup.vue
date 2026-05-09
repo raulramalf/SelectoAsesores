@@ -6,7 +6,6 @@
                 
                 <div class="promo-premium-grid" style="display: flex;">
                     
-                    <!-- 1. CONTENIDO A LA IZQUIERDA -->
                     <div class="promo-premium-content" style="flex: 1.2; padding: 56px 64px; display:flex; flex-direction:column; justify-content:center;">
                         <span class="promo-premium-badge">Tarifa Especial Nuevos Clientes</span>
                         
@@ -41,9 +40,7 @@
                         </p>
                     </div>
 
-                    <!-- 2. NUEVA IMAGEN A LA DERECHA -->
                     <div class="promo-premium-image" style="flex: 1; background-image: url('https://images.unsplash.com/photo-1450101499163-c8848c66ca85?w=800&q=80'); background-size: cover; background-position: center; position: relative;">
-                        <!-- Degradado invertido (funde de derecha a izquierda) -->
                         <div class="promo-premium-image-overlay" style="position: absolute; inset: 0; background: linear-gradient(to left, rgba(21, 31, 43, 0.1), rgba(28, 45, 63, 1) 98%);"></div>
                     </div>
 
