@@ -20,6 +20,9 @@ Route::get('/contacto',        [PublicController::class, 'contacto'])->name('con
 Route::post('/contacto',       [ContactController::class, 'store'])->name('contacto.store');
 Route::get('/reserva',         [AppointmentController::class, 'create'])->name('reserva');
 Route::post('/reserva',        [AppointmentController::class, 'store'])->name('reserva.store');
+Route::get('/aviso-legal', [PublicController::class, 'legalNotice'])->name('legal.notice');
+Route::get('/politica-de-privacidad', [PublicController::class, 'privacyPolicy'])->name('privacy.policy');
+Route::get('/politica-de-cookies', [PublicController::class, 'cookiePolicy'])->name('cookie.policy');
 
 // Actualidad Fiscal 
 Route::get('/noticias',        [NewsController::class, 'index'])->name('noticias');

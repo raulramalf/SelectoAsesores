@@ -418,7 +418,6 @@
 }
 
 @media (max-width: 768px) {
-    /* Hero */
     .hero__content        { padding: 48px 20px; max-width: 100%; }
     .hero__title          { font-size: 26px; }
     .hero__text           { font-size: 14px; }
@@ -447,4 +446,179 @@
     .servicios-detalle    { padding: 32px 16px; }
     .testimonios          { padding: 32px 16px; }
     .cta                  { padding: 40px 16px; }
+}
+
+
+@media (max-width: 600px) {
+    .testimonios__grid {
+        grid-template-columns: 1fr !important;
+        gap: 16px;
+    }
+
+    .testimonio-card {
+        flex-direction: row;
+        align-items: flex-start;
+        gap: 14px;
+        padding: 20px 16px;
+    }
+
+    .testimonio-card__foto {
+        width: 44px;
+        height: 44px;
+        flex-shrink: 0;
+    }
+
+    .testimonio-card__texto {
+        font-size: 12px;
+        line-height: 1.65;
+    }
+}
+
+.home-hero {
+    position: relative;
+    overflow: hidden;
+    min-height: 80vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+}
+
+.home-hero__content {
+    position: relative;
+    z-index: 2;
+    width: 100%;
+    max-width: 900px;
+    padding: 80px 64px;
+    box-sizing: border-box;
+}
+
+.home-hero__btn {
+    display: inline-block;
+    background: transparent;
+    border: 1px solid #E2CBAE;
+    color: #E2CBAE;
+    padding: 12px 32px;
+    border-radius: 4px;
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    text-decoration: none;
+    transition: all 0.2s;
+}
+
+.home-oferta {
+    background: #151F2B;
+    padding: 80px 64px;
+    position: relative;
+    overflow: hidden;
+}
+
+.home-oferta__inner {
+    max-width: 1200px;
+    margin: 0 auto;
+    position: relative;
+    z-index: 2;
+}
+
+.promo-premium-grid {
+    min-height: 520px;
+    display: flex;
+}
+
+.promo-premium-content {
+    flex: 1.2;
+    padding: 56px 64px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.promo-premium-image {
+    flex: 1;
+    min-height: 300px;
+}
+
+.home-testimonios {
+    background: #1c2d3f;
+    padding: 80px 64px;
+}
+
+.home-testimonios__inner {
+    max-width: 1160px;
+    margin: 0 auto;
+}
+
+.home-testimonios__grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 24px;
+    max-width: 960px;
+    margin: 0 auto;
+}
+
+.home-testimonio-card {
+    background: #151F2B;
+    border: 1px solid rgba(255,255,255,0.05);
+    border-radius: 8px;
+    padding: 32px;
+    display: flex;
+    align-items: flex-start;
+    gap: 20px;
+}
+
+.home-cta {
+    background: #243345;
+    padding: 80px 64px;
+    text-align: center;
+}
+
+.home-cta__btn {
+    display: inline-block;
+    background: #E2CBAE;
+    color: #151F2B;
+    padding: 15px 48px;
+    border-radius: 100px;
+    font-size: 12px;
+    font-weight: 600;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    text-decoration: none;
+    transition: opacity 0.2s;
+}
+
+@media (max-width: 1024px) {
+    .home-hero__content  { padding: 60px 40px; }
+    .home-oferta         { padding: 60px 40px; }
+    .promo-premium-content { padding: 40px 40px; }
+    .home-testimonios    { padding: 60px 40px; }
+    .home-cta            { padding: 60px 40px; }
+}
+
+@media (max-width: 768px) {
+    .home-hero           { min-height: 60vh; }
+    .home-hero__content  { padding: 48px 20px; }
+    .home-hero__btn      { display: block; text-align: center; }
+
+    .home-oferta         { padding: 40px 20px; }
+    .promo-premium-grid  { flex-direction: column !important; min-height: auto !important; }
+    .promo-premium-content { flex: none; padding: 28px 20px; }
+    .promo-premium-image { display: none !important; }
+
+    .home-testimonios    { padding: 48px 20px; }
+    .home-testimonios__grid { grid-template-columns: 1fr !important; gap: 16px; }
+    .home-testimonio-card { padding: 20px 16px; gap: 14px; }
+
+    .home-cta            { padding: 48px 20px; }
+    .home-cta__btn       { display: block; padding: 15px 24px; }
+}
+
+@media (max-width: 480px) {
+    .home-hero__content  { padding: 36px 16px; }
+    .home-oferta         { padding: 28px 16px; }
+    .promo-premium-content { padding: 24px 16px; }
+    .home-testimonios    { padding: 36px 16px; }
+    .home-testimonio-card { flex-direction: column; align-items: center; text-align: center; }
+    .home-cta            { padding: 36px 16px; }
 }

@@ -4,7 +4,6 @@ import { computed, ref, onMounted, onUnmounted } from 'vue'
 const page = usePage()
 const user = computed(() => page.props.auth?.user)
 
-// ── Menú móvil ──
 const menuOpen = ref(false)
 function toggleMenu() {
     menuOpen.value = !menuOpen.value
@@ -125,11 +124,15 @@ onUnmounted(() => { window.removeEventListener('resize', onResize); document.bod
             <div class="footer__bottom">
                 <span class="footer__copy">© 2026 Selecto Asesores. Todos los derechos reservados.</span>
                 <div class="footer__legal">
-                    <Link href="#">Aviso Legal</Link>
-                    <Link href="#">Privacidad</Link>
-                    <Link href="#">Cookies</Link>
+                    <div class="footer__legal">
+                        <Link :href="route('legal.notice')">Aviso Legal</Link>
+                        <Link :href="route('privacy.policy')">Privacidad</Link>
+                        <Link :href="route('cookie.policy')">Cookies</Link>
+                    </div>
                 </div>
             </div>
+
+            
         </footer>
 
         <a

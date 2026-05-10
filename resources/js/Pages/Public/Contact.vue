@@ -142,7 +142,8 @@ const contactItems = [
                         </button>
 
                         <p class="form-disclaimer">
-                            Al enviar aceptas nuestra <a href="#">política de privacidad</a>.
+                            Al enviar aceptas nuestra 
+                            <Link :href="route('privacy.policy')" class="underline hover:text-[#E2CBAE]">política de privacidad</Link>.
                             Tus datos no serán cedidos a terceros.
                         </p>
                     </form>

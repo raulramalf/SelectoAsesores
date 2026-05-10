@@ -25,4 +25,19 @@ class PublicController extends Controller
     {
         return Inertia::render('Public/Contact');
     }
+    
+    public function legalNotice()
+    {
+        return Inertia::render('Public/Legal/LegalNotice');
+    }
+
+    public function privacyPolicy()
+    {
+        return Inertia::render('Public/Legal/PrivacyPolicy');
+    }
+
+    public function cookiePolicy()
+    {
+        return Inertia::render('Public/Legal/CPInfo');
+    }
 }
