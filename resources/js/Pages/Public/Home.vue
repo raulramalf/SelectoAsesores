@@ -1,0 +1,135 @@
+<script setup>
+import PublicLayout from '@/Layouts/PublicLayout.vue'
+import Promopopup from './Promopopup.vue'
+
+const testimonios = [
+    {
+        nombre: 'Marco Ramírez',
+        imagen: 'https://images.unsplash.com/photo-1560250097-0b93528c311a?w=150&h=150&fit=crop&q=80',
+        texto: '"Lo que más valoro es la agilidad. Tener un asesor personal asignado que conoce mi histórico y responde en menos de 24 horas marca la diferencia entre un gestor común y un servicio de élite."'
+    },
+    {
+        nombre: 'Marta Ramírez',
+        imagen: 'https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?w=150&h=150&fit=crop&q=80',
+        texto: '"La planificación fiscal estratégica que ofrecen no es un gasto, es una inversión. Gracias a su análisis, hemos optimizado costes que ni siquiera habíamos detectado. Son el socio que toda gran empresa necesita."'
+    }
+]
+</script>
+
+<template>
+    <PublicLayout>
+
+        <Promopopup />
+
+        <section class="home-hero">
+            <div class="hero-bg-container" style="position:absolute;inset:0;">
+                <img src="https://images.unsplash.com/photo-1589829545856-d10d557cf95f?w=1600&q=85"
+                     alt="Hero"
+                     style="width:100%;height:100%;object-fit:cover;object-position:center 20%;filter:grayscale(30%);">
+            </div>
+            <div style="position:absolute;inset:0;background:linear-gradient(180deg,rgba(21,31,43,0.80) 0%,rgba(21,31,43,0.95) 100%);"></div>
+
+            <div class="home-hero__content">
+                <span style="font-size:11px;letter-spacing:0.22em;text-transform:uppercase;color:#E2CBAE;display:block;margin-bottom:16px;">SELECTO ASESORES</span>
+                <h1 style="font-family:'Instrument Serif',serif;font-size:clamp(32px,5vw,64px);font-weight:400;color:#fff;line-height:1.1;margin-bottom:24px;">
+                    Todo lo que tu empresa<br>
+                    <em style="color:#E2CBAE;">necesita en un solo lugar</em>
+                </h1>
+                <p style="font-size:15px;color:#a0aabf;line-height:1.85;max-width:600px;margin:0 auto 36px;font-weight:300;">
+                    Asesoría fiscal integral para autónomos, pymes y empresas. Gestionamos tu fiscalidad para que tú te centres en crecer.
+                </p>
+                <a href="/reserva" class="home-hero__btn"
+                    onmouseover="this.style.background='#E2CBAE'; this.style.color='#151F2B';"
+                    onmouseout="this.style.background='transparent'; this.style.color='#E2CBAE';">
+                    SOLICITA TU PLAZA
+                </a>
+            </div>
+        </section>
+
+        <section id="seccion-oferta" class="home-oferta">
+            <div class="home-oferta__bg-glow"></div>
+
+            <div class="home-oferta__inner">
+                <div class="promo-premium-modal">
+                    <div class="promo-premium-grid">
+
+                        <div class="promo-premium-content">
+                            <span class="promo-premium-badge">Tarifa Especial Nuevos Clientes</span>
+
+                            <h2 class="promo-premium-title">
+                                Servicio Fiscal y Contable<br>
+                                <em>Integral</em>
+                            </h2>
+
+                            <div class="promo-premium-pricing">
+                                <div class="promo-premium-pricing-old">
+                                    <span>Desde</span>
+                                    <span>300 €</span>
+                                </div>
+                                <span class="promo-premium-price">200 €</span>
+                                <span class="promo-premium-period">/ mes</span>
+                            </div>
+
+                            <p class="promo-premium-desc">
+                                Tu tranquilidad no tiene precio, pero ahora sí tiene descuento. Únete a Selecto Asesores este mes y accede a nuestra gestión contable y tributaria completa.
+                            </p>
+
+                            <ul class="promo-premium-features">
+                                <li><span>✓</span> Asesor personal asignado</li>
+                                <li><span>✓</span> Presentación de impuestos (IVA, IRPF)</li>
+                                <li><span>✓</span> Contabilidad completa al día</li>
+                            </ul>
+
+                            <a href="/reserva" class="promo-premium-btn">
+                                RECLAMAR MI PLAZA
+                            </a>
+
+                            <p class="promo-premium-disclaimer">
+                                Plazas limitadas. Promoción válida únicamente para nuevas altas sin permanencia.
+                            </p>
+                        </div>
+
+                        <div class="promo-premium-image">
+                            <div class="promo-premium-image-overlay"></div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="home-testimonios">
+            <div class="home-testimonios__inner">
+                <div style="text-align:center;margin-bottom:48px;">
+                    <span style="font-size:10px;letter-spacing:0.22em;text-transform:uppercase;color:#8a9ab5;display:block;">NUESTROS CLIENTES</span>
+                </div>
+
+                <div class="home-testimonios__grid">
+                    <div v-for="t in testimonios" :key="t.nombre" class="home-testimonio-card">
+                        <img :src="t.imagen" :alt="t.nombre" style="width:64px;height:64px;border-radius:50%;object-fit:cover;border:2px solid #E2CBAE;flex-shrink:0;box-shadow:0 4px 12px rgba(0,0,0,0.2);">
+                        <div>
+                            <h4 style="font-size:16px;color:#fff;font-weight:600;margin-bottom:8px;">{{ t.nombre }}</h4>
+                            <p style="font-size:14px;color:#a0aabf;line-height:1.7;font-style:italic;">{{ t.texto }}</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="home-cta">
+            <h2 style="font-family:'Instrument Serif',serif;font-size:clamp(26px,4vw,48px);font-weight:400;color:#fff;line-height:1.2;margin-bottom:12px;">
+                ¿No sabes si esto es para ti?<br>
+                <em style="color:#E2CBAE;">Cuéntanos tu situación y te asesoramos</em>
+            </h2>
+            <p style="font-size:14px;color:#a0aabf;margin:16px auto 36px;max-width:480px;line-height:1.75;">
+                Primera consulta gratuita. En menos de 24 horas analizamos tu caso para ver si nuestra metodología encaja con tu negocio.
+            </p>
+            <a href="/reserva" class="home-cta__btn"
+                onmouseover="this.style.opacity='0.85'"
+                onmouseout="this.style.opacity='1'">
+                SOLICITAR CONSULTA GRATUITA
+            </a>
+        </section>
+
+    </PublicLayout>
+</template>
