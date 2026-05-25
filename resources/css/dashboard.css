@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Inter:wght@300;400;500;600&display=swap');
+
 :root {
     --navy:       #151F2B;
     --navy-mid:   #1d2b3a;
@@ -1016,74 +1018,6 @@ label:hover .avatar-overlay { opacity: 1; }
     white-space: nowrap;
 }
 
-.cliente-card {
-    background: var(--navy-mid);
-    border: 1px solid var(--border);
-    border-radius: 10px;
-    padding: 28px;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    gap: 24px;
-    flex-wrap: wrap;
-}
-
-.cliente-card__left {
-    display: flex;
-    align-items: center;
-    gap: 18px;
-}
-
-.cliente-card__avatar {
-    width: 72px;
-    height: 72px;
-    border-radius: 50%;
-    background: rgba(226, 203, 174, 0.15);
-    border: 2px solid var(--gold-dim);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-family: var(--font-serif);
-    font-size: 28px;
-    color: var(--gold);
-    text-transform: uppercase;
-    flex-shrink: 0;
-    overflow: hidden;
-}
-
-.cliente-card__avatar img { width: 100%; height: 100%; object-fit: cover; }
-
-.cliente-card__name {
-    font-family: var(--font-serif);
-    font-size: 24px;
-    font-weight: 400;
-    color: #fff;
-    margin-bottom: 6px;
-}
-
-.cliente-card__badge {
-    font-size: 10px;
-    font-weight: 500;
-    letter-spacing: .12em;
-    text-transform: uppercase;
-    color: var(--gold);
-    background: rgba(226, 203, 174, 0.1);
-    border: 1px solid rgba(226, 203, 174, 0.2);
-    padding: 2px 10px;
-    border-radius: 100px;
-}
-
-.cliente-card__info { display: flex; flex-direction: column; gap: 10px; }
-
-.cliente-card__info-item {
-    display: flex;
-    align-items: center;
-    gap: 8px;
-    font-size: 13px;
-    color: var(--text-muted);
-}
-
-.cliente-card__info-item svg { flex-shrink: 0; color: var(--text-dim); }
 
 .cliente-dato {
     background: rgba(255,255,255,.02);
@@ -1572,4 +1506,220 @@ select.modal-input option {
         padding: 5px 8px;
         min-width: 38px;
     }
+}
+/* ─── Active sidebar item (missing from original) ─── */
+.sidebar__item--active {
+    background: rgba(226, 203, 174, 0.1);
+    color: #e2cbae;
+    border: 1px solid rgba(226, 203, 174, 0.15);
+}
+
+.sidebar__item--active svg {
+    color: #e2cbae;
+}
+
+/* ─── Topbar avatar text overflow ─── */
+.topbar-user .topbar-dropdown__name,
+.topbar-user .topbar-dropdown__email {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    max-width: 140px;
+}
+
+/* ─── Responsive: very small screens sidebar header ─── */
+@media (max-width: 360px) {
+    .sidebar__header {
+        padding: 16px 12px;
+    }
+
+    .dashboard-header__title {
+        font-size: 11px;
+    }
+}
+
+/* ─── Clientes panel header responsive ─── */
+.clientes-panel-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    flex-wrap: wrap;
+    padding: 14px 18px;
+    border-bottom: 1px solid var(--border);
+}
+
+.clientes-search {
+    width: 240px;
+}
+
+/* ─── Modal password grid responsive ─── */
+.modal-pwd-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+}
+
+@media (max-width: 768px) {
+    .clientes-search {
+        width: 100%;
+    }
+
+    .modal-pwd-grid {
+        grid-template-columns: 1fr;
+    }
+}
+
+/* ─── Modal inputs ─── */
+.modal-label {
+    font-size: 11px;
+    color: #8a9ab5;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    margin-bottom: 6px;
+    display: block;
+}
+
+.modal-input {
+    width: 100%;
+    padding: 10px 14px;
+    background: #1c2d3f;
+    border: 1px solid rgba(255,255,255,0.1);
+    border-radius: 4px;
+    color: #fff;
+    font-size: 13px;
+    outline: none;
+    box-sizing: border-box;
+    transition: border-color 0.2s;
+}
+
+.modal-input:focus {
+    border-color: rgba(226, 203, 174, 0.4);
+}
+
+.modal-error {
+    color: #e57373;
+    font-size: 11px;
+    margin-top: 4px;
+}
+
+/* ─── Noticias: tabla desktop / tarjetas móvil ─── */
+.news-table-desktop { display: table; }
+.news-cards-mobile  { display: none; }
+
+.news-card {
+    padding: 16px;
+    border-bottom: 1px solid rgba(255,255,255,0.05);
+}
+.news-card:last-child { border-bottom: none; }
+
+.news-card__top {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 8px;
+}
+
+.news-card__title {
+    font-size: 13px;
+    color: #fff;
+    line-height: 1.5;
+    margin: 0 0 12px;
+}
+
+.news-card__actions {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+}
+
+/* ─── Clientes: tabla desktop / tarjetas móvil ─── */
+.clientes-table-desktop { display: table; }
+.clientes-cards-mobile  { display: none; }
+.clientes-cards-mobile  { padding: 12px 16px; display: none; flex-direction: column; gap: 0; }
+
+.cliente-card {
+    padding: 14px 16px;
+    border-bottom: 1px solid rgba(255,255,255,0.06);
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+}
+
+.cliente-card:last-child { border-bottom: none; }
+
+.cliente-card:hover {
+    background: rgba(255,255,255,0.02);
+}
+
+.cliente-card__top {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 10px;
+}
+
+.cliente-card__info {
+    display: flex;
+    flex-direction: column;
+    gap: 3px;
+    min-width: 0;
+    flex: 1;
+}
+
+.cliente-card__name {
+    font-size: 14px;
+    color: #fff;
+    font-weight: 500;
+}
+
+.cliente-card__email {
+    font-size: 12px;
+    color: var(--text-muted);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.cliente-card__meta {
+    font-size: 12px;
+    color: var(--text-muted);
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    margin-bottom: 12px;
+    padding-left: 2px;
+}
+
+.cliente-card__actions {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    padding-top: 10px;
+    border-top: 1px solid rgba(255,255,255,0.05);
+}
+
+/* ─── Responsive breakpoint ─── */
+@media (max-width: 768px) {
+    /* Noticias */
+    .news-table-desktop { display: none; }
+    .news-cards-mobile  { display: block; }
+
+    /* Clientes */
+    .clientes-table-desktop { display: none; }
+    .clientes-cards-mobile  { display: flex; flex-direction: column; }
+
+    /* Panel header */
+    .clientes-panel-header {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 10px;
+    }
+    .clientes-search {
+        width: 100%;
+        box-sizing: border-box;
+    }
+
+    /* Modal contraseñas */
+    .modal-pwd-grid { grid-template-columns: 1fr; }
 }

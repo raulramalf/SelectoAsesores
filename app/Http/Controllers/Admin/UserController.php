@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Validation\Rules\Password;
 use Inertia\Inertia;
 use App\Models\User;
 
@@ -51,7 +52,7 @@ class UserController extends Controller
             'name'     => 'required|string|max:255',
             'email'    => 'required|email|max:255|unique:users',
             'phone'    => 'nullable|string|max:20',
-            'password' => 'required|string|min:8|confirmed',
+            'password' => ['required', 'confirmed', Password::defaults()],
         ]);
 
         User::create([

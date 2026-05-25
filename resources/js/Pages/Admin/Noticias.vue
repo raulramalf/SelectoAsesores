@@ -34,7 +34,8 @@ const vaciarTodo = () => { if(confirm('¿VACIAR TODO EL HISTORIAL?')) router.del
         </div>
 
         <div class="dash-panel">
-            <table class="docs-table">
+            <!-- Vista escritorio: tabla -->
+            <table class="docs-table news-table-desktop">
                 <thead>
                     <tr>
                         <th>Noticia de Hoy</th>
@@ -45,15 +46,9 @@ const vaciarTodo = () => { if(confirm('¿VACIAR TODO EL HISTORIAL?')) router.del
                 </thead>
                 <tbody>
                     <tr v-for="n in noticiasFiltradas" :key="n.id">
+                        <td><span class="main-title">{{ n.title }}</span></td>
                         <td>
-                            <div class="title-stack">
-                                <span class="main-title">{{ n.title }}</span>
-                            </div>
-                        </td>
-                        <td>
-                            <a :href="n.source_url" target="_blank" class="source-link">
-                                {{ n.source }} ↗
-                            </a>
+                            <a :href="n.source_url" target="_blank" class="source-link">{{ n.source }} ↗</a>
                         </td>
                         <td>
                             <span :class="['status-tag', n.status]">
@@ -69,6 +64,23 @@ const vaciarTodo = () => { if(confirm('¿VACIAR TODO EL HISTORIAL?')) router.del
                     </tr>
                 </tbody>
             </table>
+
+            <!-- Vista móvil: tarjetas -->
+            <div class="news-cards-mobile">
+                <div v-for="n in noticiasFiltradas" :key="n.id" class="news-card">
+                    <div class="news-card__top">
+                        <span :class="['status-tag', n.status]">
+                            {{ n.status === 'published' ? 'PÚBLICO' : 'EN COLA' }}
+                        </span>
+                        <a :href="n.source_url" target="_blank" class="source-link">{{ n.source }} ↗</a>
+                    </div>
+                    <p class="news-card__title">{{ n.title }}</p>
+                    <div class="news-card__actions">
+                        <button v-if="n.status === 'pending'" @click="aprobar(n.id)" class="dash-btn-primary btn-small">Aprobar</button>
+                        <button @click="eliminar(n.id)" class="link-delete">Eliminar</button>
+                    </div>
+                </div>
+            </div>
         </div>
     </AdminLayout>
 </template>
