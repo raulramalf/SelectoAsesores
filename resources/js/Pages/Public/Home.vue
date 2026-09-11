@@ -1,6 +1,7 @@
 <script setup>
 import PublicLayout from '@/Layouts/PublicLayout.vue'
 import Promopopup from './Promopopup.vue'
+import TrustpilotWidget from './TrustpilotWidget.vue'
 
 const testimonios = [
     {
@@ -23,9 +24,17 @@ const testimonios = [
 
         <section class="home-hero">
             <div style="position:absolute;inset:0;">
-                <img src="https://images.unsplash.com/photo-1589829545856-d10d557cf95f?w=1600&q=85"
-                     alt="Hero"
+                <!--
+                    VIDEO DE PORTADA
+                    Sustituye el "src" de abajo por la ruta o URL de tu video (por ejemplo /videos/hero.mp4
+                    dentro de public/, o una URL externa). El "poster" es la imagen que se ve mientras carga
+                    o si el video falla; puedes dejarla o cambiarla también.
+                -->
+                <video autoplay muted loop playsinline
+                     poster="https://images.unsplash.com/photo-1589829545856-d10d557cf95f?w=1600&q=85"
                      style="width:100%;height:100%;object-fit:cover;object-position:center 20%;filter:grayscale(30%);">
+                    <source src="/videos/hero-placeholder.mp4" type="video/mp4">
+                </video>
             </div>
             <div style="position:absolute;inset:0;background:linear-gradient(180deg,rgba(21,31,43,0.80) 0%,rgba(21,31,43,0.95) 100%);"></div>
 
@@ -54,7 +63,7 @@ const testimonios = [
                     <div class="promo-premium-grid">
 
                         <div class="promo-premium-content">
-                            <span class="promo-premium-badge" style="letter-spacing:0.25em;margin-bottom:16px;">Tarifa Especial Nuevos Clientes</span>
+                            <span class="promo-premium-badge" style="letter-spacing:0.25em;margin-bottom:16px;">Tarifa Especial Nuevos Autónomos</span>
 
                             <h2 class="promo-premium-title" style="margin-bottom:24px;">
                                 Servicio Fiscal y Contable<br>
@@ -67,7 +76,7 @@ const testimonios = [
                                     <span style="text-decoration:line-through;font-size:16px;color:#4a5a72;">300 €</span>
                                 </div>
                                 <span class="promo-premium-price" style="font-size:clamp(36px,6vw,56px);font-family:'Instrument Serif',serif;line-height:1;color:#fff;">200 €</span>
-                                <span class="promo-premium-period" style="font-size:14px;color:#8a9ab5;">/ mes</span>
+                                <span class="promo-premium-period" style="font-size:14px;color:#8a9ab5;">Único</span>
                             </div>
 
                             <p class="promo-premium-desc" style="font-size:15px;color:#a0aabf;line-height:1.7;margin-bottom:32px;">
@@ -122,6 +131,8 @@ const testimonios = [
                 </div>
             </div>
         </section>
+
+        <TrustpilotWidget />
 
         <section class="home-cta">
             <h2 style="font-family:'Instrument Serif',serif;font-size:clamp(26px,4vw,48px);font-weight:400;color:#fff;line-height:1.2;margin-bottom:12px;">

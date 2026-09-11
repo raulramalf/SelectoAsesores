@@ -34,14 +34,16 @@ const planes = [
     {
         nombre: 'Particulares',
         target: 'Para individuos',
-        desc: 'Asesoramiento y gestión de trámites puntuales, rentas y herencias.',
+        desc: 'Acompañamiento personal en cada trámite: rentas, herencias, prestaciones y gestiones del día a día, explicado en un lenguaje que entiendas.',
         precio: '30',
         features: [
-            'Declaración anual de la Renta (IRPF)',
-            'Gestión de herencias y donaciones',
-            'Impuestos de transmisiones patrimoniales (ITP)',
-            'Tramitación de prestaciones sociales (paro, IMV...)',
-            'Asesoramiento en seguros (vida, hogar, vehículos...)'
+            'Declaración anual de la Renta (IRPF), con revisión de deducciones aplicables',
+            'Gestión de herencias, donaciones y particiones entre herederos',
+            'Impuestos de transmisiones patrimoniales (ITP) en compraventas',
+            'Tramitación de prestaciones sociales (paro, IMV, jubilación...)',
+            'Asesoramiento y comparativa en seguros (vida, hogar, vehículos...)',
+            'Gestión de transferencias y cambios de titularidad de vehículos',
+            'Atención personalizada por videollamada, teléfono o WhatsApp'
         ],
         boton: 'Quiero asesorarme'
     }
@@ -77,12 +79,15 @@ const servicios = [
     },
     {
         nombre: 'Servicios particulares',
-        descripcion: 'Asesoría fiscal, contable y laboral para autónomos, pymes y emprendedores con confianza y profesionalismo.',
+        descripcion: 'Gestión y acompañamiento cercano para las necesidades fiscales y administrativas de cualquier persona, con el mismo rigor que aplicamos a las empresas.',
         items: [
-            'Declaración de la renta.', 
-            'Herencias, donaciones, ITP.', 
-            'Paro, IMV, prestaciones y seguros.', 
-            'Transferencia de vehículos'
+            'Declaración de la Renta (IRPF): revisión de borrador, deducciones autonómicas y optimización.',
+            'Herencias y donaciones: cálculo y presentación del impuesto, reparto entre herederos.',
+            'Impuesto de Transmisiones Patrimoniales (ITP) en compraventa de vivienda o vehículos.',
+            'Prestaciones sociales: solicitud de paro, IMV, jubilación y otras ayudas públicas.',
+            'Asesoramiento y comparativa de seguros personales (vida, hogar, vehículos).',
+            'Transferencia y cambio de titularidad de vehículos ante Tráfico.',
+            'Gestión de alquileres: contratos, fianzas y declaración de rendimientos.'
         ]
     }
 ]

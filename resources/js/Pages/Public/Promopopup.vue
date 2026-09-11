@@ -7,7 +7,7 @@
                 <div class="promo-premium-grid" style="display: flex;">
                     
                     <div class="promo-premium-content" style="flex: 1.2; padding: 56px 64px; display:flex; flex-direction:column; justify-content:center;">
-                        <span class="promo-premium-badge">Tarifa Especial Nuevos Clientes</span>
+                        <span class="promo-premium-badge">Tarifa Especial Nuevos Autónomos</span>
                         
                         <h2 class="promo-premium-title">
                             Servicio Fiscal y Contable<br>
@@ -18,7 +18,7 @@
                             <span style="font-size: 16px; color: #a0aabf; margin-right: 8px;">Desde</span>
                             <span class="promo-premium-price" style="text-decoration: line-through; font-size: 0.7em; color: #6a7a9a; margin-right: 8px;">300 €</span>
                             <span class="promo-premium-price">200 €</span>
-                            <span class="promo-premium-period">/ mes</span>
+                            <span class="promo-premium-period">Único</span>
                         </div>
                         
                         <p class="promo-premium-desc">

@@ -2,9 +2,9 @@
 import PublicLayout from '@/Layouts/PublicLayout.vue'
 
 const proceso = [
-    { num: '01', titulo: 'Primera consulta', desc: 'Analizamos tu situación fiscal de forma gratuita y sin compromiso para entender qué necesitas.' },
-    { num: '02', titulo: 'Plan personalizado', desc: 'Diseñamos una estrategia fiscal adaptada a tu actividad, tamaño y objetivos empresariales.' },
-    { num: '03', titulo: 'Gestión continua', desc: 'Nos encargamos de toda la burocracia fiscal para que tú te centres en hacer crecer tu negocio.' },
+    { num: '01', titulo: 'Primera consulta', desc: 'Analizamos tu situación fiscal, contable y laboral de forma gratuita y sin compromiso para entender qué necesitas.' },
+    { num: '02', titulo: 'Plan personalizado', desc: 'Diseñamos una estrategia de gestión adaptada a tu actividad, tamaño y objetivos empresariales.' },
+    { num: '03', titulo: 'Gestión continua', desc: 'Nos encargamos de toda la burocracia fiscal, contable y laboral para que tú te centres en hacer crecer tu negocio.' },
     { num: '04', titulo: 'Seguimiento', desc: 'Tu asesor personal está siempre disponible para resolver dudas y anticiparse a cambios normativos.' },
 ]
 </script>
@@ -16,7 +16,8 @@ const proceso = [
 
             <section class="about-hero">
                 <div style="position:absolute;inset:0;">
-                    <img src="https://images.unsplash.com/photo-1497366216548-37526070297c?auto=format&fit=crop&w=1920&q=80"
+                    <!-- TODO: sustituye por la nueva imagen del hero de "Nosotros" -->
+                    <img src="/images/about/hero-placeholder.jpg"
                          alt="Fondo oficina"
                          style="width:100%;height:100%;object-fit:cover;filter:grayscale(50%);opacity:0.15;">
                 </div>
@@ -28,7 +29,7 @@ const proceso = [
                         Más que una asesoría,<br><em style="color:#E2CBAE;">tu socio estratégico</em>
                     </h1>
                     <p style="font-size:16px;color:#a0aabf;line-height:1.8;max-width:640px;margin:0 auto;">
-                        Nacimos con un objetivo claro: simplificar la vida de los empresarios. Combinamos la experiencia técnica con la cercanía humana para que la fiscalidad deje de ser un problema.
+                        Nacimos con un objetivo claro: simplificar la vida de los empresarios. Combinamos la experiencia técnica con la cercanía humana para que la gestión fiscal, contable y laboral de tu negocio deje de ser un problema.
                     </p>
                 </div>
             </section>
@@ -36,7 +37,8 @@ const proceso = [
             <section class="about-mision">
                 <div class="about-inner">
                     <div class="about-img-wrap">
-                        <img src="https://images.unsplash.com/photo-1522071820081-009f0129c71c?auto=format&fit=crop&w=1200&q=80"
+                        <!-- TODO: sustituye por la nueva imagen de equipo/oficina -->
+                        <img src="/images/about/equipo-placeholder.jpg"
                              alt="Equipo trabajando"
                              style="width:100%;height:100%;object-fit:cover;object-position:center 40%;">
                     </div>
@@ -48,7 +50,7 @@ const proceso = [
                                 <span style="font-size:11px;font-weight:600;letter-spacing:0.2em;text-transform:uppercase;color:#E2CBAE;">Nuestra Misión</span>
                             </div>
                             <h3 style="font-family:'Instrument Serif',serif;font-size:clamp(26px,3vw,40px);font-weight:400;color:#fff;line-height:1.1;margin-bottom:20px;">¿Por qué surge<br>Selecto Asesores?</h3>
-                            <p style="font-size:15px;color:#a0aabf;line-height:1.8;">Simplificar la gestión fiscal de autónomos, pymes y empresas para que puedan centrarse en lo que realmente importa: hacer crecer su negocio. Queremos que la fiscalidad deje de ser una preocupación y se convierta en una ventaja competitiva.</p>
+                            <p style="font-size:15px;color:#a0aabf;line-height:1.8;">Simplificar la gestión fiscal, contable y laboral de autónomos, pymes y empresas para que puedan centrarse en lo que realmente importa: hacer crecer su negocio. Queremos que la gestión de tu día a día deje de ser una preocupación y se convierta en una ventaja competitiva.</p>
                         </div>
                         <div>
                             <div style="display:flex;align-items:center;gap:16px;margin-bottom:24px;">
@@ -56,7 +58,7 @@ const proceso = [
                                 <span style="font-size:11px;font-weight:600;letter-spacing:0.2em;text-transform:uppercase;color:#E2CBAE;">Nuestra Visión</span>
                             </div>
                             <h3 style="font-family:'Instrument Serif',serif;font-size:clamp(26px,3vw,40px);font-weight:400;color:#fff;line-height:1.1;margin-bottom:20px;">¿Hacia dónde<br>vamos?</h3>
-                            <p style="font-size:15px;color:#a0aabf;line-height:1.8;">Convertirnos en la asesoría fiscal de referencia en España, combinando la experiencia de nuestros profesionales con herramientas digitales avanzadas que aporten valor real y medible a cada uno de nuestros clientes.</p>
+                            <p style="font-size:15px;color:#a0aabf;line-height:1.8;">Convertirnos en la gestoría y asesoría de referencia en España, combinando la experiencia de nuestros profesionales en materia fiscal, contable y laboral con herramientas digitales avanzadas que aporten valor real y medible a cada uno de nuestros clientes.</p>
                         </div>
                     </div>
                 </div>
