@@ -1,0 +1,47 @@
+.calc-hero { position: relative; padding: 140px 5vw 56px; background: #151F2B; border-bottom: 1px solid rgba(255,255,255,.06); }
+.calc-hero__tag { font-size: 10px; letter-spacing: .22em; text-transform: uppercase; color: #E2CBAE; display: block; margin-bottom: 10px; }
+.calc-hero h1 { font-family: 'Instrument Serif', serif; font-size: clamp(28px, 5vw, 56px); font-weight: 400; color: #fff; line-height: 1.05; margin-bottom: 12px; }
+.calc-hero p { font-size: 13px; color: #a0aabf; max-width: 560px; line-height: 1.75; font-weight: 300; }
+.calc-back { display: inline-block; margin-bottom: 18px; font-size: 11px; letter-spacing: .08em; text-transform: uppercase; color: #E2CBAE; text-decoration: none; }
+
+.calc-wrap { background: #0f172a; padding: 40px 5vw 80px; min-height: 60vh; }
+.calc-grid { max-width: 1200px; margin: 0 auto; display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 24px; }
+@media (max-width: 860px) { .calc-grid { grid-template-columns: minmax(0, 1fr); } }
+
+.calc-card { background: #151F2B; border: 1px solid rgba(255,255,255,.06); border-radius: 6px; padding: 24px 22px; }
+.calc-card h2 { font-family: 'Instrument Serif', serif; font-size: 22px; font-weight: 400; color: #fff; margin-bottom: 16px; }
+.calc-field { margin-bottom: 14px; }
+.calc-field label { display: block; font-size: 11px; letter-spacing: .06em; color: #8a9ab5; margin-bottom: 6px; }
+.calc-field input[type=number], .calc-field select { width: 100%; background: #0f172a; border: 1px solid rgba(255,255,255,.1); border-radius: 4px; color: #fff; font-size: 14px; padding: 10px 12px; }
+.calc-field input:focus, .calc-field select:focus { outline: none; border-color: rgba(226,203,174,.6); }
+.calc-check { display: flex; align-items: center; gap: 8px; font-size: 12px; color: #a0aabf; margin-bottom: 12px; }
+.calc-row2 { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+
+.calc-tabs { display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 18px; }
+.calc-tab { padding: 7px 16px; border-radius: 100px; font-size: 11px; letter-spacing: .06em; cursor: pointer; border: 1px solid transparent; background: transparent; color: #6a7a9a; }
+.calc-tab.is-active { border-color: rgba(226,203,174,.4); background: rgba(226,203,174,.1); color: #E2CBAE; }
+
+.calc-result__big { font-family: 'Instrument Serif', serif; font-size: 40px; color: #E2CBAE; line-height: 1.1; }
+.calc-result__sub { font-size: 11px; color: #6a7a9a; margin-bottom: 18px; letter-spacing: .06em; text-transform: uppercase; }
+.calc-line { display: flex; justify-content: space-between; gap: 12px; padding: 9px 0; border-bottom: 1px solid rgba(255,255,255,.05); font-size: 13px; color: #a0aabf; }
+.calc-line strong { color: #fff; font-weight: 500; text-align: right; }
+.calc-line--total { border-bottom: 0; color: #fff; }
+.calc-line--neg strong { color: #e08a8a; }
+.calc-line--pos strong { color: #8ad1a0; }
+
+.calc-compare { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-bottom: 18px; }
+.calc-compare__box { border: 1px solid rgba(255,255,255,.08); border-radius: 6px; padding: 14px; }
+.calc-compare__box.is-winner { border-color: rgba(226,203,174,.55); background: rgba(226,203,174,.06); }
+.calc-compare__name { font-size: 10px; letter-spacing: .16em; text-transform: uppercase; color: #E2CBAE; margin-bottom: 6px; }
+.calc-compare__val { font-family: 'Instrument Serif', serif; font-size: 26px; color: #fff; }
+.calc-verdict { font-size: 13px; color: #fff; line-height: 1.7; padding: 12px 14px; border-left: 2px solid #E2CBAE; background: rgba(226,203,174,.05); margin-bottom: 16px; }
+
+.calc-note { max-width: 1200px; margin: 24px auto 0; font-size: 11px; color: #4a5a72; line-height: 1.75; }
+.calc-note a { color: #E2CBAE; }
+
+.calc-hub { max-width: 1200px; margin: 0 auto; display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 24px; }
+.calc-hub__card { display: block; text-decoration: none; background: #151F2B; border: 1px solid rgba(255,255,255,.06); border-radius: 6px; padding: 28px 24px; transition: border-color .2s, transform .2s; }
+.calc-hub__card:hover { border-color: rgba(226,203,174,.5); transform: translateY(-2px); }
+.calc-hub__card h3 { font-family: 'Instrument Serif', serif; font-size: 24px; font-weight: 400; color: #fff; margin-bottom: 10px; }
+.calc-hub__card p { font-size: 13px; color: #6a7a9a; line-height: 1.75; margin-bottom: 16px; }
+.calc-hub__card span { font-size: 11px; color: #E2CBAE; letter-spacing: .08em; text-transform: uppercase; }

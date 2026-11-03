@@ -26,6 +26,12 @@ Route::get('/politica-de-cookies', [PublicController::class, 'cookiePolicy'])->n
 
 // Actualidad Fiscal 
 Route::get('/noticias',        [NewsController::class, 'index'])->name('noticias');
+
+// Calculadoras (deben ir antes de /noticias/{slug})
+Route::get('/noticias/calculadoras',            [PublicController::class, 'calculadoras'])->name('calculadoras');
+Route::get('/noticias/calculadoras/irpf',       [PublicController::class, 'calculadoraIrpf'])->name('calculadoras.irpf');
+Route::get('/noticias/calculadoras/autonomos',  [PublicController::class, 'calculadoraAutonomos'])->name('calculadoras.autonomos');
+
 Route::get('/noticias/{slug}', [NewsController::class, 'show'])->name('noticias.show');
 
 // WEBHOOK n8n: Recepción automatizada (Sin CSRF)

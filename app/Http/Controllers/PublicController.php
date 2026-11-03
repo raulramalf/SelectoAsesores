@@ -26,6 +26,21 @@ class PublicController extends Controller
         return Inertia::render('Public/Contact');
     }
     
+    public function calculadoras()
+    {
+        return Inertia::render('Public/Calculators/Index');
+    }
+
+    public function calculadoraIrpf()
+    {
+        return Inertia::render('Public/Calculators/Irpf');
+    }
+
+    public function calculadoraAutonomos()
+    {
+        return Inertia::render('Public/Calculators/Autonomos');
+    }
+
     public function legalNotice()
     {
         return Inertia::render('Public/Legal/LegalNotice');

@@ -1,5 +1,6 @@
 <script setup>
 import PublicLayout from '@/Layouts/PublicLayout.vue'
+import { Link } from '@inertiajs/vue3'
 import { ref, computed } from 'vue'
 
 const props = defineProps({ noticias: { type: Array, default: () => [] } })
@@ -31,6 +32,13 @@ const noticiasFiltradas = computed(() => props.noticias.filter(n => {
                 <p style="font-size:13px;color:#a0aabf;max-width:520px;line-height:1.75;font-weight:300;">
                     Mantente informado sobre los últimos cambios en legislación fiscal, novedades de la AEAT y consejos para optimizar tu situación tributaria.
                 </p>
+            </div>
+        </section>
+
+        <section style="background:#1c2d3f;border-bottom:1px solid rgba(255,255,255,.06);">
+            <div style="max-width:1200px;margin:0 auto;padding:14px 5vw;display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap;">
+                <span style="font-size:12px;color:#a0aabf;">Calculadoras: IRPF neto/bruto, compraventas, cuota de autónomos y SL vs autónomo.</span>
+                <Link href="/noticias/calculadoras" style="font-size:11px;color:#E2CBAE;text-decoration:none;letter-spacing:.08em;text-transform:uppercase;">Ir a calculadoras &rarr;</Link>
             </div>
         </section>
 

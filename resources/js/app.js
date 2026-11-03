@@ -4,6 +4,7 @@ import '../css/home.css'
 import '../css/pages.css'
 import './bootstrap'
 import '../css/dashboard.css'
+import '../css/calculators.css'
 
 
 import { createInertiaApp } from '@inertiajs/vue3';
