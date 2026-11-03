@@ -1,5 +1,6 @@
 <script setup>
 import PublicLayout from '@/Layouts/PublicLayout.vue'
+import { empresa } from '@/data/empresa'
 
 const proceso = [
     { num: '01', titulo: 'Primera consulta', desc: 'Analizamos tu situación fiscal, contable y laboral de forma gratuita y sin compromiso para entender qué necesitas.' },
@@ -14,23 +15,11 @@ const proceso = [
 
         <div style="background:#151F2B;">
 
-            <section class="about-hero">
-                <div style="position:absolute;inset:0;">
-                    <!-- TODO: sustituye por la nueva imagen del hero de "Nosotros" -->
-                    <img src="/images/about/hero-placeholder.jpg"
-                         alt="" onerror="this.style.display='none'"
-                         style="width:100%;height:100%;object-fit:cover;filter:grayscale(50%);opacity:0.15;">
-                </div>
-                <div style="position:absolute;inset:0;background:rgba(21,31,43,0.6);"></div>
-
-                <div class="about-hero__content">
-                    <span style="font-size:11px;font-weight:600;letter-spacing:0.25em;text-transform:uppercase;color:#E2CBAE;display:block;margin-bottom:20px;">Sobre Nosotros</span>
-                    <h1 style="font-family:'Instrument Serif',serif;font-size:clamp(34px,6vw,72px);font-weight:400;color:#fff;line-height:1.1;margin-bottom:24px;">
-                        Más que una asesoría,<br><em style="color:#E2CBAE;">tu socio estratégico</em>
-                    </h1>
-                    <p style="font-size:16px;color:#a0aabf;line-height:1.8;max-width:640px;margin:0 auto;">
-                        Nacimos con un objetivo claro: simplificar la vida de los empresarios. Combinamos la experiencia técnica con la cercanía humana para que la gestión fiscal, contable y laboral de tu negocio deje de ser un problema.
-                    </p>
+            <section class="page-hero about-page-hero">
+                <div class="hx-container">
+                    <span class="hx-eyebrow">Sobre Nosotros</span>
+                    <h1>Más que una asesoría,<br><em>tu socio estratégico</em></h1>
+                    <p>{{ empresa.intro }}</p>
                 </div>
             </section>
 
@@ -50,7 +39,7 @@ const proceso = [
                                 <span style="font-size:11px;font-weight:600;letter-spacing:0.2em;text-transform:uppercase;color:#E2CBAE;">Nuestra Misión</span>
                             </div>
                             <h3 style="font-family:'Instrument Serif',serif;font-size:clamp(26px,3vw,40px);font-weight:400;color:#fff;line-height:1.1;margin-bottom:20px;">¿Por qué surge<br>Selecto Asesores?</h3>
-                            <p style="font-size:15px;color:#a0aabf;line-height:1.8;">Simplificar la gestión fiscal, contable y laboral de autónomos, pymes y empresas para que puedan centrarse en lo que realmente importa: hacer crecer su negocio. Queremos que la gestión de tu día a día deje de ser una preocupación y se convierta en una ventaja competitiva.</p>
+                            <p style="font-size:15px;color:#a0aabf;line-height:1.8;">{{ empresa.mision }}</p>
                         </div>
                         <div>
                             <div style="display:flex;align-items:center;gap:16px;margin-bottom:24px;">
@@ -58,7 +47,7 @@ const proceso = [
                                 <span style="font-size:11px;font-weight:600;letter-spacing:0.2em;text-transform:uppercase;color:#E2CBAE;">Nuestra Visión</span>
                             </div>
                             <h3 style="font-family:'Instrument Serif',serif;font-size:clamp(26px,3vw,40px);font-weight:400;color:#fff;line-height:1.1;margin-bottom:20px;">¿Hacia dónde<br>vamos?</h3>
-                            <p style="font-size:15px;color:#a0aabf;line-height:1.8;">Convertirnos en la gestoría y asesoría de referencia en España, combinando la experiencia de nuestros profesionales en materia fiscal, contable y laboral con herramientas digitales avanzadas que aporten valor real y medible a cada uno de nuestros clientes.</p>
+                            <p style="font-size:15px;color:#a0aabf;line-height:1.8;">{{ empresa.vision }}</p>
                         </div>
                     </div>
                 </div>

@@ -19,7 +19,7 @@ function submit() {
 }
 
 const contactItems = [
-    { label: 'Teléfono', value: '684743250', href: 'tel:555555555' },
+    { label: 'Teléfono', value: '684743250', href: 'tel:684743250' },
     { label: 'Email', value: 'info@selectoasesores.com', href: 'mailto:info@selectoasesores.es' },
     { label: 'Instagram', value: '@selectoasesores', href: '#' },
     { label: 'LinkedIn', value: 'linkedin/selectoasesores', href: '#' },

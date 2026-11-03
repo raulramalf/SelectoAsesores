@@ -2,57 +2,127 @@
 import PublicLayout from '@/Layouts/PublicLayout.vue'
 import Promopopup from './Promopopup.vue'
 import TrustpilotWidget from './TrustpilotWidget.vue'
+import { Head, Link } from '@inertiajs/vue3'
+import { planes } from '@/data/servicios'
+import { empresa, garantias, contacto } from '@/data/empresa'
+
+const heroImagen = 'https://images.unsplash.com/photo-1589829545856-d10d557cf95f?w=1400&q=80'
+
+const datosClave = [
+    'Primera consulta gratuita',
+    'Respuesta en menos de 24 horas',
+    'Asesor personal asignado',
+    'Presencial o videollamada',
+]
 
 const testimonios = [
     {
         nombre: 'Marco Ramírez',
-        texto: '"Lo que más valoro es la agilidad. Tener un asesor personal asignado que conoce mi histórico y responde en menos de 24 horas marca la diferencia entre un gestor común y un servicio de élite."'
+        texto: 'Lo que más valoro es la agilidad. Tener un asesor personal asignado que conoce mi histórico y responde en menos de 24 horas marca la diferencia entre un gestor común y un servicio de élite.'
     },
     {
         nombre: 'Marta Ramírez',
-        texto: '"La planificación fiscal estratégica que ofrecen no es un gasto, es una inversión. Gracias a su análisis, hemos optimizado costes que ni siquiera habíamos detectado. Son el socio que toda gran empresa necesita."'
+        texto: 'La planificación fiscal estratégica que ofrecen no es un gasto, es una inversión. Gracias a su análisis, hemos optimizado costes que ni siquiera habíamos detectado. Son el socio que toda gran empresa necesita.'
     }
 ]
 </script>
 
 <template>
     <PublicLayout>
+        <Head title="Asesoría fiscal, contable y laboral" />
 
         <Promopopup />
 
-        <section class="home-hero">
-            <div style="position:absolute;inset:0;">
-                <!--
-                    VIDEO DE PORTADA
-                    Sustituye el "src" de abajo por la ruta o URL de tu video (por ejemplo /videos/hero.mp4
-                    dentro de public/, o una URL externa). El "poster" es la imagen que se ve mientras carga
-                    o si el video falla; puedes dejarla o cambiarla también.
-                -->
-                <video autoplay muted loop playsinline
-                     poster="https://images.unsplash.com/photo-1589829545856-d10d557cf95f?w=1600&q=85"
-                     style="width:100%;height:100%;object-fit:cover;object-position:center 20%;filter:grayscale(30%);">
-                    <source src="/videos/hero-placeholder.mp4" type="video/mp4">
-                </video>
-            </div>
-            <div style="position:absolute;inset:0;background:rgba(21,31,43,0.88);"></div>
-
-            <div class="home-hero__content">
-                <span style="font-size:11px;letter-spacing:0.22em;text-transform:uppercase;color:#E2CBAE;display:block;margin-bottom:16px;">SELECTO ASESORES</span>
-                <h1 style="font-family:'Instrument Serif',serif;font-size:clamp(32px,5vw,64px);font-weight:400;color:#fff;line-height:1.1;margin-bottom:24px;">
-                    Todo lo que tu empresa<br>
-                    <em style="color:#E2CBAE;">necesita en un solo lugar</em>
-                </h1>
-                <p style="font-size:15px;color:#a0aabf;line-height:1.85;max-width:600px;margin:0 auto 36px;font-weight:300;">
-                    Asesoría fiscal integral para autónomos, pymes y empresas. Gestionamos tu fiscalidad para que tú te centres en crecer.
-                </p>
-                <a href="/reserva" class="home-hero__btn"
-                    onmouseover="this.style.background='#E2CBAE'; this.style.color='#151F2B';"
-                    onmouseout="this.style.background='transparent'; this.style.color='#E2CBAE';">
-                    SOLICITA TU PLAZA
-                </a>
+        <!-- 1 · HERO -->
+        <section class="hx-hero" id="inicio">
+            <div class="hx-container hx-hero__grid">
+                <div class="hx-hero__text">
+                    <span class="hx-eyebrow">Selecto Asesores</span>
+                    <h1 class="hx-hero__title">
+                        Todo lo que tu empresa<br>
+                        <em>necesita en un solo lugar</em>
+                    </h1>
+                    <p class="hx-hero__lead">
+                        Asesoría fiscal integral para autónomos, pymes y empresas. Gestionamos tu fiscalidad para que tú te centres en crecer.
+                    </p>
+                    <div class="hx-actions">
+                        <Link href="/reserva" class="btn btn--primary">Solicita tu plaza</Link>
+                        <Link href="/servicios" class="link-arrow">Ver servicios</Link>
+                    </div>
+                </div>
+                <figure class="hx-hero__figure">
+                    <img :src="heroImagen" alt="Reunión de asesoramiento en despacho" width="700" height="860"
+                         fetchpriority="high" decoding="async"
+                         onerror="this.closest('.hx-hero').classList.add('no-photo')">
+                </figure>
             </div>
         </section>
 
+        <section class="hx-facts" aria-label="Datos clave del servicio">
+            <ul class="hx-container hx-facts__list">
+                <li v-for="d in datosClave" :key="d">{{ d }}</li>
+            </ul>
+        </section>
+
+        <!-- 2 · PRESENTACIÓN -->
+        <section class="hx-section hx-section--alt" id="empresa">
+            <div class="hx-container hx-about">
+                <div class="hx-about__head">
+                    <span class="hx-eyebrow">Sobre nosotros</span>
+                    <h2 class="hx-title">Más que una asesoría,<br><em>tu socio estratégico</em></h2>
+                </div>
+                <div class="hx-about__body">
+                    <p class="hx-about__lead">{{ empresa.intro }}</p>
+                    <div class="hx-about__pair">
+                        <div>
+                            <h3 class="hx-label">Nuestra misión</h3>
+                            <p>{{ empresa.mision }}</p>
+                        </div>
+                        <div>
+                            <h3 class="hx-label">Nuestra visión</h3>
+                            <p>{{ empresa.vision }}</p>
+                        </div>
+                    </div>
+                    <Link href="/nosotros" class="link-arrow">Conocer Selecto Asesores</Link>
+                </div>
+            </div>
+        </section>
+
+        <!-- 3 · SERVICIOS -->
+        <section class="hx-section" id="servicios">
+            <div class="hx-container">
+                <div class="hx-head">
+                    <div>
+                        <span class="hx-eyebrow">Servicios</span>
+                        <h2 class="hx-title">Nuestros Servicios</h2>
+                    </div>
+                    <p class="hx-head__note">Transparencia total. Sin costes ocultos ni sorpresas a final de mes.</p>
+                </div>
+
+                <div class="hx-services">
+                    <article v-for="plan in planes" :key="plan.nombre" class="hx-service">
+                        <div class="hx-service__top">
+                            <h3>{{ plan.nombre }}</h3>
+                            <span v-if="plan.destacado" class="hx-tag">Más popular</span>
+                        </div>
+                        <p class="hx-service__desc">{{ plan.desc }}</p>
+                        <ul class="hx-service__list">
+                            <li v-for="f in plan.features.slice(0, 3)" :key="f">{{ f }}</li>
+                        </ul>
+                        <div class="hx-service__foot">
+                            <div class="hx-price">
+                                <small v-if="plan.nombre !== 'Particulares'">Desde</small>
+                                <strong>{{ plan.precio }} €</strong>
+                                <small v-if="plan.nombre !== 'Particulares'">/ mes</small>
+                            </div>
+                            <Link href="/servicios" class="link-arrow">Ver detalle</Link>
+                        </div>
+                    </article>
+                </div>
+            </div>
+        </section>
+
+        <!-- 4 · OFERTA -->
         <section id="seccion-oferta" class="home-oferta">
 
             <div class="home-oferta__inner">
@@ -111,40 +181,67 @@ const testimonios = [
             </div>
         </section>
 
-        <section class="home-testimonios">
-            <div class="home-testimonios__inner">
-                <div style="text-align:center;margin-bottom:48px;">
-                    <span style="font-size:10px;letter-spacing:0.22em;text-transform:uppercase;color:#8a9ab5;display:block;">NUESTROS CLIENTES</span>
-                </div>
-
-                <div class="home-testimonios__grid">
-                    <div v-for="t in testimonios" :key="t.nombre" class="home-testimonio-card">
-                        <div class="testimonio-inicial" aria-hidden="true">{{ t.nombre.split(' ').map(p => p[0]).join('') }}</div>
-                        <div>
-                            <h4 style="font-size:16px;color:#fff;font-weight:600;margin-bottom:8px;">{{ t.nombre }}</h4>
-                            <p style="font-size:14px;color:#a0aabf;line-height:1.7;font-style:italic;">{{ t.texto }}</p>
-                        </div>
+        <!-- 5 · POR QUÉ ELEGIRNOS -->
+        <section class="hx-section" id="por-que-elegirnos">
+            <div class="hx-container">
+                <div class="hx-head">
+                    <div>
+                        <span class="hx-eyebrow">Por qué elegirnos</span>
+                        <h2 class="hx-title">¿Qué puedes <em>esperar?</em></h2>
                     </div>
+                </div>
+                <ol class="hx-reasons">
+                    <li v-for="(g, i) in garantias" :key="g.titulo">
+                        <span class="hx-reasons__n">0{{ i + 1 }}</span>
+                        <h3>{{ g.titulo }}</h3>
+                        <p>{{ g.desc }}</p>
+                    </li>
+                </ol>
+            </div>
+        </section>
+
+        <!-- 6 · CONFIANZA -->
+        <section class="hx-section hx-section--alt" id="clientes">
+            <div class="hx-container">
+                <div class="hx-head">
+                    <div>
+                        <span class="hx-eyebrow">Nuestros clientes</span>
+                        <h2 class="hx-title">Lo que dicen<br><em>quienes confían en nosotros</em></h2>
+                    </div>
+                </div>
+                <div class="hx-quotes">
+                    <figure v-for="t in testimonios" :key="t.nombre" class="hx-quote">
+                        <blockquote>“{{ t.texto }}”</blockquote>
+                        <figcaption>{{ t.nombre }}</figcaption>
+                    </figure>
                 </div>
             </div>
         </section>
 
         <TrustpilotWidget />
 
-        <section class="home-cta">
-            <h2 style="font-family:'Instrument Serif',serif;font-size:clamp(26px,4vw,48px);font-weight:400;color:#fff;line-height:1.2;margin-bottom:12px;">
-                ¿No sabes si esto es para ti?<br>
-                <em style="color:#E2CBAE;">Cuéntanos tu situación y te asesoramos</em>
-            </h2>
-            <p style="font-size:14px;color:#a0aabf;margin:16px auto 36px;max-width:480px;line-height:1.75;">
-                Primera consulta gratuita. En menos de 24 horas analizamos tu caso para ver si nuestra metodología encaja con tu negocio.
-            </p>
-            <a href="/reserva" class="home-cta__btn"
-                onmouseover="this.style.opacity='0.85'"
-                onmouseout="this.style.opacity='1'">
-                SOLICITAR CONSULTA GRATUITA
-            </a>
+        <!-- 7 · LLAMADA A LA ACCIÓN -->
+        <section class="hx-cta" id="contacto">
+            <div class="hx-container hx-cta__grid">
+                <div>
+                    <h2 class="hx-title">¿No sabes si esto es para ti?<br><em>Cuéntanos tu situación y te asesoramos</em></h2>
+                    <p class="hx-cta__lead">Primera consulta gratuita. En menos de 24 horas analizamos tu caso para ver si nuestra metodología encaja con tu negocio.</p>
+                    <div class="hx-actions">
+                        <Link href="/reserva" class="btn btn--primary">Solicitar consulta gratuita</Link>
+                        <Link href="/contacto" class="link-arrow">Escríbenos</Link>
+                    </div>
+                </div>
+                <dl class="hx-contact">
+                    <div>
+                        <dt>Teléfono</dt>
+                        <dd><a :href="`tel:${contacto.telefono}`">{{ contacto.telefonoVisible }}</a></dd>
+                    </div>
+                    <div>
+                        <dt>Horario de atención</dt>
+                        <dd>{{ contacto.horario[0] }}<br>{{ contacto.horario[1] }}</dd>
+                    </div>
+                </dl>
+            </div>
         </section>
-
     </PublicLayout>
 </template>

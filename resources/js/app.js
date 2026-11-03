@@ -6,6 +6,7 @@ import './bootstrap'
 import '../css/dashboard.css'
 import '../css/calculators.css'
 import '../css/redesign.css'
+import '../css/home-v2.css'
 
 
 import { createInertiaApp } from '@inertiajs/vue3';

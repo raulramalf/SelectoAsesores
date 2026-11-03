@@ -134,7 +134,7 @@ div:is([style*="border-radius:16px"],[style*="border-radius: 16px"]) { border-ra
 .news-hero__content { padding-left: max(var(--gutter), calc((100% - var(--container)) / 2)); padding-right: max(var(--gutter), calc((100% - var(--container)) / 2)); }
 
 .blog-tabs { background: var(--navy); border-bottom: 1px solid var(--line); position: sticky; top: 84px; z-index: 40; }
-.blog-tabs__inner { max-width: var(--container); margin: 0 auto; padding: 0 var(--gutter); display: flex; gap: 32px; }
+.blog-tabs__inner { max-width: calc(var(--container) + 2 * var(--gutter)); margin: 0 auto; padding: 0 var(--gutter); display: flex; gap: 32px; }
 .blog-tab {
     padding: 18px 0 16px; font-size: 11px; letter-spacing: .18em; text-transform: uppercase; cursor: pointer;
     background: transparent; color: var(--text-muted); border: 0; border-bottom: 2px solid transparent; transition: color .2s, border-color .2s;
@@ -143,7 +143,7 @@ div:is([style*="border-radius:16px"],[style*="border-radius: 16px"]) { border-ra
 .blog-tab.is-active { color: var(--gold); border-bottom-color: var(--gold); }
 
 .blog-filtros { background: var(--navy); border-bottom: 1px solid var(--line); }
-.news-filtros { max-width: var(--container); margin: 0 auto; padding: 0 var(--gutter); height: 68px; }
+.news-filtros { max-width: calc(var(--container) + 2 * var(--gutter)); margin: 0 auto; padding: 0 var(--gutter); height: 68px; }
 .news-filtros__tabs { overflow-x: auto; scrollbar-width: none; gap: 4px; }
 .filtro-chip { padding: 7px 14px; border-radius: var(--radius); font-size: 11px; letter-spacing: .08em; cursor: pointer; flex-shrink: 0; border: 1px solid transparent; background: transparent; color: var(--text-muted); font-family: var(--font-sans); transition: color .2s, border-color .2s; }
 .filtro-chip:hover { color: #fff; }
@@ -228,3 +228,15 @@ div:is([style*="border-radius:16px"],[style*="border-radius: 16px"]) { border-ra
     div[style*="padding:36px 32px"], div[style*="padding: 36px 32px"] { padding: 28px 22px !important; }
     div[style*="padding:32px 36px"], div[style*="padding: 32px 36px"] { padding: 24px 22px !important; }
 }
+
+/* ---------- Accesibilidad y navegación ---------- */
+.skip-link { position: absolute; left: -9999px; top: 8px; z-index: 200; background: var(--gold); color: var(--navy); padding: 10px 16px; border-radius: var(--radius); font-size: 12px; }
+.skip-link:focus { left: 12px; }
+.nav__links a.active { color: #fff; }
+.nav__links a.active::after { transform: scaleX(1); }
+.footer__legal { display: flex; gap: 20px; flex-wrap: wrap; }
+.footer__list a { text-decoration: none; }
+
+/* Cabeceras de Contacto y Reserva alineadas con el contenedor general */
+.appointment-hero { min-height: 280px; background-color: var(--navy); }
+.appointment-hero__content { max-width: none; width: 100%; padding-left: max(var(--gutter), calc((100% - var(--container)) / 2)); padding-right: max(var(--gutter), calc((100% - var(--container)) / 2)); }

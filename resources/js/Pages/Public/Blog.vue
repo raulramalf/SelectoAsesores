@@ -49,7 +49,7 @@ const calculadoras = [
 
         <section class="news-hero">
             <div class="blog-hero__bg">
-                <img src="https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?w=1600&q=80" alt="" />
+                <img src="https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?w=1400&q=80" alt="" loading="eager" decoding="async" onerror="this.style.display='none'" />
             </div>
             <div class="blog-hero__overlay"></div>
             <div class="news-hero__content">

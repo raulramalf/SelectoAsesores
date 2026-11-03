@@ -3,6 +3,8 @@ import { Link, Head, usePage } from '@inertiajs/vue3'
 import { computed, ref, onMounted, onUnmounted } from 'vue'
 const page = usePage()
 const user = computed(() => page.props.auth?.user)
+const rutaActual = computed(() => (page.url || '/').split('?')[0].split('#')[0])
+const esActivo = (ruta) => ruta === '/' ? rutaActual.value === '/' : rutaActual.value === ruta || rutaActual.value.startsWith(ruta + '/')
 
 const menuOpen = ref(false)
 function toggleMenu() {
@@ -21,20 +23,22 @@ onUnmounted(() => { window.removeEventListener('resize', onResize); document.bod
 <template>
     <Head>
         <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://images.unsplash.com" crossorigin>
         <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Inria+Serif:ital,wght@0,400;0,700;1,400&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
     </Head>
 
     <div>
-        <nav class="nav">
+        <a href="#contenido" class="skip-link">Saltar al contenido</a>
+        <nav class="nav" aria-label="Principal">
             <Link :href="route('home')" class="flex items-center">
                 <img src="/favicon.ico" alt="Selecto Asesores" class="h-20 w-auto" />
             </Link>
             <ul class="nav__links">
-                <li><Link href="/">Inicio</Link></li>
-                <li><Link href="/servicios">Servicios</Link></li>
-                <li><Link href="/nosotros">Nosotros</Link></li>
-                <li><Link href="/blog">Blog</Link></li>
-                <li><Link href="/contacto">Contacto</Link></li>
+                <li><Link href="/" :class="{ active: esActivo('/') }" :aria-current="esActivo('/') ? 'page' : null">Inicio</Link></li>
+                <li><Link href="/servicios" :class="{ active: esActivo('/servicios') }" :aria-current="esActivo('/servicios') ? 'page' : null">Servicios</Link></li>
+                <li><Link href="/nosotros" :class="{ active: esActivo('/nosotros') }" :aria-current="esActivo('/nosotros') ? 'page' : null">Nosotros</Link></li>
+                <li><Link href="/blog" :class="{ active: esActivo('/blog') }" :aria-current="esActivo('/blog') ? 'page' : null">Blog</Link></li>
+                <li><Link href="/contacto" :class="{ active: esActivo('/contacto') }" :aria-current="esActivo('/contacto') ? 'page' : null">Contacto</Link></li>
             </ul>
             <div class="nav__right">
                 <template v-if="user">
@@ -82,7 +86,7 @@ onUnmounted(() => { window.removeEventListener('resize', onResize); document.bod
             </template>
         </div>
 
-        <main>
+        <main id="contenido">
             <slot />
         </main>
 
@@ -107,6 +111,7 @@ onUnmounted(() => { window.removeEventListener('resize', onResize); document.bod
                     <ul class="footer__list">
                         <li><Link href="/nosotros">Nosotros</Link></li>
                         <li><Link href="/blog">Blog</Link></li>
+                        <li><Link href="/blog?tab=calculadoras">Calculadoras</Link></li>
                         <li><Link href="/reserva">Reservar cita</Link></li>
                         <li><Link href="/contacto">Contacto</Link></li>
                     </ul>
@@ -114,21 +119,20 @@ onUnmounted(() => { window.removeEventListener('resize', onResize); document.bod
                 <div>
                     <p class="footer__heading">Contacto</p>
                     <ul class="footer__list">
-                        <li><span>684743250</span></li>
+                        <li><a href="tel:684743250">684743250</a></li>
                         <li><span>selectoasesores@contacto.com</span></li>
                         <li><span>@selectoasesores</span></li>
                         <li><span>linkedin/selectoasesores</span></li>
+                        <li><span>Lun – Vie · 9:00 – 14:00 / 16:00 – 19:00</span></li>
                     </ul>
                 </div>
             </div>
             <div class="footer__bottom">
                 <span class="footer__copy">© 2026 Selecto Asesores. Todos los derechos reservados.</span>
                 <div class="footer__legal">
-                    <div class="footer__legal">
-                        <Link :href="route('legal.notice')">Aviso Legal</Link>
-                        <Link :href="route('privacy.policy')">Privacidad</Link>
-                        <Link :href="route('cookie.policy')">Cookies</Link>
-                    </div>
+                    <Link :href="route('legal.notice')">Aviso Legal</Link>
+                    <Link :href="route('privacy.policy')">Privacidad</Link>
+                    <Link :href="route('cookie.policy')">Cookies</Link>
                 </div>
             </div>
 
