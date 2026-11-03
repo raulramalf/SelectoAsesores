@@ -18,10 +18,10 @@ const proceso = [
                 <div style="position:absolute;inset:0;">
                     <!-- TODO: sustituye por la nueva imagen del hero de "Nosotros" -->
                     <img src="/images/about/hero-placeholder.jpg"
-                         alt="Fondo oficina"
+                         alt="" onerror="this.style.display='none'"
                          style="width:100%;height:100%;object-fit:cover;filter:grayscale(50%);opacity:0.15;">
                 </div>
-                <div style="position:absolute;inset:0;background:linear-gradient(to bottom, rgba(21,31,43,0.5) 0%, #151F2B 100%);"></div>
+                <div style="position:absolute;inset:0;background:rgba(21,31,43,0.6);"></div>
 
                 <div class="about-hero__content">
                     <span style="font-size:11px;font-weight:600;letter-spacing:0.25em;text-transform:uppercase;color:#E2CBAE;display:block;margin-bottom:20px;">Sobre Nosotros</span>
@@ -39,7 +39,7 @@ const proceso = [
                     <div class="about-img-wrap">
                         <!-- TODO: sustituye por la nueva imagen de equipo/oficina -->
                         <img src="/images/about/equipo-placeholder.jpg"
-                             alt="Equipo trabajando"
+                             alt="Equipo de Selecto Asesores" onerror="this.parentElement.style.display='none'"
                              style="width:100%;height:100%;object-fit:cover;object-position:center 40%;">
                     </div>
 

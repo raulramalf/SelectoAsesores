@@ -41,7 +41,7 @@
                     </div>
 
                     <div class="promo-premium-image" style="flex: 1; background-image: url('https://images.unsplash.com/photo-1450101499163-c8848c66ca85?w=800&q=80'); background-size: cover; background-position: center; position: relative;">
-                        <div class="promo-premium-image-overlay" style="position: absolute; inset: 0; background: linear-gradient(to left, rgba(21, 31, 43, 0.1), rgba(28, 45, 63, 1) 98%);"></div>
+                        <div class="promo-premium-image-overlay" style="position: absolute; inset: 0; background: rgba(21, 31, 43, 0.35);"></div>
                     </div>
 
                 </div>
@@ -76,8 +76,6 @@ const irAOferta = () => {
 };
 
 onMounted(() => {
-    sessionStorage.removeItem('promo_vista'); // Para facilitar tus pruebas
-
     if (!sessionStorage.getItem('promo_vista')) {
         setTimeout(() => {
             isVisible.value = true;

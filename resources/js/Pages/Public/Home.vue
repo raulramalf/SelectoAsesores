@@ -6,12 +6,10 @@ import TrustpilotWidget from './TrustpilotWidget.vue'
 const testimonios = [
     {
         nombre: 'Marco Ramírez',
-        imagen: 'https://images.unsplash.com/photo-1560250097-0b93528c311a?w=150&h=150&fit=crop&q=80',
         texto: '"Lo que más valoro es la agilidad. Tener un asesor personal asignado que conoce mi histórico y responde en menos de 24 horas marca la diferencia entre un gestor común y un servicio de élite."'
     },
     {
         nombre: 'Marta Ramírez',
-        imagen: 'https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?w=150&h=150&fit=crop&q=80',
         texto: '"La planificación fiscal estratégica que ofrecen no es un gasto, es una inversión. Gracias a su análisis, hemos optimizado costes que ni siquiera habíamos detectado. Son el socio que toda gran empresa necesita."'
     }
 ]
@@ -36,7 +34,7 @@ const testimonios = [
                     <source src="/videos/hero-placeholder.mp4" type="video/mp4">
                 </video>
             </div>
-            <div style="position:absolute;inset:0;background:linear-gradient(180deg,rgba(21,31,43,0.80) 0%,rgba(21,31,43,0.95) 100%);"></div>
+            <div style="position:absolute;inset:0;background:rgba(21,31,43,0.88);"></div>
 
             <div class="home-hero__content">
                 <span style="font-size:11px;letter-spacing:0.22em;text-transform:uppercase;color:#E2CBAE;display:block;margin-bottom:16px;">SELECTO ASESORES</span>
@@ -56,10 +54,9 @@ const testimonios = [
         </section>
 
         <section id="seccion-oferta" class="home-oferta">
-            <div style="position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:1000px;height:500px;background:radial-gradient(circle, rgba(226,203,174,0.04) 0%, transparent 70%);pointer-events:none;"></div>
 
             <div class="home-oferta__inner">
-                <div class="promo-premium-modal" style="box-shadow:0 30px 60px -15px rgba(0,0,0,0.5);border:1px solid rgba(226,203,174,0.15);border-radius:16px;max-width:100%;overflow:hidden;">
+                <div class="promo-premium-modal" style="border:1px solid rgba(226,203,174,0.2);border-radius:3px;max-width:100%;overflow:hidden;">
                     <div class="promo-premium-grid">
 
                         <div class="promo-premium-content">
@@ -106,7 +103,7 @@ const testimonios = [
 
                         <!-- Imagen (oculta en mobile via CSS) -->
                         <div class="promo-premium-image" style="background-image:url('https://images.unsplash.com/photo-1450101499163-c8848c66ca85?w=800&q=80');background-size:cover;background-position:center;position:relative;">
-                            <div style="position:absolute;inset:0;background:linear-gradient(to left, rgba(21,31,43,0.1), rgba(28,45,63,1) 98%);"></div>
+                            <div style="position:absolute;inset:0;background:rgba(21,31,43,0.35);"></div>
                         </div>
 
                     </div>
@@ -122,7 +119,7 @@ const testimonios = [
 
                 <div class="home-testimonios__grid">
                     <div v-for="t in testimonios" :key="t.nombre" class="home-testimonio-card">
-                        <img :src="t.imagen" :alt="t.nombre" style="width:64px;height:64px;border-radius:50%;object-fit:cover;border:2px solid #E2CBAE;flex-shrink:0;box-shadow:0 4px 12px rgba(0,0,0,0.2);">
+                        <div class="testimonio-inicial" aria-hidden="true">{{ t.nombre.split(' ').map(p => p[0]).join('') }}</div>
                         <div>
                             <h4 style="font-size:16px;color:#fff;font-weight:600;margin-bottom:8px;">{{ t.nombre }}</h4>
                             <p style="font-size:14px;color:#a0aabf;line-height:1.7;font-style:italic;">{{ t.texto }}</p>
