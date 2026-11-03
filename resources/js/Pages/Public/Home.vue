@@ -15,16 +15,6 @@ const datosClave = [
     'Presencial o videollamada',
 ]
 
-const testimonios = [
-    {
-        nombre: 'Marco Ramírez',
-        texto: 'Lo que más valoro es la agilidad. Tener un asesor personal asignado que conoce mi histórico y responde en menos de 24 horas marca la diferencia entre un gestor común y un servicio de élite.'
-    },
-    {
-        nombre: 'Marta Ramírez',
-        texto: 'La planificación fiscal estratégica que ofrecen no es un gasto, es una inversión. Gracias a su análisis, hemos optimizado costes que ni siquiera habíamos detectado. Son el socio que toda gran empresa necesita.'
-    }
-]
 </script>
 
 <template>
@@ -200,24 +190,7 @@ const testimonios = [
             </div>
         </section>
 
-        <!-- 6 · CONFIANZA -->
-        <section class="hx-section hx-section--alt" id="clientes">
-            <div class="hx-container">
-                <div class="hx-head">
-                    <div>
-                        <span class="hx-eyebrow">Nuestros clientes</span>
-                        <h2 class="hx-title">Lo que dicen<br><em>quienes confían en nosotros</em></h2>
-                    </div>
-                </div>
-                <div class="hx-quotes">
-                    <figure v-for="t in testimonios" :key="t.nombre" class="hx-quote">
-                        <blockquote>“{{ t.texto }}”</blockquote>
-                        <figcaption>{{ t.nombre }}</figcaption>
-                    </figure>
-                </div>
-            </div>
-        </section>
-
+        <!-- 6 · CONFIANZA: opiniones reales de Trustpilot (solo si está configurado) -->
         <TrustpilotWidget />
 
         <!-- 7 · LLAMADA A LA ACCIÓN -->
