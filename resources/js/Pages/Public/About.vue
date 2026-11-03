@@ -26,6 +26,11 @@ const proceso = [
             <section class="about-mision">
                 <div class="about-inner">
 
+                    <div class="about-img-wrap">
+                        <img src="/images/about/biblioteca.webp" alt="" width="1600" height="938" loading="lazy" decoding="async"
+                             style="width:100%;height:100%;object-fit:cover;object-position:center 45%;">
+                    </div>
+
                     <div class="about-mv-grid">
                         <div>
                             <div style="display:flex;align-items:center;gap:16px;margin-bottom:24px;">
