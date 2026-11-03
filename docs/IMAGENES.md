@@ -1,17 +1,20 @@
 # Imágenes de la web
 
-La web no incluye fotografías propias todavía. Estos son los huecos que esperan imagen.
-Mientras un archivo no exista, la sección simplemente no lo muestra (no hay imágenes rotas).
+Las fotos están en `public/images/` (no se cargan de servicios externos). Formato WebP.
 
-Criterios: fotografía real, luz natural, sin poses de banco de imágenes, mismo tratamiento
-de color en todas. Formato JPG o WebP, máximo ~300 KB por imagen.
+| Archivo | Dónde se usa | Origen |
+|---|---|---|
+| `inicio/hero.webp` | Portada de Inicio | Unsplash `photo-1589829545856-d10d557cf95f` |
+| `inicio/oferta.webp` | Panel de la oferta en Inicio | Unsplash `photo-1556761175-5973dc0f32e7` |
+| `inicio/oferta-popup.webp` | Ventana emergente de la oferta | Unsplash `photo-1450101499163-c8848c66ca85` |
+| `blog/cabecera.webp` | Cabecera del Blog | Unsplash `photo-1486406146926-c627a92ad1ab` |
+| `blog/noticia-laboral.webp` | Imagen por defecto de noticias «LABORAL» | Unsplash `photo-1517048676732-d65bc937f952` |
+| `contacto/cabecera.webp` | Cabecera de Contacto y de Reserva | Unsplash `photo-1517245386807-bb43f82c33c4` |
 
-| Archivo | Dónde se usa | Medida recomendada | Contenido sugerido |
-|---|---|---|---|
-| `public/images/about/hero-placeholder.jpg` | Nosotros · fondo de cabecera (se ve muy atenuada) | 1920×900 | Oficina o sala de reuniones |
-| `public/images/about/equipo-placeholder.jpg` | Nosotros · bloque Misión y Visión | 1600×800 | El equipo trabajando o en reunión con un cliente |
-| `public/videos/hero-placeholder.mp4` | Inicio · vídeo de portada (opcional) | 1920×1080, <8 MB | Oficina, sin audio |
+Licencia de Unsplash: uso comercial gratuito, sin obligación de citar al autor.
+Son fotos de desconocidos: úsalas como ambientación, nunca como «nuestro equipo» ni «nuestros clientes».
 
-Las cabeceras de Inicio, Blog y la oferta de la portada usan hoy fotos de Unsplash enlazadas
-desde `resources/css/home.css`, `resources/css/pages.css`, `resources/js/Pages/Public/Home.vue`
-y `Blog.vue`. Se pueden sustituir por archivos propios en `public/images/`.
+## Pendiente
+- **Nosotros**: ahora no lleva foto. Para añadir una, pon el archivo en `public/images/about/` y
+  vuelve a colocar el bloque de imagen en `resources/js/Pages/Public/About.vue`.
+- **Vídeo de portada** (opcional): no hay `public/videos/hero-placeholder.mp4`; la portada usa la imagen.

@@ -25,12 +25,6 @@ const proceso = [
 
             <section class="about-mision">
                 <div class="about-inner">
-                    <div class="about-img-wrap">
-                        <!-- TODO: sustituye por la nueva imagen de equipo/oficina -->
-                        <img src="/images/about/equipo-placeholder.jpg"
-                             alt="Equipo de Selecto Asesores" onerror="this.parentElement.style.display='none'"
-                             style="width:100%;height:100%;object-fit:cover;object-position:center 40%;">
-                    </div>
 
                     <div class="about-mv-grid">
                         <div>

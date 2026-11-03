@@ -40,7 +40,7 @@
                         </p>
                     </div>
 
-                    <div class="promo-premium-image" style="flex: 1; background-image: url('https://images.unsplash.com/photo-1450101499163-c8848c66ca85?w=800&q=80'); background-size: cover; background-position: center; position: relative;">
+                    <div class="promo-premium-image" style="flex: 1; background-image: url('/images/inicio/oferta-popup.webp'); background-size: cover; background-position: center; position: relative;">
                         <div class="promo-premium-image-overlay" style="position: absolute; inset: 0; background: rgba(21, 31, 43, 0.35);"></div>
                     </div>
 

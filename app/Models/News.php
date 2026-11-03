@@ -22,7 +22,7 @@ class News extends Model
     {
         $defaults = [
             'FISCAL'    => 'https://images.unsplash.com/photo-1554224155-6726b3ff858f?w=800',
-            'LABORAL'   => 'https://images.unsplash.com/photo-1521791136364-758a39f3ef0c?w=800',
+            'LABORAL'   => asset('images/blog/noticia-laboral.webp'),
             'AUTÓNOMOS' => 'https://images.unsplash.com/photo-1450101499163-c8848c66ca85?w=800',
         ];
 

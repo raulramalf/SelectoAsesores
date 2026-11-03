@@ -6,7 +6,7 @@ import { Head, Link } from '@inertiajs/vue3'
 import { planes } from '@/data/servicios'
 import { empresa, garantias, contacto } from '@/data/empresa'
 
-const heroImagen = 'https://images.unsplash.com/photo-1589829545856-d10d557cf95f?w=1400&q=80'
+const heroImagen = '/images/inicio/hero.webp'
 
 const datosClave = [
     'Primera consulta gratuita',
@@ -162,7 +162,7 @@ const datosClave = [
                         </div>
 
                         <!-- Imagen (oculta en mobile via CSS) -->
-                        <div class="promo-premium-image" style="background-image:url('https://images.unsplash.com/photo-1450101499163-c8848c66ca85?w=800&q=80');background-size:cover;background-position:center;position:relative;">
+                        <div class="promo-premium-image" style="background-image:url('/images/inicio/oferta.webp');background-size:cover;background-position:center;position:relative;">
                             <div style="position:absolute;inset:0;background:rgba(21,31,43,0.35);"></div>
                         </div>
 

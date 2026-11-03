@@ -197,7 +197,7 @@
 .noticias-hero__bg {
     position: absolute;
     inset: 0;
-    background: url('https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?w=1400&q=80') center / cover no-repeat;
+    background: url('/images/blog/cabecera.webp') center / cover no-repeat;
 }
 
 .noticias-hero__overlay {
@@ -403,7 +403,7 @@
     min-height: 260px;
     display: flex;
     align-items: center;
-    background: url('https://images.unsplash.com/photo-1450101499163-c8848c66ca85?w=1400&q=80') center / cover no-repeat;
+    background: url('/images/contacto/cabecera.webp') center 38% / cover no-repeat;
 }
 
 .appointment-hero__overlay {
@@ -771,7 +771,7 @@
 
 .promo-premium-image {
     position: relative;
-    background: url('https://images.unsplash.com/photo-1556761175-5973dc0f32e7?w=800&q=80') center / cover no-repeat;
+    background: url('/images/inicio/oferta.webp') center / cover no-repeat;
 }
 
 .promo-premium-image-overlay {
