@@ -10,9 +10,10 @@ use Carbon\Carbon;
 
 class NewsController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
-        return Inertia::render('Public/News', [
+        return Inertia::render('Public/Blog', [
+            'tab' => $request->query('tab') === 'calculadoras' ? 'calculadoras' : 'noticias',
             'noticias' => News::where('status', 'published')
                 ->whereDate('created_at', Carbon::today())
                 ->orderByDesc('created_at')

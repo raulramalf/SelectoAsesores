@@ -33,8 +33,7 @@ onUnmounted(() => { window.removeEventListener('resize', onResize); document.bod
                 <li><Link href="/">Inicio</Link></li>
                 <li><Link href="/servicios">Servicios</Link></li>
                 <li><Link href="/nosotros">Nosotros</Link></li>
-                <li><Link href="/noticias">Noticias</Link></li>
-                <li><Link href="/noticias/calculadoras">Calculadoras</Link></li>
+                <li><Link href="/blog">Blog</Link></li>
                 <li><Link href="/contacto">Contacto</Link></li>
             </ul>
             <div class="nav__right">
@@ -71,8 +70,7 @@ onUnmounted(() => { window.removeEventListener('resize', onResize); document.bod
             <Link href="/" class="nav__mobile-link" @click="closeMenu">Inicio</Link>
             <Link href="/servicios" class="nav__mobile-link" @click="closeMenu">Servicios</Link>
             <Link href="/nosotros" class="nav__mobile-link" @click="closeMenu">Nosotros</Link>
-            <Link href="/noticias" class="nav__mobile-link" @click="closeMenu">Noticias</Link>
-            <Link href="/noticias/calculadoras" class="nav__mobile-link" @click="closeMenu">Calculadoras</Link>
+            <Link href="/blog" class="nav__mobile-link" @click="closeMenu">Blog</Link>
             <Link href="/contacto" class="nav__mobile-link" @click="closeMenu">Contacto</Link>
             <div class="nav__mobile-divider"></div>
             <template v-if="user">
@@ -108,8 +106,7 @@ onUnmounted(() => { window.removeEventListener('resize', onResize); document.bod
                     <p class="footer__heading">Empresa</p>
                     <ul class="footer__list">
                         <li><Link href="/nosotros">Nosotros</Link></li>
-                        <li><Link href="/noticias">Noticias</Link></li>
-                        <li><Link href="/noticias/calculadoras">Calculadoras</Link></li>
+                        <li><Link href="/blog">Blog</Link></li>
                         <li><Link href="/reserva">Reservar cita</Link></li>
                         <li><Link href="/contacto">Contacto</Link></li>
                     </ul>

@@ -46,7 +46,7 @@ const operacion = computed(() => compraventa({
     <PublicLayout>
         <Head title="Calculadora IRPF" />
         <section class="calc-hero">
-            <Link href="/noticias/calculadoras" class="calc-back">&larr; Calculadoras</Link>
+            <Link href="/blog?tab=calculadoras" class="calc-back">&larr; Blog · Calculadoras</Link>
             <span class="calc-hero__tag">Calculadora IRPF</span>
             <h1>Salario neto vs bruto<br>y compraventa de acciones o vivienda</h1>
             <p>Estima cuánto cobras realmente y cuánto tributas al vender un activo.</p>

@@ -24,18 +24,20 @@ Route::get('/aviso-legal', [PublicController::class, 'legalNotice'])->name('lega
 Route::get('/politica-de-privacidad', [PublicController::class, 'privacyPolicy'])->name('privacy.policy');
 Route::get('/politica-de-cookies', [PublicController::class, 'cookiePolicy'])->name('cookie.policy');
 
-// Actualidad Fiscal 
-Route::get('/noticias',        [NewsController::class, 'index'])->name('noticias');
-
-// Calculadoras (deben ir antes de /noticias/{slug})
-Route::get('/noticias/calculadoras',            [PublicController::class, 'calculadoras'])->name('calculadoras');
-Route::get('/noticias/calculadoras/irpf',       [PublicController::class, 'calculadoraIrpf'])->name('calculadoras.irpf');
-Route::get('/noticias/calculadoras/autonomos',  [PublicController::class, 'calculadoraAutonomos'])->name('calculadoras.autonomos');
-
-Route::get('/noticias/{slug}', [NewsController::class, 'show'])->name('noticias.show');
+// Blog (noticias + calculadoras)
+Route::get('/blog', [NewsController::class, 'index'])->name('blog');
+Route::get('/blog/calculadoras/irpf',      [PublicController::class, 'calculadoraIrpf'])->name('calculadoras.irpf');
+Route::get('/blog/calculadoras/autonomos', [PublicController::class, 'calculadoraAutonomos'])->name('calculadoras.autonomos');
 
 // WEBHOOK n8n: Recepción automatizada (Sin CSRF)
 Route::post('/noticias/n8n',   [NewsController::class, 'storeFromN8n']);
+
+// Rutas antiguas: redirigen al blog (van después del webhook: Route::redirect acepta cualquier método)
+Route::redirect('/noticias', '/blog', 301);
+Route::redirect('/noticias/calculadoras', '/blog?tab=calculadoras', 301);
+Route::redirect('/noticias/calculadoras/irpf', '/blog/calculadoras/irpf', 301);
+Route::redirect('/noticias/calculadoras/autonomos', '/blog/calculadoras/autonomos', 301);
+Route::redirect('/noticias/{slug}', '/blog', 301);
 
 require __DIR__.'/auth.php';
 

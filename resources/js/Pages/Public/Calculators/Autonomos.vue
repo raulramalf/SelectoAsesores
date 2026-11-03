@@ -39,7 +39,7 @@ const veredicto = computed(() => {
     <PublicLayout>
         <Head title="Calculadora autónomos" />
         <section class="calc-hero">
-            <Link href="/noticias/calculadoras" class="calc-back">&larr; Calculadoras</Link>
+            <Link href="/blog?tab=calculadoras" class="calc-back">&larr; Blog · Calculadoras</Link>
             <span class="calc-hero__tag">Calculadora autónomos</span>
             <h1>Cuota de autónomo<br>y SL vs autónomo</h1>
             <p>Conoce tu cuota por ingresos reales y compara cuánto te queda como autónomo o con sociedad limitada.</p>
