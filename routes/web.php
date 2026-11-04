@@ -28,8 +28,10 @@ Route::get('/politica-de-cookies', [PublicController::class, 'cookiePolicy'])->n
 Route::get('/blog', [NewsController::class, 'index'])->name('blog');
 Route::get('/blog/calculadoras/irpf',      [PublicController::class, 'calculadoraIrpf'])->name('calculadoras.irpf');
 Route::get('/blog/calculadoras/autonomos', [PublicController::class, 'calculadoraAutonomos'])->name('calculadoras.autonomos');
+Route::redirect('/blog/calculadoras', '/blog?tab=calculadoras', 301);
+Route::get('/blog/{slug}', [NewsController::class, 'show'])->name('blog.show');
 
-// WEBHOOK n8n: Recepción automatizada (Sin CSRF)
+// WEBHOOK n8n: Recepción automatizada (sin CSRF, protegido con N8N_WEBHOOK_TOKEN)
 Route::post('/noticias/n8n',   [NewsController::class, 'storeFromN8n']);
 
 // Rutas antiguas: redirigen al blog (van después del webhook: Route::redirect acepta cualquier método)
@@ -37,7 +39,7 @@ Route::redirect('/noticias', '/blog', 301);
 Route::redirect('/noticias/calculadoras', '/blog?tab=calculadoras', 301);
 Route::redirect('/noticias/calculadoras/irpf', '/blog/calculadoras/irpf', 301);
 Route::redirect('/noticias/calculadoras/autonomos', '/blog/calculadoras/autonomos', 301);
-Route::redirect('/noticias/{slug}', '/blog', 301);
+Route::get('/noticias/{slug}', fn (string $slug) => redirect('/blog/' . $slug, 301));
 
 require __DIR__.'/auth.php';
 

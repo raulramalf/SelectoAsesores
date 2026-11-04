@@ -1,10 +1,12 @@
 <script setup>
 import PublicLayout from '@/Layouts/PublicLayout.vue'
-import { Link, Head } from '@inertiajs/vue3'
-import { ref, computed } from 'vue'
+import { Link, Head, router } from '@inertiajs/vue3'
+import { ref, watch } from 'vue'
 
 const props = defineProps({
-    noticias: { type: Array, default: () => [] },
+    noticias: { type: Object, default: () => ({ data: [] }) },
+    categorias: { type: Array, default: () => [] },
+    filtros: { type: Object, default: () => ({ categoria: null, q: '' }) },
     tab: { type: String, default: 'noticias' },
 })
 
@@ -18,16 +20,19 @@ function cambiarTab(t) {
     } catch (e) { /* sin historial disponible */ }
 }
 
-const filtroActivo = ref('Todas')
-const busqueda = ref('')
-const filtros = ['Todas', 'IRPF', 'IVA', 'Sociedades', 'Autónomos', 'BOE']
+const busqueda = ref(props.filtros.q || '')
 
-const noticiasFiltradas = computed(() => props.noticias.filter(n => {
-    const etiqueta = `${n.category ?? ''} ${n.source ?? ''}`.toLowerCase()
-    const matchFiltro = filtroActivo.value === 'Todas' || etiqueta.includes(filtroActivo.value.toLowerCase())
-    const matchBusqueda = (n.title ?? '').toLowerCase().includes(busqueda.value.toLowerCase())
-    return matchFiltro && matchBusqueda
-}))
+function filtrar(extra = {}) {
+    const params = { categoria: props.filtros.categoria, q: busqueda.value, ...extra }
+    Object.keys(params).forEach(k => { if (!params[k]) delete params[k] })
+    router.get('/blog', params, { preserveState: true, preserveScroll: true, replace: true, only: ['noticias', 'filtros'] })
+}
+
+let temporizador
+watch(busqueda, () => {
+    clearTimeout(temporizador)
+    temporizador = setTimeout(() => filtrar({ q: busqueda.value }), 350)
+})
 
 const calculadoras = [
     {
@@ -73,35 +78,31 @@ const calculadoras = [
             <section class="blog-filtros">
                 <div class="news-filtros">
                     <div class="news-filtros__tabs">
-                        <button v-for="f in filtros" :key="f" @click="filtroActivo = f"
-                            class="filtro-chip" :class="{ 'is-active': filtroActivo === f }">
-                            {{ f }}
+                        <button type="button" class="filtro-chip" :class="{ 'is-active': !filtros.categoria }" @click="filtrar({ categoria: null })">Todas</button>
+                        <button v-for="c in categorias" :key="c.slug" type="button" class="filtro-chip"
+                            :class="{ 'is-active': filtros.categoria === c.slug }" @click="filtrar({ categoria: c.slug })">
+                            {{ c.label }}
                         </button>
                     </div>
-                    <input v-model="busqueda" type="text" placeholder="Buscar noticias..." class="news-busqueda" />
+                    <input v-model="busqueda" type="search" placeholder="Buscar artículos..." class="news-busqueda" aria-label="Buscar artículos" />
                 </div>
             </section>
 
             <section class="news-grid-section" style="min-height:60vh;">
-                <div v-if="noticiasFiltradas.length > 0" class="news-grid">
-                    <article v-for="noticia in noticiasFiltradas" :key="noticia.id" class="blog-card">
-                        <a :href="noticia.source_url" target="_blank" rel="noopener noreferrer" class="blog-card__img">
-                            <img v-if="noticia.image" :src="noticia.image" :alt="noticia.title">
-                            <div v-else class="blog-card__ph">
-                                <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#2a3a52" stroke-width="1.2">
-                                    <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/>
-                                </svg>
-                            </div>
-                        </a>
+                <div v-if="noticias.data.length > 0" class="news-grid">
+                    <article v-for="noticia in noticias.data" :key="noticia.id" class="blog-card">
+                        <Link :href="`/blog/${noticia.slug}`" class="blog-card__img" :aria-label="noticia.title">
+                            <img :src="noticia.image" alt="" loading="lazy" decoding="async">
+                        </Link>
                         <div class="blog-card__body">
-                            <span class="blog-card__source">{{ noticia.source }}</span>
-                            <a :href="noticia.source_url" target="_blank" rel="noopener noreferrer" class="blog-card__link">
+                            <span class="blog-card__source">{{ noticia.category_label }}</span>
+                            <Link :href="`/blog/${noticia.slug}`" class="blog-card__link">
                                 <h3 class="blog-card__title">{{ noticia.title }}</h3>
-                            </a>
+                            </Link>
                             <p class="blog-card__summary">{{ noticia.summary }}</p>
                             <div class="blog-card__foot">
-                                <span class="blog-card__date">{{ noticia.published_at }}</span>
-                                <a :href="noticia.source_url" target="_blank" rel="noopener noreferrer" class="blog-card__more">Leer original</a>
+                                <span class="blog-card__date">{{ noticia.date }}</span>
+                                <Link :href="`/blog/${noticia.slug}`" class="blog-card__more">Leer artículo</Link>
                             </div>
                         </div>
                     </article>
@@ -113,9 +114,18 @@ const calculadoras = [
                             <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/>
                         </svg>
                     </div>
-                    <h3>Noticias en camino</h3>
-                    <p>Pronto encontrarás aquí las últimas novedades fiscales, actualizadas automáticamente cada día.</p>
+                    <h3>{{ filtros.categoria || filtros.q ? 'Sin resultados' : 'Noticias en camino' }}</h3>
+                    <p v-if="filtros.categoria || filtros.q">No hay artículos con ese filtro. Prueba con otra categoría o búsqueda.</p>
+                    <p v-else>Pronto encontrarás aquí las últimas novedades fiscales, actualizadas automáticamente cada día.</p>
                 </div>
+
+                <nav v-if="noticias.last_page > 1" class="blog-pager" aria-label="Paginación">
+                    <Link v-if="noticias.prev_page_url" :href="noticias.prev_page_url" preserve-scroll class="link-arrow blog-pager__prev">Anterior</Link>
+                    <span v-else></span>
+                    <span class="blog-pager__info">Página {{ noticias.current_page }} de {{ noticias.last_page }}</span>
+                    <Link v-if="noticias.next_page_url" :href="noticias.next_page_url" preserve-scroll class="link-arrow">Siguiente</Link>
+                    <span v-else></span>
+                </nav>
             </section>
         </template>
 
